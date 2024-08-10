@@ -25,13 +25,13 @@ const SignupForm = () => {
   return (
     <>
       <form onSubmit={createUserHandler}>
-        <div>
+        <div className='row'>
           <label htmlFor='name' className='label'>name</label>
-          <input name='name' value={name} onInput={(e: any) => setName(e.target.value)} />
+          <input name='name' value={name} onInput={(e: any) => setName(e.target.value)} className='input'/>
         </div>
-        <div>
+        <div className='row'>
           <label className='label'>password</label>
-          <input name='password' value={password} onInput={(e: any) => setPassword(e.target.value)}/>
+          <input name='password' value={password} onInput={(e: any) => setPassword(e.target.value)} className='input'/>
         </div>
         <button type='submit'>send</button>
       </form>
