@@ -1,28 +1,29 @@
-import React, {useState} from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
+import {signupRequest} from "../api/signup.request";
 
-function App() {
+const SignupForm = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+
+  const [errorMessage, setErrorMessage] = useState('');
 
   const createUserHandler = async (e: any) => {
     e.preventDefault();
     try {
-      await fetch('http://localhost:8081/auth/create', {
-        method: 'POST',
-        body: JSON.stringify({name, password}),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-    } catch (e) {
-      console.error(e)
+      const response = await signupRequest({name, password})
+
+      if (!response.ok) {
+        const error = await response.json();
+        setErrorMessage(error.message);
+      }
+
+    } catch (error) {
+      setErrorMessage(JSON.stringify(error));
     }
   };
 
   return (
-    <div className="App">
+    <>
       <form onSubmit={createUserHandler}>
         <div>
           <label htmlFor='name' className='label'>name</label>
@@ -34,8 +35,11 @@ function App() {
         </div>
         <button type='submit'>send</button>
       </form>
-    </div>
+      {errorMessage && (
+        <p className="error-message">{errorMessage}</p>
+      )}
+    </>
   );
 }
 
-export default App;
+export {SignupForm};
