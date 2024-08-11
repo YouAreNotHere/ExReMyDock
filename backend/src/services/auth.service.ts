@@ -1,8 +1,11 @@
 import db from "../database/db";
+import bcrypt from 'bcrypt';
 
 class AuthService {
   public async signup(user: any) {
-    const query = `INSERT INTO users (name, password) VALUES ("${user.name}", "${user.password}");`;
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+
+    const query = `INSERT INTO users (name, password) VALUES ("${user.name}", "${hashedPassword}");`;
 
     try {
       return await db.query(query);
@@ -18,7 +21,7 @@ class AuthService {
     try {
       return await db.query(query);
     } catch (error) {
-      console.error('Error in AuthService.checkExistingUser: ', error)
+      console.error('Error in AuthService.getUserByName: ', error)
     }
   }
 }
