@@ -8,7 +8,6 @@
     height: 60%;
     padding: 15px;
 
-    color: gainsboro;
     background-color: darkcyan;
     border: 3px solid gainsboro;
     border-radius: 28px;
@@ -33,5 +32,8 @@
 }
 
 .error-message {
+    background: aquamarine;
     color: crimson;
+    padding: 4px;
+    border-radius: 4px;
 }
