@@ -1,4 +1,8 @@
+import {useAuthGuard} from "../shared/hooks";
+
 const MainPage = () => {
+  useAuthGuard();
+
   return (
     <div>
       <h1>Main page</h1>
