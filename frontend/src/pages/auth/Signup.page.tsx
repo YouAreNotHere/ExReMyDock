@@ -5,7 +5,7 @@ import {FormLayout} from "../../shared/layouts/FormLayout";
 const SignupPage = () => {
   return (
     <FormLayout>
-      <h1>Sign Up</h1>
+      <h1>Registration</h1>
       <SignupForm />
     </FormLayout>
   )
