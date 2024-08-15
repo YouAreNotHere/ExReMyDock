@@ -1,5 +1,6 @@
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import SignupPage from "../../pages/auth/Signup.page";
+import SigninPage from "../../pages/auth/Signin.page";
 import MainPage from "../../pages/Main.page";
 import NotFoundPage from "../../pages/not-found.page";
 
@@ -8,8 +9,9 @@ const Navigation = () => {
     <Router>
       <Routes>
         <Route path='/signup' element={<SignupPage />} />
+        <Route path='/signin' element={<SigninPage />} />
         <Route path='/' element={<MainPage />} />
-        <Route path='*' element={<NotFoundPage />} />
+        <Route path='/notfound' element={<NotFoundPage />} />
       </Routes>
     </Router>
   )

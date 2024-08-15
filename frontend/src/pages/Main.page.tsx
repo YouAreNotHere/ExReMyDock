@@ -1,11 +1,17 @@
 import {useAuthGuard} from "../shared/hooks";
+import {Link} from "react-router-dom";
 
 const MainPage = () => {
-  useAuthGuard();
+  //useAuthGuard();
 
   return (
     <div>
-      <h1>Main page</h1>
+        <Link to={"../signup"}>
+            <h1>Registration</h1>
+        </Link>
+        <Link to={"../signin"}>
+            <h1>Login</h1>
+        </Link>
     </div>
   )
 };
