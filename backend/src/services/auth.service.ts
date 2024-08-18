@@ -27,12 +27,12 @@ class AuthService {
       const requestUserToDB = `SELECT * FROM users WHERE name = "${name}"`;
       const queryUser: any = await db.query(requestUserToDB);
 
-      //if (!queryUser.length) {
-       // console.log("Error. Incorrect username");
-       // return "error"
-     // }
+      if (!queryUser.rows[0].name) {
+        console.log("Error. Incorrect username");
+        return "error"
+      }
 
-      const isPasswordValid = await bcrypt.compare(password, queryUser[0].password);
+      const isPasswordValid = await bcrypt.compare(password, queryUser.rows[0].password);
 
       if (!isPasswordValid) {
         console.log("Error. Incorrect password");
