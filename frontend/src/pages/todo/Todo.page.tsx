@@ -1,12 +1,11 @@
 import React from "react";
+import {FormLayout} from "../../shared/layouts/FormLayout";
 
 const TodoPage = () =>{
     return(
-        <>
-          <h1>
-            Здесь будут тудушки!
-          </h1>
-        </>
+        <FormLayout>
+            {/*<h1>{`${name} todos`}</h1>*/}
+        </FormLayout>
     )
 };
 
