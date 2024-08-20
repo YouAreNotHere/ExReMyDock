@@ -23,6 +23,7 @@ class AuthController {
   public async signin(req: Request, res: Response){
 
     const existingUser = await AuthService.getUserByName(req.body);
+
     if (!(existingUser?.rows as any)?.length) {
       res.status(409).send({message: 'Пользователь не найден'});
       return;

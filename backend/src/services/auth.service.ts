@@ -27,19 +27,22 @@ class AuthService {
       const requestUserToDB = `SELECT * FROM users WHERE name = "${name}"`;
       const queryUser: any = await db.query(requestUserToDB);
 
-      //if (!queryUser.length) {
-       // console.log("Error. Incorrect username");
-       // return "error"
-     // }
+      if (!queryUser.rows[0].name) {
+        console.log("Error. Incorrect username");
+        return "error"
+      }
 
-      const isPasswordValid = await bcrypt.compare(password, queryUser[0].password);
+      //У меня получается 2 проверки на существование юзера, сначала без этой проверки не работал код
+      //почему-то, потом нужно проверить, лишнее удалить.
+
+      const isPasswordValid = await bcrypt.compare(password, queryUser.rows[0].password);
 
       if (!isPasswordValid) {
         console.log("Error. Incorrect password");
         return "error"
       }
 
-      return { success: true }
+      return { user_id: queryUser.rows[0].id }
 
     }catch(err){
         console.log(err);
