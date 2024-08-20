@@ -1,20 +1,28 @@
 import React, {useState} from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import {signinRequest} from "../api/signin.request";
 
 const SigninForm = () => {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    let user_id;
 
     const [errorMessage, setErrorMessage] = useState('');
 
     const createUserHandler = async (e: any) => {
         e.preventDefault();
         try {
-            const response = await signinRequest({name, password})
+            const response : any = await signinRequest({name, password})
 
             if (!response.ok) {
                 const error = await response.json();
                 setErrorMessage(error.message);
+            }
+            if (response.ok){
+                user_id = await response.json();
+                navigate("../../todo");
+                return <Navigate to="../../todo"/>
             }
 
         } catch (error) {
