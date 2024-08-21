@@ -1,1 +1,1 @@
-export {TodosForm} from './ui/Todos.form';
+import TodosForm from './ui/Todos.form';

@@ -27,11 +27,6 @@ class AuthService {
       const requestUserToDB = `SELECT * FROM users WHERE name = "${name}"`;
       const queryUser: any = await db.query(requestUserToDB);
 
-      if (!queryUser.rows[0].name) {
-        console.log("Error. Incorrect username");
-        return "error"
-      }
-
       //У меня получается 2 проверки на существование юзера, сначала без этой проверки не работал код
       //почему-то, потом нужно проверить, лишнее удалить.
 

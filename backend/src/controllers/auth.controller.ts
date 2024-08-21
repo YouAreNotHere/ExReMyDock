@@ -22,7 +22,18 @@ class AuthController {
 
   public async signin(req: Request, res: Response){
 
+    type User = {
+      id: string;
+    };
+
+    declare module "express-session" {
+      interface SessionData {
+        user: User;
+      }
+    }
+
     const existingUser = await AuthService.getUserByName(req.body);
+    req.session.user : User  = { username: req.body.username };
 
     if (!(existingUser?.rows as any)?.length) {
       res.status(409).send({message: 'Пользователь не найден'});
@@ -36,6 +47,7 @@ class AuthController {
     }
 
     console.log("Well done! U have access to ur account.")
+    res.redirect('/todos');
     res.send(result);
   }
 }

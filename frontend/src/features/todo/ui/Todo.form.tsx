@@ -2,7 +2,7 @@ import {postTodosRequest} from "../api/todos.request";
 import {useState} from "react";
 
 const TodoForm = async (e: any) => {
-    e.preventDefault();
+    // e.preventDefault();
     // try {
     //     const response = await postTodosRequest({id, user_id, text, status})
     //
