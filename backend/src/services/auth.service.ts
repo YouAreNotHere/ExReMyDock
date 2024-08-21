@@ -19,16 +19,20 @@ class AuthService {
     const {name, password} = user;
 
     try {
+      // Эту штуку при желании можно вынести на клиент и проверять перед запросом
       if (!name || !password) {
         console.log("Error. Not enough data");
         return "error"
       }
 
+      // Эта логика уже есть в getUserByName
       const requestUserToDB = `SELECT * FROM users WHERE name = "${name}"`;
       const queryUser: any = await db.query(requestUserToDB);
 
       //У меня получается 2 проверки на существование юзера, сначала без этой проверки не работал код
       //почему-то, потом нужно проверить, лишнее удалить.
+
+      // Да, здесь проверка не нужна, она у тебя в контроллере
 
       const isPasswordValid = await bcrypt.compare(password, queryUser.rows[0].password);
 
