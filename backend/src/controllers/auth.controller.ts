@@ -22,21 +22,25 @@ class AuthController {
 
   public async signin(req: Request, res: Response){
 
-    type User = {
-      id: string;
-    };
+    // declare module используются в d.ts файлах
+    // https://scriptdev.ru/guide/058/
 
-    declare module "express-session" {
-      interface SessionData {
-        user: User;
-      }
-    }
+    // declare module "express-session" {
+    //   interface SessionData {
+    //     user: User;
+    //   }
+    // }
 
     const existingUser = await AuthService.getUserByName(req.body);
-    req.session.user : User  = { username: req.body.username };
 
+    // 1) Пробел между user и двоеточием не нужен
+    // 2) тип (:any) ты ставишь при объявлении объекта, а не при присванивании (=)
+    // 3) req.session.user нужно присвоить после успешной авторизации, то есть после if-ов с ошибками
+
+    // Закинь в этот if проверку на пароль
     if (!(existingUser?.rows as any)?.length) {
-      res.status(409).send({message: 'Пользователь не найден'});
+      // Для проблем с аутентификацией используй статус 401
+      res.status(401).send({message: 'Неверный логин или пароль'});
       return;
     }
 
@@ -46,9 +50,20 @@ class AuthController {
       return;
     }
 
-    console.log("Well done! U have access to ur account.")
-    res.redirect('/todos');
-    res.send(result);
+    // Проблему с типом existingUser позже исправим
+    req.session.user  = {
+      id: (existingUser as any).rows[0].id,
+      name: (existingUser as any).rows[0].name,
+    };
+
+    // Этот лог идет в логи бэка, тут нужно вписывать скорее факт завершенного действия, чем сообщение пользователю
+    console.log(`Пользователь ${(existingUser as any).rows[0].name} авторизован`)
+
+    // Редирект будет происходить на стороне клиента
+    // res.redirect('/todos');
+    res.send();
+
+    // А этот лог смотрится скорее как ненужный
   }
 }
 

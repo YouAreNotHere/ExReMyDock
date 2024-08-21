@@ -19,10 +19,22 @@ const SigninForm = () => {
                 const error = await response.json();
                 setErrorMessage(error.message);
             }
+            // Два противоположных if-а, почему не else?
             if (response.ok){
+                // Думаю, сделаем так. На клиенте мы
+                // будем проверять активность сессии через отдельный эндпоинт,
+                // нужно будет сделать на бэке урл /session
+                // На бэке эта сессия будет проверяться. Если сессия истекла, то
+                // юзера перебросит на /signin.
+                // А клиент будет отправлять этот запрос через setInterval
+                // Я это к тому, что эта строчка здесь не нужна
                 user_id = await response.json();
+
+                // Без "../.. не работет?"
                 navigate("../../todo");
-                return <Navigate to="../../todo"/>
+
+                // Зачем тебе тут возвращать компонент, ты сверху пользуешься хуком useNavigate
+                // return <Navigate to="../../todo"/>
             }
 
         } catch (error) {

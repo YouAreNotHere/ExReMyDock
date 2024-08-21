@@ -11,6 +11,15 @@ const sessionMiddleware = (app: Application) => {
       maxAge: 60 * 60 * 1000, // Время жизни сессии в миллисекундах
     },
   }));
+
+  // Это примерная реализация, ее надо будет поправить
+
+  // app.use((req, res, next) => {
+  //   if (!req.session.user) {
+  //     res.status(401);
+  //   }
+  //   next();
+  // });
 };
 
 export {sessionMiddleware};
