@@ -5,7 +5,7 @@ import {FormLayout} from "../../shared/layouts/FormLayout";
 const SigninPage = () => {
     return (
         <FormLayout>
-            <h1>Login</h1>
+            <h1>Войдите или зарегистрируйтесь</h1>
             <SigninForm />
         </FormLayout>
     )

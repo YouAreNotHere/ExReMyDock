@@ -1,12 +1,13 @@
 import React from "react";
 import {FormLayout} from "../../shared/layouts/FormLayout";
 
-const TodoPage = () =>{
+const TodosPage = () =>{
     return(
         <FormLayout>
+            Todos list
             {/*<h1>{`${name} todos`}</h1>*/}
         </FormLayout>
     )
 };
 
-export default TodoPage;
+export default TodosPage;
