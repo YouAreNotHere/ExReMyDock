@@ -1,14 +1,14 @@
 import React from "react";
-import {SigninForm} from "../../features/auth/signin";
+import {AuthForm} from "../../features/auth/index";
 import {FormLayout} from "../../shared/layouts/FormLayout";
 
-const SigninPage = () => {
+const AuthPage = () => {
     return (
         <FormLayout>
             <h1>Войдите или зарегистрируйтесь</h1>
-            <SigninForm />
+            <AuthForm />
         </FormLayout>
     )
 };
 
-export default SigninPage;
+export default AuthPage;

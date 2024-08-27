@@ -1,10 +1,13 @@
 // import {getTodosRequest} from "../api/todos.request";
 // import {useState} from "react";
-// import {user_id} from "../../auth/signin";
+// import {user_id} from "../../auth/auth";
+
+import {useState} from "react";
 
 const TodosForm = () => {
     // let currentTodos;
-    // let todos;
+    // const [todos, setTodos] = useState("");
+    // const [editedTodo, setEditedTodo] = useState("");
     // const [currentFilter, setCurrentFilter] = useState("SHOW_ALL");
     // const activeTodos = todos.filter(todo => todo.complete === false);
     // const completeTodos = todos.filter(todo => todo.complete === true);
@@ -41,7 +44,13 @@ const TodosForm = () => {
     //
     // return(
     //     <ul>
-    //         {currentTodos.map(todo => <Todo key = {todo.id} todo = {todo}/>)}
+    //         {currentTodos.map(todo => {
+    //          return (<Todo
+    //           key = {todo.id}
+    //           todo = {todo}
+    //           setTodos = {setTodos}
+    //           editedTodo = {editedTodo}
+    //           setEditedTodo = {setEditedTodo}/>))}}
     //     </ul>
     // )
 }

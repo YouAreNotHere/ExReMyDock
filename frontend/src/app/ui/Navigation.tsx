@@ -1,7 +1,6 @@
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import SignupPage from "../../pages/auth/Signup.page";
-import SigninPage from "../../pages/auth/Signin.page";
-//import TodoPage from "../../pages/todo/Todo.page";
+import AuthPage from "../../pages/auth/Auth.page";
+import TodosPage from "../../pages/todo/Todos.page";
 import MainPage from "../../pages/Main.page";
 import NotFoundPage from "../../pages/not-found.page";
 
@@ -9,11 +8,11 @@ const Navigation = () => {
   return (
     <Router>
       <Routes>
-        <Route path='/signup' element={<SignupPage />} />
-        <Route path='/signin' element={<SigninPage />} />
-        <Route path='/' element={<MainPage />} />
+        {/*<Route path='/signup' element={<SignupPage />} />*/}
+        {/*<Route path='/auth' element={<AuthPage />} />*/}
+        <Route path='/' element={<AuthPage />} />
         <Route path='/notfound' element={<NotFoundPage />} />
-        {/*<Route path="/todo" element={<TodoPage/>} />*/}
+        <Route path="/todos" element={<TodosPage/>} />
       </Routes>
     </Router>
   )

@@ -1,24 +1,47 @@
 import {postTodosRequest} from "../api/todos.request";
-import {useState} from "react";
+import {useState, useRef} from "react";
 
-const TodoForm = async (e: any) => {
-    // e.preventDefault();
-    // try {
-    //     const response = await postTodosRequest({id, user_id, text, status})
+const TodoForm = async ({todo, editedTodo, setEditedTodo, setTodos}: any) => {
+    // const [newTodoText, setNewTodoText] = useState("");
+    // const inputRef = useRef();
+    // let todoContent;
     //
-    //     if (!response.ok) {
-    //         const error = await response.json();
-    //         setErrorMessage(error.message);
-    //     }
-    //     if (response.ok){
-    //         alert("Авторизация пройдена");
-    //         navigate("../../todo");
-    //         return <Navigate to="../../todo"/>
-    //     }
-    //
-    // } catch (error) {
-    //     setErrorMessage(JSON.stringify(error));
+    // if (editedTodo===todo.id){
+    //     todoContent = (
+    //         <div id={todo.id}>
+    //             <input
+    //                 ref={inputRef}
+    //                 value={newTodoText}
+    //                 onChange={(e) => {
+    //                     setNewTodoText(e.target.value);
+    //                 }}
+    //             />
+    //             <button onClick={()=>{
+    //                 dispatch(editTodo(newTodoText, todo.id, ));
+    //                 dispatch(changeEditedTodoId(null));
+    //                 setNewTodoText("");
+    //             }}>
+    //                 Save
+    //             </button>
+    //         </div>
+    //     )
+    // }else{
+    //     todoContent = (
+    //         <li key={todo.id} className={todo.complete ? "сompleted" : "normal"}>
+    //             {todo.text}
+    //             <button className="addPadding" onClick={() => dispatch(deleteTodo(todo.id))}>
+    //                 Delete todo
+    //             </button>
+    //             <button className="addPadding" onClick={() => dispatch(changeEditedTodoId(todo.id))}>
+    //                 Edit
+    //             </button>
+    //             <button onClick={() => dispatch(completeTodo(todo.id))} className="addPadding">
+    //                 {todo.complete ? "Uncomplete" : "Complete"}
+    //             </button>
+    //         </li>
+    //     )
     // }
+    // return todoContent;
 };
 
 export default TodoForm;
