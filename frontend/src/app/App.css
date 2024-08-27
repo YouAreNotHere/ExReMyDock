@@ -9,3 +9,12 @@
   background-color: #282c34;
   color: gainsboro;
 }
+
+.buttonStyle  {
+  margin: 5px;
+}
+
+.centerStyle{
+  position: center;
+  margin-left: 5vw;
+}

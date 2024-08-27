@@ -13,42 +13,19 @@ class AuthService {
       console.error('Error in AuthService.signup: ', error)
       return 'error';
     }
-  }
+  };
 
-  public async signin(user: any){
-    const {name, password} = user;
-
-    try {
-      // Эту штуку при желании можно вынести на клиент и проверять перед запросом
-      if (!name || !password) {
-        console.log("Error. Not enough data");
-        return "error"
-      }
-
-      // Эта логика уже есть в getUserByName
-      const requestUserToDB = `SELECT * FROM users WHERE name = "${name}"`;
-      const queryUser: any = await db.query(requestUserToDB);
-
-      //У меня получается 2 проверки на существование юзера, сначала без этой проверки не работал код
-      //почему-то, потом нужно проверить, лишнее удалить.
-
-      // Да, здесь проверка не нужна, она у тебя в контроллере
-
-      const isPasswordValid = await bcrypt.compare(password, queryUser.rows[0].password);
-
-      if (!isPasswordValid) {
-        console.log("Error. Incorrect password");
-        return "error"
-      }
-
-      return { user_id: queryUser.rows[0].id }
-
-    }catch(err){
-        console.log(err);
-        return "error"
-      }
-    }
-
+  // public async signin(user: any) {
+  //   try {
+  //     const queryUser: any = await this.getUserByName(user);
+  //     const isPasswordValid = await bcrypt.compare(user.password, queryUser.rows[0].password);
+  //
+  //     return {user_id: queryUser.rows[0].id}
+  //   } catch (err) {
+  //     console.log(err);
+  //     return "error"
+  //   }
+  // };
 
   public async getUserByName(user: any) {
     const query = `SELECT * FROM users WHERE name = "${user.name}"`;
@@ -58,7 +35,28 @@ class AuthService {
     } catch (error) {
       console.error('Error in AuthService.getUserByName: ', error)
     }
+  };
+
+  public async checkIsValidCredentials(user: any){
+    const {name, password} = user;
+    const queryUser: any = await this.getUserByName(user);
+
+    if (!(queryUser?.rows as any)?.length) {
+      console.log('Error. Incorrect username')
+      return false
+    };
+
+    const isPasswordValid = await bcrypt.compare(password, queryUser.rows[0].password);
+
+    if (!isPasswordValid) {
+      console.log("Error. Incorrect password");
+      return false
+    };
+
+    return true;
   }
 }
+
+
 
 export default new AuthService();

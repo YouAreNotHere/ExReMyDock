@@ -1,8 +1,10 @@
 import React, {useState} from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import {signinRequest} from "../api/signin.request";
+import "../../../app/App.css";
+import { useNavigate } from "react-router-dom";
+import {authRequest} from "../api/auth.request";
 
-const SigninForm = () => {
+
+const AuthForm = () => {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -10,31 +12,27 @@ const SigninForm = () => {
 
     const [errorMessage, setErrorMessage] = useState('');
 
-    const createUserHandler = async (e: any) => {
+    const onLoginClick = async (e: any) => {
         e.preventDefault();
         try {
-            const response : any = await signinRequest({name, password})
+            const url = 'http://localhost:8081/auth/signin';
+            const response : any = await authRequest({name, password}, url)
 
             if (!response.ok) {
                 const error = await response.json();
                 setErrorMessage(error.message);
-            }
-            // Два противоположных if-а, почему не else?
-            if (response.ok){
+            }else{
+                console.log("Авторизация успешна")
                 // Думаю, сделаем так. На клиенте мы
                 // будем проверять активность сессии через отдельный эндпоинт,
                 // нужно будет сделать на бэке урл /session
                 // На бэке эта сессия будет проверяться. Если сессия истекла, то
-                // юзера перебросит на /signin.
+                // юзера перебросит на /auth.
                 // А клиент будет отправлять этот запрос через setInterval
                 // Я это к тому, что эта строчка здесь не нужна
-                user_id = await response.json();
 
-                // Без "../.. не работет?"
-                navigate("../../todo");
-
-                // Зачем тебе тут возвращать компонент, ты сверху пользуешься хуком useNavigate
-                // return <Navigate to="../../todo"/>
+                //user_id = await response.json();
+                navigate("/todos");
             }
 
         } catch (error) {
@@ -42,9 +40,39 @@ const SigninForm = () => {
         }
     };
 
+    const onRegistationClick = async (e: any) => {
+        e.preventDefault();
+        try {
+            const url = 'http://localhost:8081/auth/signup';
+            const response = await authRequest({name, password}, url)
+
+            if (!response.ok) {
+                const error = await response.json();
+                setErrorMessage(error.message);
+            }
+
+        } catch (error) {
+            setErrorMessage(JSON.stringify(error));
+        }
+    };
+
+    const Button = ({value, onClick}: any) =>{
+        return(
+            <button
+                className = "buttonStyle"
+                disabled={!name || !password}
+                type='submit'
+                onClick={onClick}
+                >
+                {value}
+            </button>
+
+        )
+    }
+
     return (
         <>
-            <form onSubmit={createUserHandler}>
+            <form>
                 <div className='row'>
                     <label htmlFor='name' className='label'>name</label>
                     <input name='name' value={name} onInput={(e: any) => setName(e.target.value)} className='input'/>
@@ -53,7 +81,11 @@ const SigninForm = () => {
                     <label className='label'>password</label>
                     <input name='password' value={password} onInput={(e: any) => setPassword(e.target.value)} className='input'/>
                 </div>
-                <button type='submit'>Login</button>
+                <div className="centerStyle">
+                    <Button value={"Login"} onClick={onLoginClick}/>
+                    <Button value={"Registration"} onClick={onRegistationClick}/>
+                </div>
+
             </form>
             {errorMessage && (
                 <p className="error-message">{errorMessage}</p>
@@ -62,4 +94,4 @@ const SigninForm = () => {
     );
 }
 
-export {SigninForm};
+export {AuthForm};
