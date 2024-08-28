@@ -18,3 +18,16 @@
   position: center;
   margin-left: 5vw;
 }
+
+.сompleted {
+  color : gray;
+  text-decoration: line-through;
+}
+
+.addPadding{
+  margin: 5px;
+}
+
+.completedFilter{
+  display: none;
+}

@@ -1,4 +1,5 @@
 import {IAuthRequest} from "../types/IAuthRequest";
+import {useState} from "react";
 
 const authRequest = async (payload: IAuthRequest, url: string) =>
     await fetch(url, {
@@ -8,5 +9,6 @@ const authRequest = async (payload: IAuthRequest, url: string) =>
             'Content-Type': 'application/json',
         },
     });
+
 
 export {authRequest}

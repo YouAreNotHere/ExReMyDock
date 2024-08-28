@@ -1,18 +1,20 @@
-// import {getTodosRequest} from "../api/todos.request";
-// import {useState} from "react";
-// import {user_id} from "../../auth/auth";
-
+import {getTodosRequest} from "../api/todos.request";
 import {useState} from "react";
+import TodoForm from "./Todo.form";
+import {useSelector} from "react-redux";
+
 
 const TodosForm = () => {
-    // let currentTodos;
-    // const [todos, setTodos] = useState("");
-    // const [editedTodo, setEditedTodo] = useState("");
-    // const [currentFilter, setCurrentFilter] = useState("SHOW_ALL");
+    let currentTodos;
+    let todos;
+    const [editedTodo, setEditedTodo] = useState("");
+    const [currentFilter, setCurrentFilter] = useState("SHOW_ALL");
     // const activeTodos = todos.filter(todo => todo.complete === false);
     // const completeTodos = todos.filter(todo => todo.complete === true);
-    // const [errorMessage, setErrorMessage] = useState('');
-    //
+    const [errorMessage, setErrorMessage] = useState('');
+    const user_id = useSelector((state: any) => state.user_id);
+    alert(user_id);
+
     // if (currentFilter == "SHOW_COMPLETED"){
     //     currentTodos = completeTodos
     // } else if (currentFilter == "SHOW_ACTIVE"){
@@ -20,38 +22,37 @@ const TodosForm = () => {
     // }else {
     //     currentTodos = todos
     // };
-    //
-    // const getTodos = async (e: any) => {
-    //     e.preventDefault();
-    //     try {
-    //         const response = await getTodosRequest({user_id});
-    //
-    //         if (!response.ok) {
-    //             const error = await response.json();
-    //             setErrorMessage(error.message);
-    //         }
-    //
-    //         if (response.ok){
-    //             console.log("Тудушки загружены");
-    //             todos = JSON.parse(response);
-    //             return todos;
-    //         }
-    //
-    //     } catch (error) {
-    //         setErrorMessage(JSON.stringify(error));
-    //     }
-    // };
-    //
+
+    const getTodos = async (e: any) => {
+        e.preventDefault();
+        try {
+            const response: any = await getTodosRequest({user_id});
+
+            if (!response.ok) {
+                const error = await response.json();
+                setErrorMessage(error.message);
+            }else{
+                console.log("Тудушки загружены");
+                todos = await JSON.parse(response);
+                return todos;
+            }
+
+        } catch (error) {
+            setErrorMessage(JSON.stringify(error));
+        }
+    };
+
     // return(
-    //     <ul>
-    //         {currentTodos.map(todo => {
-    //          return (<Todo
-    //           key = {todo.id}
-    //           todo = {todo}
-    //           setTodos = {setTodos}
-    //           editedTodo = {editedTodo}
-    //           setEditedTodo = {setEditedTodo}/>))}}
-    //     </ul>
+    //     // <ul>
+    //     //     {/*Поменял currentTodos на todos*/}
+    //     //     {todos.map(todo => {
+    //     //      return (<TodoForm
+    //     //       key = {todo.id}
+    //     //       todo = {todo}
+    //     //       setTodos = {setTodos}
+    //     //       editedTodo = {editedTodo}
+    //     //       setEditedTodo = {setEditedTodo}/>))}}
+    //     // </ul>
     // )
 }
 

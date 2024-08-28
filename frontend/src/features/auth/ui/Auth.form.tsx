@@ -2,12 +2,13 @@ import React, {useState} from "react";
 import "../../../app/App.css";
 import { useNavigate } from "react-router-dom";
 import {authRequest} from "../api/auth.request";
-
+import {useDispatch} from "react-redux"
 
 const AuthForm = () => {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     let user_id;
 
     const [errorMessage, setErrorMessage] = useState('');
@@ -31,8 +32,14 @@ const AuthForm = () => {
                 // А клиент будет отправлять этот запрос через setInterval
                 // Я это к тому, что эта строчка здесь не нужна
 
-                //user_id = await response.json();
-                navigate("/todos");
+                const user_id = await response.json()
+                console.log(user_id)
+                dispatch(user_id);
+                await navigate("/todos");
+
+                // user_id = await response.json();
+                // await dispatch(user_id);
+                // await navigate("/todos");
             }
 
         } catch (error) {
@@ -45,6 +52,7 @@ const AuthForm = () => {
         try {
             const url = 'http://localhost:8081/auth/signup';
             const response = await authRequest({name, password}, url)
+
 
             if (!response.ok) {
                 const error = await response.json();
