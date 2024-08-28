@@ -37,7 +37,7 @@ class AuthController {
 
     console.log(`Пользователь авторизован`)
 
-    res.send();
+    res.send({user_id: 1});
   }
 }
 
