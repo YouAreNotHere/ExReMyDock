@@ -24,10 +24,13 @@ class AuthController {
     // declare module используются в d.ts файлах
     // https://scriptdev.ru/guide/058/
 
-    if (!await AuthService.checkIsValidCredentials(req.body)) {
-      res.status(401).send({message: 'Неверный логин или пароль'});
-      return;
-    }
+    // if (!await AuthService.checkIsValidCredentials(req.body)) {
+    //   res.status(401).send({message: 'Неверный логин или пароль'});
+    //   return;
+    // }
+
+    const result = AuthService.signin(req.body);
+    console.log(result)
 
     // Проблему с типом existingUser позже исправим
     // req.session.user  = {
@@ -37,7 +40,7 @@ class AuthController {
 
     console.log(`Пользователь авторизован`)
 
-    res.send({user_id: 1});
+    res.send(result);
   }
 }
 

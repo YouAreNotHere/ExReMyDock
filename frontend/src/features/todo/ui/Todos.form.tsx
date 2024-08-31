@@ -5,15 +5,13 @@ import {useSelector} from "react-redux";
 
 
 const TodosForm = () => {
-    let currentTodos;
-    let todos;
+    let todos: any;
     const [editedTodo, setEditedTodo] = useState("");
     const [currentFilter, setCurrentFilter] = useState("SHOW_ALL");
     // const activeTodos = todos.filter(todo => todo.complete === false);
     // const completeTodos = todos.filter(todo => todo.complete === true);
     const [errorMessage, setErrorMessage] = useState('');
-    const user_id = useSelector((state: any) => state.user_id);
-    alert(user_id);
+    const userId = useSelector((state: any) => state.userId);
 
     // if (currentFilter == "SHOW_COMPLETED"){
     //     currentTodos = completeTodos
@@ -26,7 +24,7 @@ const TodosForm = () => {
     const getTodos = async (e: any) => {
         e.preventDefault();
         try {
-            const response: any = await getTodosRequest({user_id});
+            const response: any = await getTodosRequest({userId});
 
             if (!response.ok) {
                 const error = await response.json();
@@ -42,18 +40,17 @@ const TodosForm = () => {
         }
     };
 
-    // return(
-    //     // <ul>
-    //     //     {/*Поменял currentTodos на todos*/}
-    //     //     {todos.map(todo => {
-    //     //      return (<TodoForm
-    //     //       key = {todo.id}
-    //     //       todo = {todo}
-    //     //       setTodos = {setTodos}
-    //     //       editedTodo = {editedTodo}
-    //     //       setEditedTodo = {setEditedTodo}/>))}}
-    //     // </ul>
-    // )
+    return(
+        <ul>
+            {/*Поменял currentTodos на todos*/}
+            {todos.map((todo: any) => {
+             return (<TodoForm
+              key = {todo.id}
+              todo = {todo}
+              editedTodo = {editedTodo}
+              setEditedTodo = {setEditedTodo}/>)})}
+        </ul>
+    )
 }
 
 export default TodosForm;

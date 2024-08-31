@@ -3,6 +3,7 @@ import "../../../app/App.css";
 import { useNavigate } from "react-router-dom";
 import {authRequest} from "../api/auth.request";
 import {useDispatch} from "react-redux"
+import {changeId} from "../../../action/index"
 
 const AuthForm = () => {
     const [name, setName] = useState('');
@@ -32,14 +33,9 @@ const AuthForm = () => {
                 // А клиент будет отправлять этот запрос через setInterval
                 // Я это к тому, что эта строчка здесь не нужна
 
-                const user_id = await response.json()
-                console.log(user_id)
-                dispatch(user_id);
-                await navigate("/todos");
-
-                // user_id = await response.json();
-                // await dispatch(user_id);
-                // await navigate("/todos");
+                const id = await response.json()
+                dispatch(changeId(id));
+                navigate("/todos");
             }
 
         } catch (error) {

@@ -1,10 +1,12 @@
 import {Application} from "express";
 import session from "express-session";
+import {todosRouter} from "./todos.routes";
 import { authRouter } from './auth.routes';
 
 
 const initRouting = (app: Application) => {
   app.use('/auth', authRouter);
+  app.use("/todos", todosRouter);
 
   // 1) Внимательней, этот код я добавил в /session.middleware.ts
   // 2) route это урл, по которому юзер может постучаться на сервис,
