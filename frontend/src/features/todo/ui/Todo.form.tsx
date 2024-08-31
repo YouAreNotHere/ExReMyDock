@@ -2,7 +2,7 @@ import {postTodosRequest} from "../api/todos.request";
 import {useState, useRef} from "react";
 import "../../../app/App.css";
 
-const TodoForm = async ({todo, editedTodo, setEditedTodo, setTodos}: any) => {
+const TodoForm = ({todo, editedTodo, setEditedTodo, setTodos}: any) => {
     const [newTodoText, setNewTodoText] = useState("");
     const inputRef = useRef();
     let todoContent;

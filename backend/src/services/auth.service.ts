@@ -15,17 +15,18 @@ class AuthService {
     }
   };
 
-  // public async signin(user: any) {
-  //   try {
-  //     const queryUser: any = await this.getUserByName(user);
-  //     const isPasswordValid = await bcrypt.compare(user.password, queryUser.rows[0].password);
-  //
-  //     return {user_id: queryUser.rows[0].id}
-  //   } catch (err) {
-  //     console.log(err);
-  //     return "error"
-  //   }
-  // };
+  public async signin(user: any) {
+    try {
+      const queryUser: any = await this.getUserByName(user);
+      const isPasswordValid = await bcrypt.compare(user.password, queryUser.rows[0].password);
+      console.log(queryUser.rows[0].id);
+
+      return {user_id: queryUser.rows[0].id}
+    } catch (err) {
+      console.log(err);
+      return "error"
+    }
+  };
 
   public async getUserByName(user: any) {
     const query = `SELECT * FROM users WHERE name = "${user.name}"`;
@@ -53,7 +54,7 @@ class AuthService {
       return false
     };
 
-    return true;
+    return queryUser.rows[0].id;
   }
 }
 
