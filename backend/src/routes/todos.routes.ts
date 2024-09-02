@@ -4,6 +4,6 @@ import TodosController from "../controllers/todos.controller";
 const todosRouter = Router();
 
 todosRouter.get('/getTodos', TodosController.getTodos);
-//todosRouter.post('/addTodos', TodosController.addTodos);
+todosRouter.post('/addTodo', TodosController.addTodo);
 
 export { todosRouter };

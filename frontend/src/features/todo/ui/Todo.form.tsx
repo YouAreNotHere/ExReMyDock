@@ -7,6 +7,11 @@ const TodoForm = ({todo, editedTodo, setEditedTodo, setTodos}: any) => {
     const inputRef = useRef();
     let todoContent;
 
+    if (!todo){
+        todoContent=(
+            <p>Its place to your first todo!</p>
+        )
+    }
     // if (editedTodo===todo.id){
     //     todoContent = (
     //         <div id={todo.id}>
@@ -26,7 +31,7 @@ const TodoForm = ({todo, editedTodo, setEditedTodo, setTodos}: any) => {
     //             </button>
     //         </div>
     //     )
-    // }else{
+    else{
         todoContent = (
             <li key={todo.id} className={todo.complete ? "сompleted" : ""}>
                 {todo.text}
@@ -41,7 +46,7 @@ const TodoForm = ({todo, editedTodo, setEditedTodo, setTodos}: any) => {
                 {/*</button>*/}
             </li>
         )
-    //}
+    }
     return todoContent;
 };
 
