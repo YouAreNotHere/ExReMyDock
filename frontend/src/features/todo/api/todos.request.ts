@@ -1,6 +1,6 @@
 import {IGetTodosRequest, IPostTodosRequest} from "../types/ITodosRequest";
 
-const getTodosRequest = async (payload: { userId: number }) =>
+const getTodosRequest = async (payload: IGetTodosRequest) =>
     await fetch('http://localhost:8081/todos/getTodos', {
         method: 'GET',
         body: JSON.stringify(payload),
@@ -10,7 +10,7 @@ const getTodosRequest = async (payload: { userId: number }) =>
     });
 
 const postTodosRequest = async (payload: IPostTodosRequest) =>
-    await fetch('http://localhost:8081/todos/add', {
+    await fetch('http://localhost:8081/todos/addTodo', {
         method: 'POST',
         body: JSON.stringify(payload),
         headers: {

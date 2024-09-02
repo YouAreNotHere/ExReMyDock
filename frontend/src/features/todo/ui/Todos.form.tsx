@@ -1,11 +1,11 @@
 import {getTodosRequest} from "../api/todos.request";
-import {useState} from "react";
+import {Fragment, useState} from "react";
 import TodoForm from "./Todo.form";
 import {useSelector} from "react-redux";
+import AddTodo from "./AddTodo.form";
 
 
 const TodosForm = () => {
-    let todos: any;
     const [editedTodo, setEditedTodo] = useState("");
     const [currentFilter, setCurrentFilter] = useState("SHOW_ALL");
     // const activeTodos = todos.filter(todo => todo.complete === false);
@@ -39,18 +39,24 @@ const TodosForm = () => {
             setErrorMessage(JSON.stringify(error));
         }
     };
+    let todos: any = getTodos(userId);
 
     return(
-        <ul>
-            {/*Поменял currentTodos на todos*/}
-            {todos.map((todo: any) => {
-             return (<TodoForm
-              key = {todo.id}
-              todo = {todo}
-              editedTodo = {editedTodo}
-              setEditedTodo = {setEditedTodo}/>)})}
-        </ul>
+           <div>
+               <div>
+                   <AddTodo/>
+               </div>
+            <ul>
+                {/*Поменял currentTodos на todos*/}
+                {todos.map((todo: any) => {
+                    return (<TodoForm
+                        key = {todo.id}
+                        todo = {todo}
+                        editedTodo = {editedTodo}
+                        setEditedTodo = {setEditedTodo}/>)})}
+            </ul>
+           </div>
     )
-}
+};
 
 export default TodosForm;
