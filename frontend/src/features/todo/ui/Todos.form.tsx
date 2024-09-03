@@ -1,5 +1,5 @@
 import {getTodosRequest} from "../api/todos.request";
-import {Fragment, useState} from "react";
+import {useState} from "react";
 import TodoForm from "./Todo.form";
 import {useSelector} from "react-redux";
 import AddTodo from "./AddTodo.form";
@@ -22,16 +22,16 @@ const TodosForm = () => {
     // };
 
     const getTodos = async (e: any) => {
-        e.preventDefault();
         try {
             const response: any = await getTodosRequest({userId});
 
             if (!response.ok) {
+                console.log("Какая-то хуйня")
                 const error = await response.json();
                 setErrorMessage(error.message);
             }else{
                 console.log("Тудушки загружены");
-                todos = await JSON.parse(response);
+                todos = await response.json();
                 return todos;
             }
 
@@ -41,13 +41,14 @@ const TodosForm = () => {
     };
     let todos: any = getTodos(userId);
 
+    //console.log(todos);
+
     return(
            <div>
                <div>
                    <AddTodo/>
                </div>
             <ul>
-                {/*Поменял currentTodos на todos*/}
                 {todos.map((todo: any) => {
                     return (<TodoForm
                         key = {todo.id}

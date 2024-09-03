@@ -1,11 +1,11 @@
 import React from "react";
 import {FormLayout} from "../../shared/layouts/FormLayout";
-import TodoForm from "../../features/todo/ui/Todo.form";
+import TodosForm from "../../features/todo/ui/Todos.form";
 
 const TodosPage = () =>{
     return(
         <FormLayout>
-            <TodoForm/>
+            <TodosForm/>
         </FormLayout>
     )
 };
