@@ -45,16 +45,14 @@ const TodosForm = () => {
 
     return(
            <div>
-               <div>
                    <AddTodo/>
-               </div>
             <ul>
-                {todos.map((todo: any) => {
-                    return (<TodoForm
-                        key = {todo.id}
-                        todo = {todo}
-                        editedTodo = {editedTodo}
-                        setEditedTodo = {setEditedTodo}/>)})}
+                {/*{todos.map((todo: any) => {*/}
+                {/*    return (<TodoForm*/}
+                {/*        key = {todo.id}*/}
+                {/*        todo = {todo}*/}
+                {/*        editedTodo = {editedTodo}*/}
+                {/*        setEditedTodo = {setEditedTodo}/>)})}*/}
             </ul>
            </div>
     )
