@@ -19,9 +19,8 @@ class AuthService {
     try {
       const queryUser: any = await this.getUserByName(user);
       const isPasswordValid = await bcrypt.compare(user.password, queryUser.rows[0].password);
-      console.log(queryUser.rows[0].id);
 
-      return {user_id: queryUser.rows[0].id}
+      return {user_id: queryUser.rows[0].id};
     } catch (err) {
       console.log(err);
       return "error"

@@ -7,7 +7,7 @@ class db {
     this.pool = createPool({
       host: 'localhost',
       user: 'YouAreNotHere',
-      password: 'A40698546d',
+      password: '123456',
       database: 'test_database',
       waitForConnections: true,
       connectionLimit: 10,

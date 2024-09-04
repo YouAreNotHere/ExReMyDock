@@ -18,7 +18,7 @@ const AuthForm = () => {
         e.preventDefault();
         try {
             const url = 'http://localhost:8081/auth/signin';
-            const response : any = await authRequest({name, password}, url)
+            const response : any = await authRequest({name, password}, url);
 
             if (!response.ok) {
                 const error = await response.json();
@@ -33,7 +33,8 @@ const AuthForm = () => {
                 // А клиент будет отправлять этот запрос через setInterval
                 // Я это к тому, что эта строчка здесь не нужна
 
-                const id = await response.json()
+                const id = await response.json();
+                console.log(id);
                 dispatch(changeId(id));
                 navigate("/todos");
             }
