@@ -29,8 +29,12 @@ class AuthController {
     //   return;
     // }
 
-    const result = AuthService.signin(req.body);
-    console.log(result);
+    const result: any = AuthService.signin(req.body);
+    //console.log(result);
+    //const userID:any = await result.json();
+     const userID: any = await res.json(result);
+     //const userID2: any = await userID.json();
+     console.log(userID);
 
     // Проблему с типом existingUser позже исправим
     // req.session.user  = {
