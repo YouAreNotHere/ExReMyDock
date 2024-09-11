@@ -18,9 +18,19 @@ class AuthService {
   public async signin(user: any) {
     try {
       const queryUser: any = await this.getUserByName(user);
+      if (!queryUser.rows[0]){
+        console.log("Пользовательне найден")
+        return false
+      }
       const isPasswordValid = await bcrypt.compare(user.password, queryUser.rows[0].password);
 
-      return {user_id: queryUser.rows[0].id};
+      if (isPasswordValid){
+        return {user_id: queryUser.rows[0].id};
+      }else{
+        console.log("Ошибка. Неверный пароль!");
+        return false;
+      }
+
     } catch (err) {
       console.log(err);
       return "error"

@@ -31,7 +31,8 @@ class AuthController {
 
     const result: any = AuthService.signin(req.body)
         .then(result =>console.log(result))
-        .then(result => res.send(result));
+         return await res.json(result);
+        //.then(result => res.send(result));
 
     // Проблему с типом existingUser позже исправим
     // req.session.user  = {
@@ -41,7 +42,7 @@ class AuthController {
 
     console.log(`Пользователь авторизован`)
 
-    res.send(result);
+    //res.send(result);
   }
 }
 

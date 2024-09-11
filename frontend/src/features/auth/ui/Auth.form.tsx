@@ -18,12 +18,16 @@ const AuthForm = () => {
         e.preventDefault();
         try {
             const url = 'http://localhost:8081/auth/signin';
-            const response : any = await authRequest({name, password}, url);
+            const response : any = await authRequest({name, password}, url)
+                 // .then((result: any) => console.log(result))
+                 // .then((result: any) => result.json())
+                 // .then((result: any) => console.log(result))
+
 
             if (!response.ok) {
                 const error = await response.json();
                 setErrorMessage(error.message);
-            }else{
+                }
                 console.log("Авторизация успешна")
                 // Думаю, сделаем так. На клиенте мы
                 // будем проверять активность сессии через отдельный эндпоинт,
@@ -33,11 +37,15 @@ const AuthForm = () => {
                 // А клиент будет отправлять этот запрос через setInterval
                 // Я это к тому, что эта строчка здесь не нужна
 
-                const id = await response.json();
-                console.log(id);
-                dispatch(changeId(id));
+                // const id = await response.json()
+                //     .then((result: any) => console.log(result))
+                //     .then((result: any) => dispatch(changeId(result)));
+                //dispatch(changeId(id));
+            const data = await response.json()
+                .then((result: any) => console.log("Zhopa: ",result));
+            console.log('Parsed data: ', data); // Parsed data
                 navigate("/todos");
-            }
+
 
         } catch (error) {
             setErrorMessage(JSON.stringify(error));
