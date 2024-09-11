@@ -19,10 +19,6 @@ const AuthForm = () => {
         try {
             const url = 'http://localhost:8081/auth/signin';
             const response : any = await authRequest({name, password}, url)
-                 // .then((result: any) => console.log(result))
-                 // .then((result: any) => result.json())
-                 // .then((result: any) => console.log(result))
-
 
             if (!response.ok) {
                 const error = await response.json();
@@ -36,13 +32,11 @@ const AuthForm = () => {
                 // юзера перебросит на /auth.
                 // А клиент будет отправлять этот запрос через setInterval
                 // Я это к тому, что эта строчка здесь не нужна
-
                 // const id = await response.json()
                 //     .then((result: any) => console.log(result))
                 //     .then((result: any) => dispatch(changeId(result)));
                 //dispatch(changeId(id));
             const data = await response.json()
-                .then((result: any) => console.log("Zhopa: ",result));
             console.log('Parsed data: ', data); // Parsed data
                 navigate("/todos");
 
