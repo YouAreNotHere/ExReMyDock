@@ -25,7 +25,7 @@ class AuthService {
       const isPasswordValid = await bcrypt.compare(user.password, queryUser.rows[0].password);
 
       if (isPasswordValid){
-        return {user_id: queryUser.rows[0].id};
+        return {userId: queryUser.rows[0].id};
       }else{
         console.log("Ошибка. Неверный пароль!");
         return false;

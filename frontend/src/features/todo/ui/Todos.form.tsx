@@ -12,6 +12,7 @@ const TodosForm = () => {
     // const completeTodos = todos.filter(todo => todo.complete === true);
     const [errorMessage, setErrorMessage] = useState('');
     const userId = useSelector((state: any) => state.userId);
+    let todos;
 
     // if (currentFilter == "SHOW_COMPLETED"){
     //     currentTodos = completeTodos
@@ -22,8 +23,10 @@ const TodosForm = () => {
     // };
 
     const getTodos = async (e: any) => {
+
         try {
             const response: any = await getTodosRequest({userId});
+            console.log(response);
 
             if (!response.ok) {
                 console.log("Какая-то хуйня")
@@ -39,13 +42,15 @@ const TodosForm = () => {
             setErrorMessage(JSON.stringify(error));
         }
     };
-    let todos: any = getTodos(userId);
+     todos = getTodos(userId);
 
-    //console.log(todos);
 
     return(
            <div>
                    <AddTodo/>
+               <button onClick={getTodos}>
+                   Huy
+               </button>
             <ul>
                 {/*{todos.map((todo: any) => {*/}
                 {/*    return (<TodoForm*/}

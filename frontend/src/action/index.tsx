@@ -1,6 +1,6 @@
-export const changeId = (userId: number): any =>{
+export const changeId = (userId: any): any =>{
     return ({
         type: "CHANGE_USER_ID",
-        userId,
+        userId: userId.userId,
     })
 }

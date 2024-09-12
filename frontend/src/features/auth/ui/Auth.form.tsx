@@ -23,8 +23,7 @@ const AuthForm = () => {
             if (!response.ok) {
                 const error = await response.json();
                 setErrorMessage(error.message);
-                }
-                console.log("Авторизация успешна")
+                }else{
                 // Думаю, сделаем так. На клиенте мы
                 // будем проверять активность сессии через отдельный эндпоинт,
                 // нужно будет сделать на бэке урл /session
@@ -33,14 +32,16 @@ const AuthForm = () => {
                 // А клиент будет отправлять этот запрос через setInterval
                 // Я это к тому, что эта строчка здесь не нужна
                 // const id = await response.json()
-                //     .then((result: any) => console.log(result))
-                //     .then((result: any) => dispatch(changeId(result)));
-                //dispatch(changeId(id));
-            const data = await response.json()
-            console.log('Parsed data: ', data); // Parsed data
+
+                const userId = await response.json()
+                if (userId === false){
+                    console.log("Некорректный пароль");
+                    return
+                }
+                console.log("Авторизация успешна")
+                dispatch(changeId(userId));
                 navigate("/todos");
-
-
+            }
         } catch (error) {
             setErrorMessage(JSON.stringify(error));
         }
