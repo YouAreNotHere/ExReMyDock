@@ -1,6 +1,6 @@
 import {IGetTodosRequest, IPostTodosRequest} from "../types/ITodosRequest";
 
-const getTodosRequest = async (payload: IGetTodosRequest) =>
+const getTodosRequest = async (payload: IGetTodosRequest) => {
     await fetch('http://localhost:8081/todos/getTodos', {
         method: 'GET',
         body: JSON.stringify(payload),
@@ -9,7 +9,10 @@ const getTodosRequest = async (payload: IGetTodosRequest) =>
         },
     });
 
-const postTodosRequest = async (payload: IPostTodosRequest) =>
+}
+
+
+const postTodosRequest = async (payload: IPostTodosRequest) =>{
     await fetch('http://localhost:8081/todos/addTodo', {
         method: 'POST',
         body: JSON.stringify(payload),
@@ -17,6 +20,8 @@ const postTodosRequest = async (payload: IPostTodosRequest) =>
             'Content-Type': 'application/json',
         },
     });
+}
+
 
 
 export {getTodosRequest, postTodosRequest}

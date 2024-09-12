@@ -5,7 +5,7 @@ import {configureStore} from "@reduxjs/toolkit";
 // import editedTodoId from "./editedTodoId";
 
 const userId = (state: any = null, action: any) => {
-    if (!action.user){
+    if (!action.userId){
         return null
     }
     switch (action.type){

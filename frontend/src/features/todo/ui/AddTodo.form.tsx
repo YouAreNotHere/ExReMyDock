@@ -1,6 +1,6 @@
 import {useRef, useState} from "react";
 import {useSelector} from "react-redux"
-import {postTodosRequest} from "../api/todos.request";
+import {getTodosRequest, postTodosRequest} from "../api/todos.request";
 
 
 const AddTodo = () =>{
@@ -16,6 +16,7 @@ const AddTodo = () =>{
             />
             <button onClick={() => {
                 postTodosRequest({userId, text, status: "active"});
+                //getTodosRequest({userId});
                 setText("");
             }}>
                 Add Todo

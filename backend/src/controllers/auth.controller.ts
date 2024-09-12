@@ -37,6 +37,10 @@ class AuthController {
     //   name: (existingUser as any).rows[0].name,
     // };
 
+    // if (!result){
+    //   res.status(500).send({message: "Некорректный пароль"})
+    // }
+
     console.log(`Пользователь авторизован`)
 
     res.send(result);
