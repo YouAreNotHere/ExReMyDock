@@ -1,5 +1,4 @@
 interface IPostTodosRequest {
-    //id: number;
     userId: number;
     text: string;
     status: string;
