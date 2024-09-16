@@ -22,11 +22,11 @@ const TodosForm = () => {
     //     currentTodos = todos
     // };
 
-    const getTodos = async (e: any) => {
+    const getTodos = async (userId: any) => {
 
         try {
             const response: any = await getTodosRequest({userId});
-            console.log(response);
+            console.log("response = " + response);
 
             if (!response.ok) {
                 console.log("Какая-то хуйня")
@@ -43,6 +43,7 @@ const TodosForm = () => {
         }
     };
      todos = getTodos(userId);
+     console.log(todos);
 
 
     return(
