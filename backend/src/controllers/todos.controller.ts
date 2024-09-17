@@ -14,7 +14,7 @@ class TodosController {
         const huhu   = {
             userPizda: 3,
         }
-        res.send(huhu);
+        res.send(result.rows);
     }
 
     public async addTodo(req: Request, res: Response){

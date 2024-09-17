@@ -1,5 +1,5 @@
 import {getTodosRequest} from "../api/todos.request";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import TodoForm from "./Todo.form";
 import {useSelector} from "react-redux";
 import AddTodo from "./AddTodo.form";
@@ -12,7 +12,8 @@ const TodosForm = () => {
     // const completeTodos = todos.filter(todo => todo.complete === true);
     const [errorMessage, setErrorMessage] = useState('');
     const userId = useSelector((state: any) => state.userId);
-    let todos;
+
+    const [todos, setTodos ] = useState<any>([]);
 
     // if (currentFilter == "SHOW_COMPLETED"){
     //     currentTodos = completeTodos
@@ -26,7 +27,7 @@ const TodosForm = () => {
 
         try {
             const response: any = await getTodosRequest({userId});
-            console.log("response = " + response);
+            const data = await response.json();
 
             if (!response.ok) {
                 console.log("Какая-то хуйня")
@@ -34,31 +35,29 @@ const TodosForm = () => {
                 setErrorMessage(error.message);
             }else{
                 console.log("Тудушки загружены");
-                todos = await response.json();
-                return todos;
+                setTodos(data)
+                return data;
             }
 
         } catch (error) {
             setErrorMessage(JSON.stringify(error));
         }
     };
-     todos = getTodos(userId);
-     console.log(todos);
 
+    useEffect(():any => {
+        getTodos(userId);
+    },[]);
 
     return(
            <div>
                    <AddTodo/>
-               <button onClick={getTodos}>
-                   Huy
-               </button>
             <ul>
-                {/*{todos.map((todo: any) => {*/}
-                {/*    return (<TodoForm*/}
-                {/*        key = {todo.id}*/}
-                {/*        todo = {todo}*/}
-                {/*        editedTodo = {editedTodo}*/}
-                {/*        setEditedTodo = {setEditedTodo}/>)})}*/}
+                {todos.map((todo: any) => {
+                    return (<TodoForm
+                        key = {todo.id}
+                        todo = {todo}
+                        editedTodo = {editedTodo}
+                        setEditedTodo = {setEditedTodo}/>)})}
             </ul>
            </div>
     )
