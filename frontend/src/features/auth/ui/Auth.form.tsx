@@ -3,7 +3,7 @@ import "../../../app/App.css";
 import { useNavigate } from "react-router-dom";
 import {authRequest} from "../api/auth.request";
 import {useDispatch} from "react-redux"
-import {changeId} from "../../../action/index"
+import {changeId} from "../../../actions/index"
 
 const AuthForm = () => {
     const [name, setName] = useState('');
