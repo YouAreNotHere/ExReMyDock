@@ -36,7 +36,7 @@ const TodoForm = ({todo, editedTodo, setEditedTodo, setTodos}: any) => {
         )
     }else{
         todoContent = (
-            <li key={todo.id} className={todo.complete ? "сompleted" : ""}>
+            <li key={todo.id} className={todo.completed ? "сompleted" : ""}>
                 {todo.text}
                 <button className="addPadding" onClick={() => dispatch(deleteTodo(todo.id))}>
                     Delete todo
@@ -45,7 +45,7 @@ const TodoForm = ({todo, editedTodo, setEditedTodo, setTodos}: any) => {
                     Edit
                 </button>
                 <button onClick={() => dispatch(completeTodo(todo.id))} className="addPadding">
-                    {todo.complete ? "Uncomplete" : "Complete"}
+                    {!todo.completed ? "Complete" : "Uncomplete"}
                 </button>
             </li>
         )

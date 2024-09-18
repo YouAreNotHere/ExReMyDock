@@ -68,7 +68,7 @@ class db {
           id INT AUTO_INCREMENT PRIMARY KEY,
           user_id INT NOT NULL,
           text VARCHAR(255) NOT NULL,
-          status VARCHAR(255) NOT NULL
+          completed BOOLEAN NOT NULL
       );
     `;
     await this.query(sql);

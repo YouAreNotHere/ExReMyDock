@@ -15,7 +15,7 @@ const AddTodo = () =>{
                 value = {text}
             />
             <button onClick={() => {
-                postTodosRequest({userId, text, status: "active"});
+                postTodosRequest({userId, text, completed: false});
                 //getTodosRequest({userId});
                 setText("");
             }}>

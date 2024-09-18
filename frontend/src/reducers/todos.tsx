@@ -9,6 +9,8 @@ const todos = (state: any = [], action: any) =>{
                     complete : false,
                 }
             ]
+        case "LOAD_TODOS":
+            return action.todos
         case "EDIT_TODO":
             return state.map((todo: any)=>{
                 if (todo.id !== action.id){
@@ -19,7 +21,7 @@ const todos = (state: any = [], action: any) =>{
             })
         case "COMPLETE_TODO":
             return state.map((todo: any) =>
-                todo.id === action.id ? {...todo, complete: !todo.complete} : todo)
+                todo.id === action.id ? {...todo, completed: !todo.completed} : todo)
         case "DELETE_TODO":
             return state.filter((todo: any) => todo.id !==action.id);
         default:
