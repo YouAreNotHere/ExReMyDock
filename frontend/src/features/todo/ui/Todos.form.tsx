@@ -1,8 +1,9 @@
 import {getTodosRequest} from "../api/todos.request";
 import {useState, useEffect} from "react";
 import TodoForm from "./Todo.form";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import AddTodo from "./AddTodo.form";
+import {addTodo, loadTodos} from "../../../actions";
 
 
 const TodosForm = () => {
@@ -11,9 +12,10 @@ const TodosForm = () => {
     // const activeTodos = todos.filter(todo => todo.complete === false);
     // const completeTodos = todos.filter(todo => todo.complete === true);
     const [errorMessage, setErrorMessage] = useState('');
+    const dispatch: any = useDispatch();
     const userId = useSelector((state: any) => state.userId);
+    const todos = useSelector((state: any) => state.todos);
 
-    const [todos, setTodos ] = useState<any>([]);
 
     // if (currentFilter == "SHOW_COMPLETED"){
     //     currentTodos = completeTodos
@@ -30,12 +32,16 @@ const TodosForm = () => {
             const data = await response.json();
 
             if (!response.ok) {
-                console.log("Какая-то хуйня")
+                console.log("Тудушки не загружены")
                 const error = await response.json();
                 setErrorMessage(error.message);
             }else{
                 console.log("Тудушки загружены");
-                setTodos(data)
+                const todos = data.map((todo: any): any =>
+                    todo.complete == 0 ? {...todo, completed: true} : {...todo, completed: false}
+                )
+                console.log(todos);
+                dispatch(loadTodos(todos));
                 return data;
             }
 
@@ -47,6 +53,7 @@ const TodosForm = () => {
     useEffect(():any => {
         getTodos(userId);
     },[]);
+    //console.log("todos = " + todos);
 
     return(
            <div>

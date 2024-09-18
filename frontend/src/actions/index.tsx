@@ -19,6 +19,11 @@ export const addTodo = (text: string) => ({
     text: text,
 });
 
+export const loadTodos = (todos: any) => ({
+    type: "LOAD_TODOS",
+    todos: todos,
+})
+
 export const editTodo = (text: string, id: number) => ({
     type: "EDIT_TODO",
     id: id,

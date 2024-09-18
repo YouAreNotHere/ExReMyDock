@@ -1,7 +1,7 @@
 interface IPostTodosRequest {
     userId: number;
     text: string;
-    status: string;
+    completed: boolean;
 }
 
 interface IGetTodosRequest {
