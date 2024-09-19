@@ -1,12 +1,25 @@
-import {useRef, useState} from "react";
-import {useSelector} from "react-redux"
+import {useRef, useState, useEffect} from "react";
+import {useSelector, useDispatch} from "react-redux"
+import useGetTodos from "./useGetTodos";
 import {getTodosRequest, postTodosRequest} from "../api/todos.request";
+import {addTodo} from "../../../actions";
+import {get} from "node:http";
 
 
 const AddTodo = () =>{
     const ref: any = useRef();
     const [text, setText] = useState("");
     const userId = useSelector((state:any) => state.userId);
+    const dispatch = useDispatch();
+    const getTodos: any = useGetTodos();
+
+    const onClickHandler = async (e: any) => {
+        await postTodosRequest({userId, text, completed: false});
+        //getTodosRequest({userId});
+        getTodos(userId);
+        setText("");
+    }
+
     return (
         <>
             <input
@@ -14,11 +27,7 @@ const AddTodo = () =>{
                 onChange={(e) => setText(e.target.value)}
                 value = {text}
             />
-            <button onClick={() => {
-                postTodosRequest({userId, text, completed: false});
-                //getTodosRequest({userId});
-                setText("");
-            }}>
+            <button onClick={onClickHandler}>
                 Add Todo
             </button>
         </>

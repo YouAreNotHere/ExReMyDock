@@ -1,3 +1,5 @@
+//Допилить actions errorMessege, isLoading, чтобы было 3 вида экшона на бэк.
+
 export const changeId = (userId: any): any =>{
     return ({
         type: "CHANGE_USER_ID",

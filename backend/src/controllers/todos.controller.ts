@@ -10,10 +10,7 @@ class TodosController {
             res.status(404).send({message: 'Тудушек не найдено'});
             return;
         }
-        console.log("Тудушки найдены");
-        const huhu   = {
-            userPizda: 3,
-        }
+        console.log("Тудушки отправлены на фронт");
         res.send(result.rows);
     }
 
