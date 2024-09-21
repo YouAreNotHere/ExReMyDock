@@ -22,8 +22,10 @@ const useGetTodos =  () => {
                 const newTodos: any = data.map((todo: any): any =>
                     todo.complete === 0 ? {...todo, completed: true} : {...todo, completed: false}
                 )
-                const areTodosEqual = JSON.stringify(todos) === JSON.stringify(newTodos);
-                if (!areTodosEqual){
+                const newTodosMoreTodos = JSON.stringify(todos).length < JSON.stringify(newTodos).length;
+                console.log("Новых тудушек больше? " + newTodosMoreTodos);
+                if (newTodosMoreTodos){
+                    console.log("Отправляем в состояние новые тудушки")
                     dispatch(loadTodos(newTodos));
                 }
             }

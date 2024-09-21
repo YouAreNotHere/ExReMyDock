@@ -2,6 +2,8 @@ import {useState, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import "../../../app/App.css";
 import {editTodo, changeEditedTodoId, deleteTodo, completeTodo} from "../../../actions";
+import {deleteTodoRequest} from "../api/todos.request"
+
 
 const TodoForm = ({todo, editedTodo, setEditedTodo, setTodos}: any) => {
     const [newTodoText, setNewTodoText] = useState("");
@@ -9,6 +11,12 @@ const TodoForm = ({todo, editedTodo, setEditedTodo, setTodos}: any) => {
     const dispatch = useDispatch();
 
     let todoContent;
+
+    const onDeleteHandler  = async (e: any) => {
+        await deleteTodoRequest({id: todo.id});
+        console.log(todo.id);
+        dispatch(deleteTodo(todo.id));
+    }
 
     if (!todo){
         todoContent=(
@@ -38,7 +46,7 @@ const TodoForm = ({todo, editedTodo, setEditedTodo, setTodos}: any) => {
         todoContent = (
             <li key={todo.id} className={todo.completed ? "сompleted" : ""}>
                 {todo.text}
-                <button className="addPadding" onClick={() => dispatch(deleteTodo(todo.id))}>
+                <button className="addPadding" onClick={onDeleteHandler}>
                     Delete todo
                 </button>
                 <button className="addPadding" onClick={() => dispatch(changeEditedTodoId(todo.id))}>

@@ -1,4 +1,4 @@
-interface IPostTodosRequest {
+interface IAddTodoRequest {
     userId: number;
     text: string;
     completed: boolean;
@@ -8,4 +8,8 @@ interface IGetTodosRequest {
     userId: number;
 }
 
-export type {IPostTodosRequest, IGetTodosRequest}
+interface IDeleteTodoRequest{
+    id: number;
+}
+
+export type {IAddTodoRequest, IGetTodosRequest, IDeleteTodoRequest}

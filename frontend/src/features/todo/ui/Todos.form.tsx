@@ -3,6 +3,7 @@ import TodoForm from "./Todo.form";
 import {useSelector, useDispatch} from "react-redux";
 import AddTodo from "./AddTodo.form";
 import useGetTodos from "./useGetTodos";
+import {loadTodos} from "../../../actions";
 
 const TodosForm = () => {
     const [editedTodo, setEditedTodo] = useState("");
@@ -12,6 +13,7 @@ const TodosForm = () => {
     const dispatch: any = useDispatch();
     const todos = useSelector((state: any) => state.todos);
     const userId = useSelector((state: any) => state.userId);
+
     const getTodos: any = useGetTodos();
 
     // if (currentFilter == "SHOW_COMPLETED"){
@@ -25,7 +27,7 @@ const TodosForm = () => {
     useEffect(():any => {
         getTodos(userId);
     },[todos]);
-    //console.log("todos = " + todos);
+
 
     return(
            <div>
