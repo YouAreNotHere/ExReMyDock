@@ -19,6 +19,16 @@ class TodosService {
             return "error"
         }
     }
+
+    public async deleteTodo(todoId: any){
+        const query: string = `DELETE FROM todos WHERE id = "${todoId}";`;
+        try {
+            return await db.query(query);
+        } catch (error){
+            console.error("Error in TodosService.deletTodo:", error);
+            return "error"
+        }
+    }
 }
 
 export default new TodosService();

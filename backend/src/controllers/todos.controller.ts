@@ -17,11 +17,23 @@ class TodosController {
     public async addTodo(req: Request, res: Response){
         const result = await TodosService.addTodo(req.body);
         if (result === 'error') {
-            res.status(500).send({message: 'Что-то пошло не так'});
+            res.status(500).send({message: 'При добавлении туду что-то пошло не так'});
             return;
         }
 
         console.log(`Todo with text ${req.body.text} was added`)
+        res.send();
+    };
+
+    public async deleteTodo(req: Request, res: Response){
+        const {id} = req.body;
+        const result = await TodosService.deleteTodo(id);
+        if (result === 'error') {
+            res.status(500).send({message: 'При удалении туду что-то пошло не так'});
+            return;
+        }
+
+        console.log(`Todo with ${id} was deleted`)
         res.send();
     }
 }
