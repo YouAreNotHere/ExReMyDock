@@ -36,6 +36,18 @@ class TodosController {
         console.log(`Todo with ${id} was deleted`)
         res.send();
     }
+
+    public async completeTodo(req: Request, res: Response){
+        const {id} = req.body;
+        const result = await TodosService.completeTodo(id);
+        if (result === 'error') {
+            res.status(500).send({message: 'При завершеннии туду что-то пошло не так'});
+            return;
+        }
+
+        console.log(`Todo with ${id} is completed`)
+        res.send();
+    }
 }
 
 

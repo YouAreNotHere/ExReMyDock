@@ -29,6 +29,16 @@ class TodosService {
             return "error"
         }
     }
+
+    public async completeTodo(todoId: any){
+        const query: string = `UPDATE todos SET completed = "1" WHERE id = "${todoId}";`;
+        try {
+            return await db.query(query);
+        } catch (error){
+            console.error("Error in TodosService.deletTodo:", error);
+            return "error"
+        }
+    }
 }
 
 export default new TodosService();
