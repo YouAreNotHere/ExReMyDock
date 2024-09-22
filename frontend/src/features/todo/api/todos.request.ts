@@ -2,8 +2,8 @@ import {IGetTodosRequest, IAddTodoRequest, IDeleteTodoRequest, ICompleteTodoRequ
 
 const getTodosRequest = async (payload: IGetTodosRequest) =>
     await fetch('http://localhost:8081/todos/getTodos', {
-        method: 'POST',
-        body: JSON.stringify(payload),
+        method: 'GET',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
         },

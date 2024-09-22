@@ -1,8 +1,6 @@
 import {Application} from "express";
-import session from "express-session";
 import {todosRouter} from "./todos.routes";
 import { authRouter } from './auth.routes';
-
 
 const initRouting = (app: Application) => {
   app.use('/auth', authRouter);

@@ -21,29 +21,38 @@ class AuthController {
   }
 
   public async signin(req: Request, res: Response){
-    // declare module используются в d.ts файлах
-    // https://scriptdev.ru/guide/058/
-
-    // if (!await AuthService.checkIsValidCredentials(req.body)) {
-    //   res.status(401).send({message: 'Неверный логин или пароль'});
-    //   return;
-    // }
+    if (!await AuthService.checkIsValidCredentials(req.body)) {
+      res.status(401).send({message: 'Неверный логин или пароль'});
+      return;
+    }
 
     const result: any = await AuthService.signin(req.body)
 
-    // Проблему с типом existingUser позже исправим
-    // req.session.user  = {
-    //   id: (existingUser as any).rows[0].id,
-    //   name: (existingUser as any).rows[0].name,
-    // };
-
-    // if (!result){
-    //   res.status(500).send({message: "Некорректный пароль"})
-    // }
+    if (!result){
+      res.status(500).send({message: "Некорректный пароль"})
+    }
 
     console.log(`Пользователь авторизован`)
 
+    const existingUser = await AuthService.getUserByName(req.body);
+
+    // Проблему с типом existingUser позже исправим
+    req.session.user  = {
+      id: (existingUser as any).rows[0].id,
+      name: (existingUser as any).rows[0].name,
+    };
+
     res.send(result);
+  }
+
+  public async logout(req: Request, res: Response){
+    req.session.destroy(error => {
+      if (error) {
+        return res.status(500).send({ message: 'Ошибка при выходе' });
+      }
+      res.clearCookie('connect.sid');
+      res.status(200).send({message: 'Выполнен выход из системы'});
+    });
   }
 }
 

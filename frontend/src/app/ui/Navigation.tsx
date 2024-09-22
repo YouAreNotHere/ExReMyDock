@@ -11,11 +11,9 @@ const Navigation = () => {
       <Provider store = {store}>
         <Router>
           <Routes>
-            {/*<Route path='/signup' element={<SignupPage />} />*/}
-            {/*<Route path='/auth' element={<AuthPage />} />*/}
-            <Route path='/' element={<AuthPage />} />
-            <Route path='/notfound' element={<NotFoundPage />} />
-            <Route path="/todos" element={<TodosPage/>} />
+            <Route path='/' element={<TodosPage />} />
+            <Route path='/auth' element={<AuthPage />} />
+            <Route path='*' element={<NotFoundPage />} />
           </Routes>
         </Router>
       </Provider>

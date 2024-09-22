@@ -1,29 +1,7 @@
-import {useAuthGuard} from "../shared/hooks";
-import {Link} from "react-router-dom";
+import TodosPage from "./todo/Todos.page";
 
 const MainPage = () => {
-  //useAuthGuard();
-
-  // С такой логикой использования MainPage, юзер, будучи уже авторизованным, сможет попасть
-  // на окно авторизации, хотя это ему не нужно
-  // Или же наоборот, он может пойти по адресу /todos, введя адрес сам в урл, и страница просто упадет со статусом
-  // 401, хотя его можно было автоматом перебросить на страницу авторизации
-
-  // Пусть главной страницей будет TodoPage. Если юзер не авторизован, то его будет перекидывать на /auth
-  // На экране auth будет ссылка на экран signup
-  // Можешь сам это сделать, можем вместе
-
-  return (
-    <div>
-        {/*Без ".." не работает?*/}
-        <Link to={"../signup"}>
-            <h1>Registration</h1>
-        </Link>
-        <Link to={"../auth"}>
-            <h1>Login</h1>
-        </Link>
-    </div>
-  )
+  return <TodosPage />;
 };
 
 export default MainPage;
