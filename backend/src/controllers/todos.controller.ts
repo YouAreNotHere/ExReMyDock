@@ -47,7 +47,18 @@ class TodosController {
             return;
         }
 
-        console.log(`Todo with ${req.body.id} is completed`)
+        console.log(`Todo with id "${req.body.id}" is completed`)
+        res.send();
+    }
+
+    public async saveEditedTodo(req: Request, res: Response){
+        const result = await TodosService.saveEditedTodo(req.body);
+        if (result === 'error') {
+            res.status(500).send({message: 'При сохранении изменяемой тудушки что-то пошло не так'});
+            return;
+        }
+
+        console.log(`Todo with text "${req.body.text}" is completed`)
         res.send();
     }
 }
