@@ -30,8 +30,9 @@ class TodosService {
         }
     }
 
-    public async completeTodo(todoId: any){
-        const query: string = `UPDATE todos SET completed = "1" WHERE id = "${todoId}";`;
+    public async completeTodo(idAndCompleted: any){
+        const {id, completed} = idAndCompleted;
+         const query: string = `UPDATE todos SET completed = ${completed} WHERE id = "${id}";`;
         try {
             return await db.query(query);
         } catch (error){

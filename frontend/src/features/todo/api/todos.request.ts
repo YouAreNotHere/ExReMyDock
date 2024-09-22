@@ -1,4 +1,4 @@
-import {IGetTodosRequest, IAddTodoRequest, IDeleteTodoRequest} from "../types/ITodosRequest";
+import {IGetTodosRequest, IAddTodoRequest, IDeleteTodoRequest, ICompleteTodoRequest} from "../types/ITodosRequest";
 
 const getTodosRequest = async (payload: IGetTodosRequest) =>
     await fetch('http://localhost:8081/todos/getTodos', {
@@ -8,8 +8,6 @@ const getTodosRequest = async (payload: IGetTodosRequest) =>
             'Content-Type': 'application/json',
         },
     });
-
-
 
 const addTodoRequest = async (payload: IAddTodoRequest) =>
     await fetch('http://localhost:8081/todos/addTodo', {
@@ -29,8 +27,16 @@ const deleteTodoRequest = async (payload: IDeleteTodoRequest) =>
         },
     });
 
+const completeTodoRequest = async (payload: ICompleteTodoRequest) =>{
+    console.log(payload);
+    await fetch('http://localhost:8081/todos/completeTodo', {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+}
 
 
-
-
-export {getTodosRequest, addTodoRequest, deleteTodoRequest}
+export {getTodosRequest, addTodoRequest, deleteTodoRequest, completeTodoRequest}

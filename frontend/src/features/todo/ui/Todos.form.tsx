@@ -24,9 +24,10 @@ const TodosForm = () => {
     //     currentTodos = todos
     // };
 
-    useEffect(():any => {
-        getTodos(userId);
-    },[todos]);
+    // useEffect(():any => {
+    //     getTodos(userId);
+    // },[todos]);
+    getTodos(userId);
 
 
     return(

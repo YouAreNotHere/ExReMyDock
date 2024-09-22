@@ -9,15 +9,9 @@ const app = express();
 
 const PORT = 8081;
 
-const corsOptions = {
-  origin: ["http://localhost:3000"],
-  //Пробовал и квадратных скобок
-};
-
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.listen(PORT, async () => {
   console.log(`App listening on port ${PORT}`)
