@@ -24,15 +24,6 @@ const AuthForm = () => {
                 const error = await response.json();
                 setErrorMessage(error.message);
                 }else{
-                // Думаю, сделаем так. На клиенте мы
-                // будем проверять активность сессии через отдельный эндпоинт,
-                // нужно будет сделать на бэке урл /session
-                // На бэке эта сессия будет проверяться. Если сессия истекла, то
-                // юзера перебросит на /auth.
-                // А клиент будет отправлять этот запрос через setInterval
-                // Я это к тому, что эта строчка здесь не нужна
-                // const id = await response.json()
-
                 const userId = await response.json()
                 if (userId === false){
                     console.log("Некорректный пароль");
@@ -40,7 +31,8 @@ const AuthForm = () => {
                 }
                 console.log("Авторизация успешна")
                 dispatch(changeId(userId));
-                navigate("/todos");
+
+                navigate("/");
             }
         } catch (error) {
             setErrorMessage(JSON.stringify(error));

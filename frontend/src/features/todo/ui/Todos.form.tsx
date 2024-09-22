@@ -2,8 +2,8 @@ import {useState, useEffect} from "react";
 import TodoForm from "./Todo.form";
 import {useSelector, useDispatch} from "react-redux";
 import AddTodo from "./AddTodo.form";
-import useGetTodos from "./useGetTodos";
 import {loadTodos} from "../../../actions";
+import {useRequest} from "../../../shared/hooks/useRequest";
 
 const TodosForm = () => {
     const [editedTodo, setEditedTodo] = useState("");
@@ -14,21 +14,30 @@ const TodosForm = () => {
     const todos = useSelector((state: any) => state.todos);
     const userId = useSelector((state: any) => state.userId);
 
-    const getTodos: any = useGetTodos();
+    const setTodosToState = (todos: any) => {
+      console.log("Тудушки загружены");
+      const newTodos: any = data.map((todo: any): any =>
+        todo.completed === 0 ? {...todo, completed: true} : {...todo, completed: false}
+      )
+      const newTodosMoreTodos = JSON.stringify(todos).length < JSON.stringify(newTodos).length;
+      console.log(newTodos);
+      //console.log("Новых тудушек больше? " + newTodosMoreTodos);
+      if (newTodosMoreTodos){
+        //console.log("Отправляем в состояние новые тудушки")
+        dispatch(loadTodos(newTodos));
+      }
+    }
 
-    // if (currentFilter == "SHOW_COMPLETED"){
-    //     currentTodos = completeTodos
-    // } else if (currentFilter == "SHOW_ACTIVE"){
-    //     currentTodos = activeTodos
-    // }else {
-    //     currentTodos = todos
-    // };
+    const {
+      data,
+      isLoading,
+      errorMessage,
+      makeRequest: getTodos
+    } = useRequest({method: 'GET', url: '/todos/getTodos', onSuccess: setTodosToState});
 
-    // useEffect(():any => {
-    //     getTodos(userId);
-    // },[todos]);
-    getTodos(userId);
-
+    useEffect(():any => {
+        getTodos();
+    },[]);
 
     return(
            <div>

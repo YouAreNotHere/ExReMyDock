@@ -3,11 +3,14 @@ import TodosService from "../services/todos.service";
 
 class TodosController {
     public async getTodos (req: Request, res: Response){
-        const {userId} = req.body;
-        const result: any = await TodosService.getTodosByUserId(userId);
+
+        const userId = req.session.user?.id;
+        if (!userId) res.redirect('auth');
+
+        const result: any = await TodosService.getTodosByUserId(Number(userId));
         console.log(result.rows);
         if (!(result?.rows as any)?.length) {
-            res.status(404).send({message: 'Тудушек не найдено'});
+            res.status(200).send({message: 'Тудушек не найдено'});
             return;
         }
         console.log("Тудушки отправлены на фронт");

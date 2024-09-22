@@ -1,6 +1,17 @@
 import session from "express-session";
 import {Application} from "express";
 
+import 'express-session';
+
+declare module 'express-session' {
+  export interface SessionData {
+    user?: {
+      id: string;
+      name: string;
+    };
+  }
+}
+
 const sessionMiddleware = (app: Application) => {
   app.use(session({
     secret: 'your_secret_key', // Уникальный ключ для шифрования сессии
@@ -9,17 +20,18 @@ const sessionMiddleware = (app: Application) => {
     saveUninitialized: true, // Автоматически сохранять новые сессии
     cookie: {
       maxAge: 60 * 60 * 1000, // Время жизни сессии в миллисекундах
+      sameSite: 'lax',
+      secure: false,
     },
   }));
 
   // Это примерная реализация, ее надо будет поправить
 
-  // app.use((req, res, next) => {
-  //   if (!req.session.user) {
-  //     res.status(401);
-  //   }
-  //   next();
-  // });
+  app.use((req, res, next) => {
+    if (!req.originalUrl.startsWith('/auth') && !req.session.user) {
+      res.status(401).send({message: 'Unauthorized'});
+    } else next();
+  });
 };
 
 export {sessionMiddleware};
