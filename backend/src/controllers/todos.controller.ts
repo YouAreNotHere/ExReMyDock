@@ -38,14 +38,13 @@ class TodosController {
     }
 
     public async completeTodo(req: Request, res: Response){
-        const {id} = req.body;
-        const result = await TodosService.completeTodo(id);
+        const result = await TodosService.completeTodo(req.body);
         if (result === 'error') {
             res.status(500).send({message: 'При завершеннии туду что-то пошло не так'});
             return;
         }
 
-        console.log(`Todo with ${id} is completed`)
+        console.log(`Todo with ${req.body.id} is completed`)
         res.send();
     }
 }

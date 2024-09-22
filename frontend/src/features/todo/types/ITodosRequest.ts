@@ -12,4 +12,10 @@ interface IDeleteTodoRequest{
     id: number;
 }
 
-export type {IAddTodoRequest, IGetTodosRequest, IDeleteTodoRequest}
+interface ICompleteTodoRequest{
+    id: number;
+    completed: boolean;
+}
+
+
+export type {IAddTodoRequest, IGetTodosRequest, IDeleteTodoRequest, ICompleteTodoRequest}
