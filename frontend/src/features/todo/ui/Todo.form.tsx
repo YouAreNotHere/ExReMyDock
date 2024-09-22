@@ -9,6 +9,7 @@ const TodoForm = ({todo, editedTodo, setEditedTodo, setTodos}: any) => {
     const [newTodoText, setNewTodoText] = useState("");
     const inputRef = useRef<any>();
     const dispatch = useDispatch();
+    const editedId = useSelector((state: any) => state.editedTodoId);
 
     let todoContent;
 
