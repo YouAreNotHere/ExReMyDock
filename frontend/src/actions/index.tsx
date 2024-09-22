@@ -13,17 +13,27 @@ export const VisibilityFilters = {
     SHOW_ACTIVE: 'SHOW_ACTIVE'
 };
 
+export const changeCurrentFilter = (filter: string) =>({
+    type: "CHANGE_FILTER",
+    filter: filter,
+});
+
 let nextId = 0;
 
-export const addTodo = (text: string) => ({
-    type: "ADD_TODO",
-    id: nextId++,
-    text: text,
-});
+// export const addTodo = (text: string) => ({
+//     type: "ADD_TODO",
+//     id: nextId++,
+//     text: text,
+// });
 
 export const loadTodos = (todos: any) => ({
     type: "LOAD_TODOS",
     todos: todos,
+})
+
+export const loadCurrentTodos = (currentTodos: any) => ({
+    type: "LOAD_CURRENT_TODOS",
+    currentTodos: currentTodos,
 })
 
 export const editTodo = (text: string, id: number) => ({
@@ -40,11 +50,6 @@ export const deleteTodo = (id: number) => ({
 export const completeTodo = (id: number) => ({
     type: "COMPLETE_TODO",
     id: id,
-});
-
-export const changeCurrentFilter= (filter: any) =>({
-    type: "CHANGE_FILTER",
-    filter: filter,
 });
 
 export const changeEditedTodoId= (editedTodoId: number | null) => ({
