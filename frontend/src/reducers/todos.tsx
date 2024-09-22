@@ -11,6 +11,8 @@ const todos = (state: any = [], action: any) =>{
             ]
         case "LOAD_TODOS":
             return action.todos
+        case "LOAD_CURRENT_TODOS":
+            return action.currentTodos
         case "EDIT_TODO":
             return state.map((todo: any)=>{
                 if (todo.id !== action.id){

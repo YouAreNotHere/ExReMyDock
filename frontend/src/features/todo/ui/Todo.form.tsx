@@ -4,8 +4,7 @@ import "../../../app/App.css";
 import {editTodo, changeEditedTodoId, deleteTodo, completeTodo} from "../../../actions";
 import {deleteTodoRequest, completeTodoRequest, saveEditedTodoRequest} from "../api/todos.request"
 
-
-const TodoForm = ({todo, setEditedTodo, setTodos}: any) => {
+const TodoForm = ({todo}: any) => {
     const [newTodoText, setNewTodoText] = useState("");
     const inputRef = useRef<any>();
     const dispatch = useDispatch();
@@ -19,7 +18,7 @@ const TodoForm = ({todo, setEditedTodo, setTodos}: any) => {
     }
 
     const onCompleteHandler  = async (e: any) => {
-        await completeTodoRequest({id: todo.id, completed: todo.completed});
+        await completeTodoRequest({id: todo.id, completed: !todo.completed});
         dispatch(completeTodo(todo.id));
     }
 

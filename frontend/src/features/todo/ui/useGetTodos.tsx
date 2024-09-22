@@ -20,13 +20,11 @@ const useGetTodos =  () => {
             }else{
                 console.log("Тудушки загружены");
                 const newTodos: any = data.map((todo: any): any =>
-                    todo.completed === 0 ? {...todo, completed: true} : {...todo, completed: false}
+                    todo.completed === 0 ? {...todo, completed: false} : {...todo, completed: true}
                 )
                 const newTodosMoreTodos = JSON.stringify(todos).length < JSON.stringify(newTodos).length;
-                console.log(newTodos);
-                //console.log("Новых тудушек больше? " + newTodosMoreTodos);
                 if (newTodosMoreTodos){
-                    //console.log("Отправляем в состояние новые тудушки")
+                    console.log("Туду обновлены")
                     dispatch(loadTodos(newTodos));
                 }
             }

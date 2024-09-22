@@ -1,29 +1,19 @@
 import React from "react";
+import {FormLayout, FilterLayout} from "../../shared/layouts/FormLayout";
 import TodosForm from "../../features/todo/ui/Todos.form";
-import {useRequest} from "../../shared/hooks/useRequest";
-import {useNavigate} from "react-router-dom";
+import FilterBar from "../../features/todo/ui/FilterBar.form";
 
-const TodosPage = () => {
-
-    // стоит убрать логику логаута из TodosPage куда-нибудь в shared, например, ибо эта логика не относится к todos
-    const navigate = useNavigate();
-    const onLogoutSuccess = () => {
-        navigate('/auth');
-    };
-
-    const {
-        isLoading,
-        errorMessage,
-        makeRequest: logoutRequest,
-    } = useRequest({method: 'POST', url: '/auth/logout', onSuccess: onLogoutSuccess});
-
-
+const TodosPage = () =>{
     return(
-      <>
-        <button onClick={logoutRequest}>{isLoading ? 'loading...' : 'logout'}</button>
-        {errorMessage && <p>{errorMessage}</p>}
-        <TodosForm/>
-      </>
+        <>
+            <FormLayout>
+                <TodosForm/>
+            </FormLayout>
+            <FilterLayout>
+                <FilterBar/>
+            </FilterLayout>
+        </>
+
     )
 };
 

@@ -1,6 +1,7 @@
 import './FormLayout.css';
+import "../../../../app/App.css";
 
-const FormLayout = ({children}: any) => {
+export const FormLayout = ({children}: any) => {
   return (
     <div className="form-layout">
       {children}
@@ -8,4 +9,10 @@ const FormLayout = ({children}: any) => {
   );
 };
 
-export {FormLayout};
+export const FilterLayout = ({children}: any) => {
+  return (
+      <div className="filterBar">
+        {children}
+      </div>
+  );
+};
