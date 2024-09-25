@@ -12,7 +12,7 @@ const TodosForm = () => {
     // const completeTodos = todos.filter(todo => todo.complete === true);
     const dispatch: any = useDispatch();
     const todos = useSelector((state: any) => state.todos);
-    const userId = useSelector((state: any) => state.userId);
+
 
     const setTodosToState = (todos: any) => {
       console.log("Тудушки загружены");
