@@ -1,4 +1,4 @@
-import {createPool, Pool} from 'mysql2/promise';
+import { createPool, Pool } from 'mysql2/promise';
 
 class db {
   private pool: Pool;
@@ -19,11 +19,11 @@ class db {
   public async query(sql: string) {
     try {
       const connection = await this.pool.getConnection();
-      console.log('MySQL connected...')
+      console.log('MySQL connected...');
 
       const [rows, fields] = await connection.query(sql);
       connection.release();
-      console.log('MySQL released...')
+      console.log('MySQL released...');
 
       return { rows, fields };
     } catch (error) {

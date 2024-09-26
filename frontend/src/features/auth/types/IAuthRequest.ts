@@ -1,6 +1,6 @@
 interface IAuthRequest {
-    name: string;
-    password: string;
+  name: string;
+  password: string;
 }
 
-export type {IAuthRequest}
+export type { IAuthRequest };

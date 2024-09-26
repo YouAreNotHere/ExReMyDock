@@ -1,10 +1,10 @@
 import express from 'express';
-import bodyParser from "body-parser";
+import bodyParser from 'body-parser';
 import cors from 'cors';
-import db from "./src/database/db";
-import { initRouting } from "./src/routes";
-import {initMiddlewares} from "./src/middlewares";
-import {sessionMiddleware} from "./src/middlewares/session.middleware";
+import db from './src/database/db';
+import { initRouting } from './src/routes';
+import { initMiddlewares } from './src/middlewares';
+import { sessionMiddleware } from './src/middlewares/session.middleware';
 
 const app = express();
 
@@ -14,7 +14,7 @@ initMiddlewares(app);
 initRouting(app);
 
 app.listen(PORT, async () => {
-  console.log(`App listening on port ${PORT}`)
+  console.log(`App listening on port ${PORT}`);
 
   await db.createTables();
-})
+});
