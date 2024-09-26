@@ -2,14 +2,13 @@ import {useState, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import "../../../app/App.css";
 import {editTodo, changeEditedTodoId, deleteTodo, completeTodo} from "../../../actions";
-import {deleteTodoRequest, completeTodoRequest} from "../api/todos.request"
+import {deleteTodoRequest, completeTodoRequest, saveEditedTodoRequest} from "../api/todos.request"
 
-
-const TodoForm = ({todo, editedTodo, setEditedTodo, setTodos}: any) => {
+const TodoForm = ({todo}: any) => {
     const [newTodoText, setNewTodoText] = useState("");
     const inputRef = useRef<any>();
     const dispatch = useDispatch();
-    const editedId = useSelector((state: any) => state.editedTodoId);
+    const editedTodo = useSelector((state: any) => state.editedTodoId);
 
     let todoContent;
 
@@ -19,8 +18,15 @@ const TodoForm = ({todo, editedTodo, setEditedTodo, setTodos}: any) => {
     }
 
     const onCompleteHandler  = async (e: any) => {
-        await completeTodoRequest({id: todo.id, completed: todo.completed});
+        await completeTodoRequest({id: todo.id, completed: !todo.completed});
         dispatch(completeTodo(todo.id));
+    }
+
+    const onSavedEditedHandler = async (e: any) =>{
+        await saveEditedTodoRequest({id: todo.id, text: newTodoText});
+        dispatch(editTodo(newTodoText, todo.id,));
+        dispatch(changeEditedTodoId(null));
+        setNewTodoText("");
     }
 
     if (!todo){
@@ -38,11 +44,8 @@ const TodoForm = ({todo, editedTodo, setEditedTodo, setTodos}: any) => {
                         setNewTodoText(e.target.value);
                     }}
                 />
-                <button onClick={() => {
-                    dispatch(editTodo(newTodoText, todo.id,));
-                    dispatch(changeEditedTodoId(null));
-                    setNewTodoText("");
-                }}>
+                <button className="addPadding"
+                    onClick={onSavedEditedHandler}>
                     Save
                 </button>
             </div>

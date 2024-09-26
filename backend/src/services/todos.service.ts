@@ -40,6 +40,17 @@ class TodosService {
             return "error"
         }
     }
+
+    public async saveEditedTodo(idAndText: any){
+        const {id, text} = idAndText;
+        const query: string = `UPDATE todos SET text = "${text}" WHERE id = "${id}";`;
+        try {
+            return await db.query(query);
+        } catch (error){
+            console.error("Error in TodosService.deletTodo:", error);
+            return "error"
+        }
+    }
 }
 
 export default new TodosService();

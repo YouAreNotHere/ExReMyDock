@@ -7,16 +7,12 @@ import { loadTodos } from "../../../actions";
 
 const TodosForm = () => {
     const [editedTodo, setEditedTodo] = useState("");
-    const [currentFilter, setCurrentFilter] = useState("SHOW_ALL");
-    // const activeTodos = todos.filter(todo => todo.complete === false);
-    // const completeTodos = todos.filter(todo => todo.complete === true);
     const dispatch: any = useDispatch();
     const todos = useSelector((state: any) => state.todos);
-    const userId = useSelector((state: any) => state.userId);
-    const activeTodos = todos.filter((todo: any) => todo.completed === false);
-    const completeTodos = todos.filter((todo: any) => todo.completed === true);
     const currentFilter = useSelector((state: any) => state.todoFilters);
     let currentTodos: any = [];
+    const activeTodos = todos.filter((todo: any) => todo.complete === false);
+    const completeTodos = todos.filter((todo: any) => todo.complete === true);
 
     if (currentFilter == "SHOW_COMPLETED"){
         currentTodos = completeTodos;
@@ -55,7 +51,7 @@ const TodosForm = () => {
            <div>
                    <AddTodo/>
             <ul>
-                {todos.map((todo: any) => {
+                {currentTodos.map((todo: any) => {
                     return (<TodoForm
                         key = {todo.id}
                         todo = {todo}
