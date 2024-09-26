@@ -17,10 +17,5 @@ interface ICompleteTodoRequest{
     completed: boolean;
 }
 
-interface ISaveEditedTodoRequest{
-    id: number;
-    text: string;
-}
 
-
-export type {IAddTodoRequest, IGetTodosRequest, IDeleteTodoRequest, ICompleteTodoRequest, ISaveEditedTodoRequest}
+export type {IAddTodoRequest, IGetTodosRequest, IDeleteTodoRequest, ICompleteTodoRequest}
