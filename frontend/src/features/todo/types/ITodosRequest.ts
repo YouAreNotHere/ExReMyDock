@@ -22,5 +22,4 @@ interface ISaveEditedTodoRequest{
     text: string;
 }
 
-
 export type {IAddTodoRequest, IGetTodosRequest, IDeleteTodoRequest, ICompleteTodoRequest, ISaveEditedTodoRequest}
