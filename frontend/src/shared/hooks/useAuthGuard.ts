@@ -1,5 +1,5 @@
-import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const useAuthGuard = () => {
   const navigate = useNavigate();
@@ -14,4 +14,4 @@ const useAuthGuard = () => {
   }, [isAuthenticated]);
 };
 
-export {useAuthGuard};
+export { useAuthGuard };

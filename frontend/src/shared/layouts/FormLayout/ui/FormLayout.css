@@ -1,39 +1,39 @@
 .form-layout {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-    width: 60%;
-    height: 60%;
-    padding: 15px;
+  width: 60%;
+  height: 60%;
+  padding: 15px;
 
-    background-color: darkcyan;
-    border: 3px solid gainsboro;
-    border-radius: 28px;
+  background-color: darkcyan;
+  border: 3px solid gainsboro;
+  border-radius: 28px;
 }
 
 .row {
-    width: 250px;
-    display: flex;
-    justify-content: space-between;
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
 
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .label {
-    width: 70px;
-    text-align: end;
-    margin-right: 6px;
+  width: 70px;
+  text-align: end;
+  margin-right: 6px;
 }
 
 .input {
-    width: 180px;
+  width: 180px;
 }
 
 .error-message {
-    background: aquamarine;
-    color: crimson;
-    padding: 4px;
-    border-radius: 4px;
+  background: aquamarine;
+  color: crimson;
+  padding: 4px;
+  border-radius: 4px;
 }

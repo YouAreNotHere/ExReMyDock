@@ -1,1 +1,1 @@
-export {useAuthGuard} from './useAuthGuard';
+export { useAuthGuard } from './useAuthGuard';

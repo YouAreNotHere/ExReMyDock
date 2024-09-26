@@ -1,13 +1,12 @@
 import './App.css';
-import {Navigation} from "./ui";
+import { Navigation } from './ui';
 
 const App = () => {
-
   return (
-    <div className="App">
+    <div className='App'>
       <Navigation />
     </div>
-  )
-}
+  );
+};
 
 export default App;

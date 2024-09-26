@@ -10,30 +10,24 @@
   color: gainsboro;
 }
 
-.buttonStyle  {
+.buttonStyle {
   margin: 5px;
 }
 
-.centerStyle{
+.centerStyle {
   position: center;
   margin-left: 5vw;
 }
 
 .сompleted {
-  color : gray;
+  color: gray;
   text-decoration: line-through;
 }
 
-.addPadding{
+.addPadding {
   margin: 5px;
 }
 
-.completedFilter{
+.completedFilter {
   display: none;
-}
-.filterBar{
-  margin-top: 10px;
-  width: 60%;
-  display: flex;
-  justify-content: space-around;
 }
