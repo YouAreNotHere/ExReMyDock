@@ -25,23 +25,24 @@ class AuthController {
       return;
     }
 
-    const result: any = await AuthService.signin(req.body);
+    const user: any = await AuthService.signin(req.body);
 
-    if (!result) {
+    if (!user) {
       res.status(500).send({ message: 'Некорректный пароль' });
     }
 
     console.log(`Пользователь авторизован`);
 
-    const existingUser = await AuthService.getUserByName(req.body);
+    //const existingUser = await AuthService.getUserByName(req.body);
 
+    console.log("Записываю в session: user.id "+ user.id, "и user.name " + user.name);
     // Проблему с типом existingUser позже исправим
     req.session.user = {
-      id: (existingUser as any).rows[0].id,
-      name: (existingUser as any).rows[0].name,
+      id: (user as any).id,
+      name: (user as any).name,
     };
 
-    res.send(result);
+    res.send(user);
   }
 
   public async logout(req: Request, res: Response) {
