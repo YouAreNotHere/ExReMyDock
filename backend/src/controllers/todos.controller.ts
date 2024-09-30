@@ -17,6 +17,7 @@ class TodosController {
   }
 
   public async addTodo(req: Request, res: Response) {
+    console.log(req.body);
     const result = await TodosService.addTodo(req.body);
     if (result === 'error') {
       res

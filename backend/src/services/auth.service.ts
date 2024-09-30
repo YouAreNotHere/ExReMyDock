@@ -19,7 +19,7 @@ class AuthService {
     try {
       const queryUser: any = await this.getUserByName(user);
       if (!queryUser.rows[0]) {
-        console.log('Пользовательне найден');
+        console.log('Пользовательне не найден');
         return false;
       }
       const isPasswordValid = await bcrypt.compare(
@@ -28,7 +28,7 @@ class AuthService {
       );
 
       if (isPasswordValid) {
-        return { userId: queryUser.rows[0].id };
+        return { id: queryUser.rows[0].id, name: queryUser.rows[0].name };
       } else {
         console.log('Ошибка. Неверный пароль!');
         return false;

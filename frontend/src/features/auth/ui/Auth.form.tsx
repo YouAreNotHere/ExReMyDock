@@ -24,13 +24,14 @@ const AuthForm = () => {
         const error = await response.json();
         setErrorMessage(error.message);
       } else {
-        const userId = await response.json();
-        if (userId === false) {
+        const user = await response.json();
+        if (user === false) {
           console.log('Некорректный пароль');
           return;
         }
         console.log('Авторизация успешна');
-        dispatch(changeId(userId));
+        console.log(user.id);
+        dispatch(changeId(user.id));
 
         navigate('/');
       }
