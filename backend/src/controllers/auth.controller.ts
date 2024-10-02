@@ -38,8 +38,8 @@ class AuthController {
     console.log("Записываю в session: user.id "+ user.id, "и user.name " + user.name);
     // Проблему с типом existingUser позже исправим
     req.session.user = {
-      id: (user as any).id,
-      name: (user as any).name,
+      id: (user as any).id as number,
+      name: (user as any).name as string,
     };
 
     res.send(user);

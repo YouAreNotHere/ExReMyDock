@@ -15,17 +15,15 @@ const getTodosRequest = async (payload: IGetTodosRequest) =>
     },
   });
 
-const addTodoRequest = async (payload: IAddTodoRequest) =>{
-    console.log("Запрос на добавление туду отправлен" + JSON.stringify(payload));
+const addTodoRequest = async (payload: IAddTodoRequest) =>
     await fetch('http://localhost:8081/todos/addTodo', {
         method: 'POST',
+        credentials: 'include',
         body: JSON.stringify(payload),
         headers: {
             'Content-Type': 'application/json',
         },
     });
-}
-
 
 const deleteTodoRequest = async (payload: IDeleteTodoRequest) =>
   await fetch('http://localhost:8081/todos/deleteTodo', {

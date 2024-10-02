@@ -28,7 +28,7 @@ class AuthService {
       );
 
       if (isPasswordValid) {
-        return { id: queryUser.rows[0].id, name: queryUser.rows[0].name };
+        return { id: queryUser.rows[0].id as number, name: queryUser.rows[0].name as string };
       } else {
         console.log('Ошибка. Неверный пароль!');
         return false;
