@@ -1,16 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import TodoForm from './Todo.form';
 import { useSelector, useDispatch } from 'react-redux';
 import AddTodo from './AddTodo.form';
 import { useRequest } from '../../../shared/hooks/useRequest';
 import { loadTodos } from '../../../actions';
+import {ITodos} from "../types/ITodosRequest";
 
 const TodosForm = () => {
-  const [editedTodo, setEditedTodo] = useState('');
   const dispatch: any = useDispatch();
   const todos = useSelector((state: any) => state.todos);
   const currentFilter = useSelector((state: any) => state.todoFilters);
   let currentTodos: any = [];
+
+
+
   const activeTodos = todos.filter((todo: any) => todo.complete === false);
   const completeTodos = todos.filter((todo: any) => todo.complete === true);
 
@@ -22,19 +25,17 @@ const TodosForm = () => {
     currentTodos = todos;
   }
 
-  const setTodosToState = (todos: any) => {
-    console.log('Тудушки загружены');
-    const newTodos: any = data.map((todo: any): any =>
+  const setTodosToState = (todos: ITodos) => {
+    const newTodos: ITodos = data.map((todo: any): any =>
       todo.completed === 0
         ? { ...todo, completed: true }
         : { ...todo, completed: false },
     );
-    const newTodosMoreTodos =
+
+    const newTodosMoreTodos : boolean =
       JSON.stringify(todos).length < JSON.stringify(newTodos).length;
     console.log(newTodos);
-    //console.log("Новых тудушек больше? " + newTodosMoreTodos);
     if (newTodosMoreTodos) {
-      //console.log("Отправляем в состояние новые тудушки")
       dispatch(loadTodos(newTodos));
     }
   };
@@ -63,8 +64,6 @@ const TodosForm = () => {
             <TodoForm
               key={todo.id}
               todo={todo}
-              editedTodo={editedTodo}
-              setEditedTodo={setEditedTodo}
             />
           );
         })}

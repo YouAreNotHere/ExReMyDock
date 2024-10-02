@@ -1,5 +1,4 @@
 interface IAddTodoRequest {
-  userId: number;
   text: string;
   completed: boolean;
 }
@@ -22,10 +21,18 @@ interface ISaveEditedTodoRequest {
   text: string;
 }
 
+interface ITodos {
+  id: number;
+  user_id: number;
+  text: string;
+  completed: boolean | number;
+}
+
 export type {
   IAddTodoRequest,
   IGetTodosRequest,
   IDeleteTodoRequest,
   ICompleteTodoRequest,
   ISaveEditedTodoRequest,
+  ITodos
 };

@@ -10,7 +10,7 @@ const AddTodo = () => {
   const getTodos: any = useGetTodos();
 
   const onClickHandler = async (e: any) => {
-    await addTodoRequest({ userId, text, completed: false });
+    await addTodoRequest({ text, completed: false });
     getTodos(userId);
     setText('');
   };

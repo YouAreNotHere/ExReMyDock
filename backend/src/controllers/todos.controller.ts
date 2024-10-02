@@ -3,7 +3,7 @@ import TodosService from '../services/todos.service';
 
 class TodosController {
   public async getTodos(req: Request, res: Response) {
-    const userId = req.session.user?.id;
+    const userId : number = req.session.user?.id as number;
     if (!userId) res.redirect('auth');
 
     const result: any = await TodosService.getTodosByUserId(Number(userId));
@@ -17,8 +17,8 @@ class TodosController {
   }
 
   public async addTodo(req: Request, res: Response) {
-    console.log(req.body);
-    const result = await TodosService.addTodo(req.body);
+    const userId : number = req.session.user?.id as number;
+    const result = await TodosService.addTodo(req.body, userId);
     if (result === 'error') {
       res
         .status(500)

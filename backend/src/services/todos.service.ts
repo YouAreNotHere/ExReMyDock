@@ -10,8 +10,8 @@ class TodosService {
     }
   }
 
-  public async addTodo(newTodo: any) {
-    const query = `INSERT INTO todos (user_id, text, completed) VALUES ("${newTodo.userId}", "${newTodo.text}", ${newTodo.completed});`;
+  public async addTodo(newTodo: any, userId: number) {
+    const query = `INSERT INTO todos (user_id, text, completed) VALUES ("${userId}", "${newTodo.text}", ${newTodo.completed});`;
     try {
       return await db.query(query);
     } catch (error) {
