@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import '../../../app/App.css';
+import {useRequest} from "../../../shared/hooks/useRequest";
 import {
   editTodo,
   changeEditedTodoId,
@@ -22,6 +23,16 @@ const TodoForm = ({ todo }: any) => {
   let todoContent;
 
   const onDeleteHandler = async (e: any) => {
+      // const {
+      //     data,
+      //     isLoading,
+      //     errorMessage,
+      //     makeRequest: deleteTodo,
+      // } = useRequest({
+      //     method: 'POST',
+      //     body: { id: todo.id },
+      //     url: '/todos/addTodo',
+      // });
     await deleteTodoRequest({ id: todo.id });
     dispatch(deleteTodo(todo.id));
   };

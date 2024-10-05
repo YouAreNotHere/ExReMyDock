@@ -28,6 +28,7 @@ const addTodoRequest = async (payload: IAddTodoRequest) =>
 const deleteTodoRequest = async (payload: IDeleteTodoRequest) =>
   await fetch('http://localhost:8081/todos/deleteTodo', {
     method: 'POST',
+      credentials: 'include',
     body: JSON.stringify(payload),
     headers: {
       'Content-Type': 'application/json',
@@ -38,6 +39,7 @@ const completeTodoRequest = async (payload: ICompleteTodoRequest) => {
   console.log(payload);
   await fetch('http://localhost:8081/todos/completeTodo', {
     method: 'POST',
+      credentials: 'include',
     body: JSON.stringify(payload),
     headers: {
       'Content-Type': 'application/json',
@@ -48,6 +50,7 @@ const completeTodoRequest = async (payload: ICompleteTodoRequest) => {
 const saveEditedTodoRequest = async (payload: ISaveEditedTodoRequest) =>
   await fetch('http://localhost:8081/todos/saveEditedTodo', {
     method: 'POST',
+      credentials: 'include',
     body: JSON.stringify(payload),
     headers: {
       'Content-Type': 'application/json',
