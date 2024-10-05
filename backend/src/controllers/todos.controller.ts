@@ -27,7 +27,7 @@ class TodosController {
     }
 
     console.log(`Todo with text ${req.body.text} was added`);
-    res.send();
+    res.send(true);
   }
 
   public async deleteTodo(req: Request, res: Response) {

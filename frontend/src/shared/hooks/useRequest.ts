@@ -21,19 +21,29 @@ const useRequest = (props: IUseRequestProps) => {
   const makeRequest = async () => {
     setIsLoading(true);
     try {
-      const payload: any = method === 'GET' ? { params } : { body };
-      const response = await fetch(`http://localhost:8081${url}`, {
-        method,
-        ...payload,
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      let response : any;
+      if (method === 'POST') {
+         response = await fetch(`http://localhost:8081${url}`, {
+          method,
+          body: JSON.stringify(body),
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+      }else{
+         response = await fetch(`http://localhost:8081${url}`, {
+          method,
+          ...params,
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+      }
 
       if (response.ok) {
         const data = await response.json();
-
         setData(data);
         setErrorMessage(null);
         if (onSuccess) {
@@ -45,7 +55,6 @@ const useRequest = (props: IUseRequestProps) => {
         if (response.status === 401) {
           navigate('/auth');
         }
-
         setErrorMessage(error.message ?? 'Ошибка');
         setData(null);
       }

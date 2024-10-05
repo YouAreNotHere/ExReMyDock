@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import useGetTodos from './useGetTodos';
-import { getTodosRequest, addTodoRequest } from '../api/todos.request';
+import {useRequest} from "../../../shared/hooks/useRequest";
 
 const AddTodo = () => {
   const ref: any = useRef();
@@ -9,9 +9,20 @@ const AddTodo = () => {
   const userId = useSelector((state: any) => state.userId);
   const getTodos: any = useGetTodos();
 
+  const {
+    data,
+    isLoading,
+    errorMessage,
+    makeRequest: addTodo,
+  } = useRequest({
+    method: 'POST',
+    body: {text, completed: false},
+    url: '/todos/addTodo',
+    onSuccess: getTodos,
+  });
+
   const onClickHandler = async (e: any) => {
-    await addTodoRequest({ text, completed: false });
-    getTodos(userId);
+    await addTodo();
     setText('');
   };
 

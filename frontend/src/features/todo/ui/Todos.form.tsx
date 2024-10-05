@@ -25,8 +25,8 @@ const TodosForm = () => {
     currentTodos = todos;
   }
 
-  const setTodosToState = (todos: ITodos) => {
-    const newTodos: ITodos = data.map((todo: any): any =>
+  const setTodosToState = (todos: any ) => {
+    const newTodos = todos.map((todo: ITodos): any =>
       todo.completed === 0
         ? { ...todo, completed: true }
         : { ...todo, completed: false },
@@ -34,7 +34,6 @@ const TodosForm = () => {
 
     const newTodosMoreTodos : boolean =
       JSON.stringify(todos).length < JSON.stringify(newTodos).length;
-    console.log(newTodos);
     if (newTodosMoreTodos) {
       dispatch(loadTodos(newTodos));
     }
