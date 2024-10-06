@@ -42,6 +42,7 @@ const AuthForm = () => {
 
   const onRegistationClick = async (e: any) => {
     e.preventDefault();
+    navigate('/registration');
     try {
       const url = 'http://localhost:8081/auth/signup';
       const response = await authRequest({ name, password }, url);
@@ -56,10 +57,16 @@ const AuthForm = () => {
   };
 
   const Button = ({ value, onClick }: any) => {
+    let disabled: any;
+    if (value === "Войти"){
+      disabled = (!name || !password) ? true : false
+    } else {
+      disabled = null;
+    }
     return (
       <button
         className='buttonStyle'
-        disabled={!name || !password}
+        disabled= {disabled}
         type='submit'
         onClick={onClick}
       >
@@ -92,8 +99,13 @@ const AuthForm = () => {
           />
         </div>
         <div className='centerStyle'>
-          <Button value={'Login'} onClick={onLoginClick} />
-          <Button value={'Registration'} onClick={onRegistationClick} />
+          <Button value={'Войти'} onClick={onLoginClick} />
+          <div>
+            <p>
+              В первый раз?
+            </p>
+            <Button value={'Создать аккаунт'} onClick={onRegistationClick} />
+          </div>
         </div>
       </form>
       {errorMessage && <p className='error-message'>{errorMessage}</p>}
