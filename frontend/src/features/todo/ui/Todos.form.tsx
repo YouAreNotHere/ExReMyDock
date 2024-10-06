@@ -12,10 +12,8 @@ const TodosForm = () => {
   const currentFilter = useSelector((state: any) => state.todoFilters);
   let currentTodos: any = [];
 
-
-
-  const activeTodos = todos.filter((todo: any) => todo.complete === false);
-  const completeTodos = todos.filter((todo: any) => todo.complete === true);
+  const activeTodos = todos.filter((todo: any) => todo.completed === false);
+  const completeTodos = todos.filter((todo: any) => todo.completed === true);
 
   if (currentFilter == 'SHOW_COMPLETED') {
     currentTodos = completeTodos;

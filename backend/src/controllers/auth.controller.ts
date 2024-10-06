@@ -16,7 +16,7 @@ class AuthController {
     }
 
     console.log(`user with name ${req.body.name} was created`);
-    res.send();
+    res.send({regAccount: true});
   }
 
   public async signin(req: Request, res: Response) {
