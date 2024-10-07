@@ -1,5 +1,3 @@
-//Допилить actions errorMessege, isLoading, чтобы было 3 вида экшона на бэк.
-
 export const changeId = (userId: any): any => {
   return {
     type: 'CHANGE_USER_ID',
@@ -19,12 +17,6 @@ export const changeCurrentFilter = (filter: string) => ({
 });
 
 let nextId = 0;
-
-// export const addTodo = (text: string) => ({
-//     type: "ADD_TODO",
-//     id: nextId++,
-//     text: text,
-// });
 
 export const loadTodos = (todos: any) => ({
   type: 'LOAD_TODOS',

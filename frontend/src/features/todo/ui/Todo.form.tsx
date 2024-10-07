@@ -1,19 +1,13 @@
 import { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import '../../../app/App.css';
-import {useRequest} from "../../../shared/hooks/useRequest";
+import { useRequest } from '../../../shared/hooks/useRequest';
 import {
   editTodo,
   changeEditedTodoId,
   deleteTodo,
   completeTodo,
 } from '../../../actions';
-import {
-  deleteTodoRequest,
-  completeTodoRequest,
-  saveEditedTodoRequest,
-} from '../api/todos.request';
-
 
 const TodoForm = ({ todo }: any) => {
   const [newTodoText, setNewTodoText] = useState('');
@@ -22,27 +16,27 @@ const TodoForm = ({ todo }: any) => {
   const editedTodo = useSelector((state: any) => state.editedTodoId);
 
   let todoContent;
-    const {makeRequest: deleteTodoRequest} = useRequest({
-        method: 'POST',
-        body: {id: todo.id},
-        url: '/todos/deleteTodo',
-    });
+  const { makeRequest: deleteTodoRequest } = useRequest({
+    method: 'POST',
+    body: { id: todo.id },
+    url: '/todos/deleteTodo',
+  });
 
-    const {makeRequest: completeTodoRequest} = useRequest({
-        method: 'POST',
-        body: {id: todo.id, completed: todo.completed},
-        url: '/todos/completeTodo',
-    });
+  const { makeRequest: completeTodoRequest } = useRequest({
+    method: 'POST',
+    body: { id: todo.id, completed: todo.completed },
+    url: '/todos/completeTodo',
+  });
 
-    const {makeRequest: saveEditedTodoRequest} = useRequest({
-        method: 'POST',
-        body: {id: todo.id, text: newTodoText},
-        url: '/todos/saveEditedTodo',
-    });
+  const { makeRequest: saveEditedTodoRequest } = useRequest({
+    method: 'POST',
+    body: { id: todo.id, text: newTodoText },
+    url: '/todos/saveEditedTodo',
+  });
 
   const onDeleteHandler = async (e: any) => {
-      await deleteTodoRequest();
-      dispatch(deleteTodo(todo.id));
+    await deleteTodoRequest();
+    dispatch(deleteTodo(todo.id));
   };
 
   const onCompleteHandler = async (e: any) => {
@@ -51,7 +45,7 @@ const TodoForm = ({ todo }: any) => {
   };
 
   const onSavedEditedHandler = async (e: any) => {
-    await saveEditedTodoRequest()
+    await saveEditedTodoRequest();
     dispatch(editTodo(newTodoText, todo.id));
     dispatch(changeEditedTodoId(null));
     setNewTodoText('');

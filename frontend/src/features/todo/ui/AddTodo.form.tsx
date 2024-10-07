@@ -1,22 +1,20 @@
-import { useRef, useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import useGetTodos from './useGetTodos';
-import {useRequest} from "../../../shared/hooks/useRequest";
+import { useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useRequest } from '../../../shared/hooks/useRequest';
 
 const AddTodo = () => {
   const ref: any = useRef();
   const [text, setText] = useState('');
   const userId = useSelector((state: any) => state.userId);
-  const getTodos: any = useGetTodos();
 
-  const {
-    data,
-    isLoading,
-    errorMessage,
-    makeRequest: addTodo,
-  } = useRequest({
+  const { makeRequest: getTodos } = useRequest({
+    method: 'GET',
+    url: '/todos/getTodos',
+  });
+
+  const { makeRequest: addTodo } = useRequest({
     method: 'POST',
-    body: {text, completed: false},
+    body: { text, completed: false },
     url: '/todos/addTodo',
     onSuccess: getTodos,
   });

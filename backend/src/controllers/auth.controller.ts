@@ -16,7 +16,7 @@ class AuthController {
     }
 
     console.log(`user with name ${req.body.name} was created`);
-    res.send({regAccount: true});
+    res.send({ regAccount: true });
   }
 
   public async signin(req: Request, res: Response) {
@@ -33,10 +33,10 @@ class AuthController {
 
     console.log(`Пользователь авторизован`);
 
-    //const existingUser = await AuthService.getUserByName(req.body);
-
-    console.log("Записываю в session: user.id "+ user.id, "и user.name " + user.name);
-    // Проблему с типом existingUser позже исправим
+    console.log(
+      'Записываю в session: user.id ' + user.id,
+      'и user.name ' + user.name,
+    );
     req.session.user = {
       id: (user as any).id as number,
       name: (user as any).name as string,
