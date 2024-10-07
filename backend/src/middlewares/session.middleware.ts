@@ -27,8 +27,6 @@ const sessionMiddleware = (app: Application) => {
     }),
   );
 
-  // Это примерная реализация, ее надо будет поправить
-
   app.use((req, res, next) => {
     if (!req.originalUrl.startsWith('/auth') && !req.session.user) {
       res.status(401).send({ message: 'Unauthorized' });
