@@ -1,36 +1,43 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import '../../../app/App.css';
 import { useNavigate } from 'react-router-dom';
 import { authRequest } from '../api/auth.request';
 import { useDispatch } from 'react-redux';
 import { changeId } from '../../../actions/index';
-import Button from '@mui/material/Button';
+import useButtonFocus from '../../../shared/hooks/useButtonFocus';
 
 const AuthForm = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const loginButtonRef: any = useRef();
+  const nameInputRef: any = useRef(null);
+  const passwordInputRef: any = useRef(null);
+  const useFocus: any = useButtonFocus();
+  const focusToNameInput = useFocus(
+    nameInputRef.current,
+    nameInputRef.current.focus,
+    'ArrowDown',
+  );
+  focusToNameInput();
   let user_id;
 
-  loginButtonRef.current.addEventListener('keydown', (event: any) => {
-    switch (event.key) {
-      // case 'ArrowUp':
-      //   textArea.current.focus();
-      //   break;
-      // case 'ArrowDown':
-      //   rangeInput.current.focus();
-      //   break;
-      case 'Enter':
-        console.log('Enter reg');
-        break;
-    }
-  });
+  // useEffect(() => {
+  //   if (!authPageRef.current) return;
+  //   const handleEsc = (event: KeyboardEvent) => {
+  //     if (event.key === 'Escape') {
+  //       navigate('/auth');
+  //     }
+  //   };
+  //
+  //   window.addEventListener('keydown', handleEsc);
+  //   return () => window.removeEventListener('keydown', handleEsc);
+  // }, []);
 
   const [errorMessage, setErrorMessage] = useState('');
 
-  const onLoginClick = async () => {
+  const onLoginClick = async (e: any) => {
+    e.preventDefault();
     try {
       const url = 'http://localhost:8081/auth/signin';
       const response: any = await authRequest({ name, password }, url);
@@ -60,7 +67,7 @@ const AuthForm = () => {
     navigate('/registration');
   };
 
-  const MyButton = ({ value, onClick }: any) => {
+  const Button = ({ value, onClick }: any) => {
     let disabled: any;
     if (value === 'Войти') {
       disabled = !name || !password ? true : false;
@@ -80,7 +87,7 @@ const AuthForm = () => {
   };
 
   return (
-    <>
+    <div>
       <form>
         <div className='row'>
           <label htmlFor='name' className='label'>
@@ -91,9 +98,15 @@ const AuthForm = () => {
             value={name}
             onInput={(e: any) => setName(e.target.value)}
             className='input'
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') onLoginClick();
-            }}
+            ref={nameInputRef}
+            // onKeyDown={(event) => {
+            //   if (event.key === 'ArrowDown') {
+            //     if (passwordInputRef.current) {
+            //       passwordInputRef.current.focus();
+            //     }
+            //   }
+            //   //useFocus(event, 'ArrowDown', passwordInputRef);
+            // }}
           />
         </div>
         <div className='row'>
@@ -102,37 +115,27 @@ const AuthForm = () => {
             name='password'
             value={password}
             onInput={(e: any) => setPassword(e.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') onLoginClick();
-            }}
+            ref={passwordInputRef}
+            // onKeyDown={(event) => {
+            //   if (event.key === 'ArrowUp') {
+            //     if (nameInputRef.current) {
+            //       nameInputRef.current.focus();
+            //     }
+            //   }
+            // }}
             className='input'
           />
         </div>
         <div className='centerStyle'>
-          <Button
-            //ref={loginButtonRef}
-            value={'Войти'}
-            onClick={onLoginClick}
-            variant='contained'
-            color='success'
-            size='large'
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') console.log('Enter Pressed');
-            }}
-            autoFocus
-          />
+          <Button value={'Войти'} onClick={onLoginClick} />
           <div>
             <p>В первый раз?</p>
-            <MyButton
-              value={'Создать аккаунт'}
-              onClick={onRegistationClick}
-              ref={loginButtonRef}
-            />
+            <Button value={'Создать аккаунт'} onClick={onRegistationClick} />
           </div>
         </div>
       </form>
       {errorMessage && <p className='error-message'>{errorMessage}</p>}
-    </>
+    </div>
   );
 };
 
