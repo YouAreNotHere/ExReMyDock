@@ -3,7 +3,7 @@ import TodosService from '../services/todos.service';
 
 class TodosController {
   public async getTodos(req: Request, res: Response) {
-    const userId : number = req.session.user?.id as number;
+    const userId: number = req.session.user?.id as number;
     if (!userId) res.redirect('auth');
 
     const result: any = await TodosService.getTodosByUserId(Number(userId));
@@ -17,7 +17,7 @@ class TodosController {
   }
 
   public async addTodo(req: Request, res: Response) {
-    const userId : number = req.session.user?.id as number;
+    const userId: number = req.session.user?.id as number;
     const result = await TodosService.addTodo(req.body, userId);
     if (result === 'error') {
       res
@@ -60,11 +60,9 @@ class TodosController {
   public async saveEditedTodo(req: Request, res: Response) {
     const result = await TodosService.saveEditedTodo(req.body);
     if (result === 'error') {
-      res
-        .status(500)
-        .send({
-          message: 'При сохранении изменяемой тудушки что-то пошло не так',
-        });
+      res.status(500).send({
+        message: 'При сохранении изменяемой тудушки что-то пошло не так',
+      });
       return;
     }
 
