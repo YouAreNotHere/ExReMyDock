@@ -1,4 +1,6 @@
-export const changeId = (userId: any): any => {
+import { ITodos } from '../features/todo/types/ITodosRequest';
+
+export const changeId = (userId: number) => {
   return {
     type: 'CHANGE_USER_ID',
     userId: userId,
@@ -18,12 +20,12 @@ export const changeCurrentFilter = (filter: string) => ({
 
 let nextId = 0;
 
-export const loadTodos = (todos: any) => ({
+export const loadTodos = (todos: ITodos) => ({
   type: 'LOAD_TODOS',
   todos: todos,
 });
 
-export const loadCurrentTodos = (currentTodos: any) => ({
+export const loadCurrentTodos = (currentTodos: ITodos) => ({
   type: 'LOAD_CURRENT_TODOS',
   currentTodos: currentTodos,
 });

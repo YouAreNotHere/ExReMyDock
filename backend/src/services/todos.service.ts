@@ -10,7 +10,10 @@ class TodosService {
     }
   }
 
-  public async addTodo(newTodo: any, userId: number) {
+  public async addTodo(
+    newTodo: { userId: number; text: string; completed: boolean },
+    userId: number,
+  ) {
     const query = `INSERT INTO todos (user_id, text, completed) VALUES ("${userId}", "${newTodo.text}", ${newTodo.completed});`;
     try {
       return await db.query(query);
@@ -20,7 +23,7 @@ class TodosService {
     }
   }
 
-  public async deleteTodo(todoId: any) {
+  public async deleteTodo(todoId: number) {
     const query: string = `DELETE FROM todos WHERE id = "${todoId}";`;
     try {
       return await db.query(query);
@@ -30,7 +33,10 @@ class TodosService {
     }
   }
 
-  public async completeTodo(idAndCompleted: any) {
+  public async completeTodo(idAndCompleted: {
+    id: number;
+    completed: boolean;
+  }) {
     const { id, completed } = idAndCompleted;
     const query: string = `UPDATE todos SET completed = ${completed} WHERE id = "${id}";`;
     try {
@@ -41,7 +47,7 @@ class TodosService {
     }
   }
 
-  public async saveEditedTodo(idAndText: any) {
+  public async saveEditedTodo(idAndText: { id: number; text: string }) {
     const { id, text } = idAndText;
     const query: string = `UPDATE todos SET text = "${text}" WHERE id = "${id}";`;
     try {

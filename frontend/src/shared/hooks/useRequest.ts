@@ -21,9 +21,9 @@ const useRequest = (props: IUseRequestProps) => {
   const makeRequest = async () => {
     setIsLoading(true);
     try {
-      let response : any;
+      let response;
       if (method === 'POST') {
-         response = await fetch(`http://localhost:8081${url}`, {
+        response = await fetch(`http://localhost:8081${url}`, {
           method,
           body: JSON.stringify(body),
           credentials: 'include',
@@ -31,8 +31,8 @@ const useRequest = (props: IUseRequestProps) => {
             'Content-Type': 'application/json',
           },
         });
-      }else{
-         response = await fetch(`http://localhost:8081${url}`, {
+      } else {
+        response = await fetch(`http://localhost:8081${url}`, {
           method,
           ...params,
           credentials: 'include',
@@ -47,6 +47,7 @@ const useRequest = (props: IUseRequestProps) => {
         setData(data);
         setErrorMessage(null);
         if (onSuccess) {
+          console.log('onSucc');
           onSuccess(data);
         }
       } else {

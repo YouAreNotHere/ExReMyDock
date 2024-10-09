@@ -28,11 +28,21 @@ interface ITodos {
   completed: boolean | number;
 }
 
+interface ITodosProps {
+  todo: {
+    id: number;
+    user_id: number;
+    text: string;
+    completed: boolean | number;
+  };
+}
+
 export type {
   IAddTodoRequest,
   IGetTodosRequest,
   IDeleteTodoRequest,
   ICompleteTodoRequest,
   ISaveEditedTodoRequest,
-  ITodos
+  ITodos,
+  ITodosProps,
 };

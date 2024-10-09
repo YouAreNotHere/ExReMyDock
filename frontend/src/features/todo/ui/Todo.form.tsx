@@ -8,8 +8,10 @@ import {
   deleteTodo,
   completeTodo,
 } from '../../../actions';
+import { ITodosProps } from '../types/ITodosRequest';
+interface Props {}
 
-const TodoForm = ({ todo }: any) => {
+const TodoForm = ({ todo }: ITodosProps) => {
   const [newTodoText, setNewTodoText] = useState('');
   const inputRef = useRef<any>();
   const dispatch = useDispatch();
@@ -56,7 +58,7 @@ const TodoForm = ({ todo }: any) => {
   }
   if (editedTodo === todo.id) {
     todoContent = (
-      <div id={todo.id}>
+      <div key={todo.id}>
         <input
           ref={inputRef}
           value={newTodoText}

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authRequest } from '../api/auth.request';
+import { IconButtonProps } from '@mui/material';
 
 const RegistrationForm = () => {
   const [name, setName] = useState('');
@@ -23,9 +24,10 @@ const RegistrationForm = () => {
 
   const onRegistationClick = async (e: any) => {
     e.preventDefault();
+
     try {
       const url = 'http://localhost:8081/auth/signup';
-      const response: any = await authRequest({ name, password }, url);
+      const response = await authRequest({ name, password }, url);
 
       if (!response.ok) {
         const error = await response.json();
@@ -38,17 +40,17 @@ const RegistrationForm = () => {
     }
   };
 
-  const Button = ({ value, onClick }: any) => {
-    let disabled: any;
+  const Button = ({ value, onClick }: IconButtonProps) => {
+    let isDisabled: boolean | undefined;
     if (value === 'Создать аккаунт') {
-      disabled = !name || !password ? true : false;
+      isDisabled = !name || !password ? true : false;
     } else {
-      disabled = null;
+      isDisabled = undefined;
     }
     return (
       <button
         className='buttonStyle'
-        disabled={disabled}
+        disabled={isDisabled}
         type='submit'
         onClick={onClick}
       >

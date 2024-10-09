@@ -3,4 +3,9 @@ interface IAuthRequest {
   password: string;
 }
 
+interface IButtonProps {
+  value: string;
+  onClick?: () => void;
+}
+
 export type { IAuthRequest };
