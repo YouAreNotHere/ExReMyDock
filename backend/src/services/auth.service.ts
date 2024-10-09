@@ -2,7 +2,7 @@ import db from '../database/db';
 import bcrypt from 'bcrypt';
 
 class AuthService {
-  public async signup(user: any) {
+  public async signup(user: { name: string; password: string }) {
     const hashedPassword = await bcrypt.hash(user.password, 10);
 
     const query = `INSERT INTO users (name, password) VALUES ("${user.name}", "${hashedPassword}");`;
@@ -15,7 +15,7 @@ class AuthService {
     }
   }
 
-  public async signin(user: any) {
+  public async signin(user: { name: string; password: string }) {
     try {
       const queryUser: any = await this.getUserByName(user);
       if (!queryUser.rows[0]) {
@@ -28,7 +28,10 @@ class AuthService {
       );
 
       if (isPasswordValid) {
-        return { id: queryUser.rows[0].id as number, name: queryUser.rows[0].name as string };
+        return {
+          id: queryUser.rows[0].id as number,
+          name: queryUser.rows[0].name as string,
+        };
       } else {
         console.log('Ошибка. Неверный пароль!');
         return false;
@@ -39,7 +42,7 @@ class AuthService {
     }
   }
 
-  public async getUserByName(user: any) {
+  public async getUserByName(user: { name: string; password: string }) {
     const query = `SELECT * FROM users WHERE name = "${user.name}"`;
 
     try {
@@ -49,7 +52,10 @@ class AuthService {
     }
   }
 
-  public async checkIsValidCredentials(user: any) {
+  public async checkIsValidCredentials(user: {
+    name: string;
+    password: string;
+  }) {
     const { name, password } = user;
     const queryUser: any = await this.getUserByName(user);
 

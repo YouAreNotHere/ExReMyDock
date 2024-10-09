@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { authRequest } from '../api/auth.request';
 import { useDispatch } from 'react-redux';
 import { changeId } from '../../../actions/index';
-import useButtonFocus from '../../../shared/hooks/useButtonFocus';
+//import useButtonFocus from '../../../shared/hooks/useButtonFocus';
+import { IconButtonProps } from '@mui/material';
 
 const AuthForm = () => {
   const [name, setName] = useState('');
@@ -13,26 +14,14 @@ const AuthForm = () => {
   const dispatch = useDispatch();
   const nameInputRef: any = useRef(null);
   const passwordInputRef: any = useRef(null);
-  const useFocus: any = useButtonFocus();
-  const focusToNameInput = useFocus(
-    nameInputRef.current,
-    nameInputRef.current.focus,
-    'ArrowDown',
-  );
-  focusToNameInput();
+  //const useFocus: any = useButtonFocus();
+  // const focusToNameInput = useFocus(
+  //   nameInputRef.current,
+  //   nameInputRef.current.focus,
+  //   'ArrowDown',
+  // );
+  //focusToNameInput();
   let user_id;
-
-  // useEffect(() => {
-  //   if (!authPageRef.current) return;
-  //   const handleEsc = (event: KeyboardEvent) => {
-  //     if (event.key === 'Escape') {
-  //       navigate('/auth');
-  //     }
-  //   };
-  //
-  //   window.addEventListener('keydown', handleEsc);
-  //   return () => window.removeEventListener('keydown', handleEsc);
-  // }, []);
 
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -40,7 +29,7 @@ const AuthForm = () => {
     e.preventDefault();
     try {
       const url = 'http://localhost:8081/auth/signin';
-      const response: any = await authRequest({ name, password }, url);
+      const response = await authRequest({ name, password }, url);
 
       if (!response.ok) {
         const error = await response.json();
@@ -52,7 +41,6 @@ const AuthForm = () => {
           return;
         }
         console.log('Авторизация успешна');
-        console.log(user.id);
         dispatch(changeId(user.id));
 
         navigate('/');
@@ -67,17 +55,17 @@ const AuthForm = () => {
     navigate('/registration');
   };
 
-  const Button = ({ value, onClick }: any) => {
-    let disabled: any;
+  const Button = ({ value, onClick }: IconButtonProps) => {
+    let isDisabled: boolean | undefined;
     if (value === 'Войти') {
-      disabled = !name || !password ? true : false;
+      isDisabled = !name || !password ? true : false;
     } else {
-      disabled = null;
+      isDisabled = undefined;
     }
     return (
       <button
         className='buttonStyle'
-        disabled={disabled}
+        disabled={isDisabled}
         type='submit'
         onClick={onClick}
       >

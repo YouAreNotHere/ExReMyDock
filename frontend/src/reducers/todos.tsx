@@ -1,4 +1,6 @@
-const todos = (state: any = [], action: any) => {
+import { ITodos } from '../features/todo/types/ITodosRequest';
+
+const todos = (state: any = [], action: { [key: string]: string | number }) => {
   switch (action.type) {
     case 'ADD_TODO':
       return [
@@ -12,7 +14,7 @@ const todos = (state: any = [], action: any) => {
     case 'LOAD_TODOS':
       return action.todos;
     case 'EDIT_TODO':
-      return state.map((todo: any) => {
+      return state.map((todo: ITodos) => {
         if (todo.id !== action.id) {
           return todo;
         } else {
@@ -20,11 +22,11 @@ const todos = (state: any = [], action: any) => {
         }
       });
     case 'COMPLETE_TODO':
-      return state.map((todo: any) =>
+      return state.map((todo: ITodos) =>
         todo.id === action.id ? { ...todo, completed: !todo.completed } : todo,
       );
     case 'DELETE_TODO':
-      return state.filter((todo: any) => todo.id !== action.id);
+      return state.filter((todo: ITodos) => todo.id !== action.id);
     default:
       return state;
   }
