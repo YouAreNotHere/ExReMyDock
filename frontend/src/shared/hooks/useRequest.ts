@@ -44,10 +44,10 @@ const useRequest = (props: IUseRequestProps) => {
 
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
         setData(data);
         setErrorMessage(null);
         if (onSuccess) {
-          console.log('onSucc');
           onSuccess(data);
         }
       } else {
@@ -66,7 +66,6 @@ const useRequest = (props: IUseRequestProps) => {
       setIsLoading(false);
     }
   };
-
   return {
     data,
     isLoading,

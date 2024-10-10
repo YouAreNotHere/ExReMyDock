@@ -9,7 +9,6 @@ import {
   completeTodo,
 } from '../../../actions';
 import { ITodosProps } from '../types/ITodosRequest';
-interface Props {}
 
 const TodoForm = ({ todo }: ITodosProps) => {
   const [newTodoText, setNewTodoText] = useState('');
@@ -26,7 +25,7 @@ const TodoForm = ({ todo }: ITodosProps) => {
 
   const { makeRequest: completeTodoRequest } = useRequest({
     method: 'POST',
-    body: { id: todo.id, completed: todo.completed },
+    body: { id: todo.id, completed: !todo.completed },
     url: '/todos/completeTodo',
   });
 
