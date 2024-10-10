@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRequest } from '../../../shared/hooks/useRequest';
 import { useDispatch } from 'react-redux';
 import { loadTodos } from '../../../actions';
@@ -8,23 +8,30 @@ const AddTodo = () => {
   const ref: any = useRef();
   const [text, setText] = useState('');
 
-  const { data, makeRequest: getTodos } = useRequest({
-    method: 'GET',
-    url: '/todos/getTodos',
-  });
-
   const { makeRequest: addTodo } = useRequest({
     method: 'POST',
     body: { text, completed: false },
     url: '/todos/addTodo',
-    //onSuccess: getTodos,
   });
+
+  const { data: todos, makeRequest: getTodos } = useRequest({
+    method: 'GET',
+    url: '/todos/getTodos',
+  });
+
+  useEffect(() => {
+    console.log('Подтянулись тудушки в аддТуду = ' + todos);
+    dispatch(loadTodos(todos));
+    setText('');
+  }, [todos]);
 
   const onClickHandler = async (e: any) => {
     await addTodo();
-    //if (data) dispatch(loadTodos(data));
-    //getTodos();
-    setText('');
+    await getTodos();
+
+    // console.log('Подтянулись тудушки в аддТуду = ' + todos);
+    // dispatch(loadTodos(todos));
+    // setText('');
   };
 
   return (
