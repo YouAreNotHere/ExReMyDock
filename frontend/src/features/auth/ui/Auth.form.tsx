@@ -5,15 +5,13 @@ import { authRequest } from '../api/auth.request';
 import { useDispatch } from 'react-redux';
 import { changeId } from '../../../actions/index';
 //import useButtonFocus from '../../../shared/hooks/useButtonFocus';
-import { IconButtonProps } from '@mui/material';
+import { useArrowNavigation } from '../../../shared/hooks/useArrowNavigation';
 
 const AuthForm = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const nameInputRef: any = useRef(null);
-  const passwordInputRef: any = useRef(null);
   //const useFocus: any = useButtonFocus();
   // const focusToNameInput = useFocus(
   //   nameInputRef.current,
@@ -24,6 +22,12 @@ const AuthForm = () => {
   let user_id;
 
   const [errorMessage, setErrorMessage] = useState('');
+
+  const nameInputRef = useRef(null);
+  const passwordInputRef = useRef(null);
+  const submitButtonRef = useRef(null);
+
+  useArrowNavigation([nameInputRef, passwordInputRef, submitButtonRef]);
 
   const onLoginClick = async (e: any) => {
     e.preventDefault();
@@ -55,24 +59,24 @@ const AuthForm = () => {
     navigate('/registration');
   };
 
-  const Button = ({ value, onClick }: IconButtonProps) => {
-    let isDisabled: boolean | undefined;
-    if (value === 'Войти') {
-      isDisabled = !name || !password ? true : false;
-    } else {
-      isDisabled = undefined;
-    }
-    return (
-      <button
-        className='buttonStyle'
-        disabled={isDisabled}
-        type='submit'
-        onClick={onClick}
-      >
-        {value}
-      </button>
-    );
-  };
+  // const Button = ({ value, onClick }: any) => {
+  //   let isDisabled: boolean | undefined;
+  //   if (value === 'Войти') {
+  //     isDisabled = !name || !password ? true : false;
+  //   } else {
+  //     isDisabled = undefined;
+  //   }
+  //   return (
+  //     <button
+  //       className='buttonStyle'
+  //       disabled={isDisabled}
+  //       type='submit'
+  //       onClick={onClick}
+  //     >
+  //       {value}
+  //     </button>
+  //   );
+  // };
 
   return (
     <div>
@@ -82,10 +86,12 @@ const AuthForm = () => {
             name
           </label>
           <input
+            id='auth-input-name'
             name='name'
             value={name}
             onInput={(e: any) => setName(e.target.value)}
             className='input'
+            autoComplete='off'
             ref={nameInputRef}
             // onKeyDown={(event) => {
             //   if (event.key === 'ArrowDown') {
@@ -100,10 +106,13 @@ const AuthForm = () => {
         <div className='row'>
           <label className='label'>password</label>
           <input
+            id='auth-password-input'
             name='password'
             value={password}
             onInput={(e: any) => setPassword(e.target.value)}
             ref={passwordInputRef}
+            // type={'password'}
+            autoComplete='off'
             // onKeyDown={(event) => {
             //   if (event.key === 'ArrowUp') {
             //     if (nameInputRef.current) {
@@ -115,10 +124,21 @@ const AuthForm = () => {
           />
         </div>
         <div className='centerStyle'>
-          <Button value={'Войти'} onClick={onLoginClick} />
+          <button
+            id='auth-submit-button'
+            ref={submitButtonRef}
+            className='buttonStyle'
+            disabled={!name || !password}
+            type='submit'
+            onClick={onLoginClick}
+          >
+            Войти
+          </button>
           <div>
             <p>В первый раз?</p>
-            <Button value={'Создать аккаунт'} onClick={onRegistationClick} />
+            <button className='buttonStyle' onClick={onRegistationClick}>
+              Создать аккаунт
+            </button>
           </div>
         </div>
       </form>
