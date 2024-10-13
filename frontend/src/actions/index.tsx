@@ -20,7 +20,7 @@ export const changeCurrentFilter = (filter: string) => ({
 
 let nextId = 0;
 
-export const loadTodos = (todos: ITodos) => ({
+export const loadTodos = (todos: ITodos[]) => ({
   type: 'LOAD_TODOS',
   todos: todos,
 });

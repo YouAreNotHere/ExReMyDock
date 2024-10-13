@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { authRequest } from '@/features/auth/api/auth.request';
-import { IconButtonProps } from '@mui/material';
+import { authRequest } from '../api/auth.request';
+import Button from '../../../shared/button/Button';
+import { useArrowNavigation } from '../../../shared/hooks/useArrowNavigation';
 
 const RegistrationForm = () => {
   const [name, setName] = useState('');
@@ -9,6 +10,18 @@ const RegistrationForm = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
   const authPageRef = useRef(null);
+
+  const nameInputRef = useRef(null);
+  const passwordInputRef = useRef(null);
+  const submitButtonRef = useRef(null);
+  const toAuthButtonRef = useRef(null);
+
+  useArrowNavigation([
+    nameInputRef,
+    passwordInputRef,
+    submitButtonRef,
+    toAuthButtonRef,
+  ]);
 
   useEffect(() => {
     if (!authPageRef.current) return;
@@ -40,25 +53,6 @@ const RegistrationForm = () => {
     }
   };
 
-  const Button = ({ value, onClick }: IconButtonProps) => {
-    let isDisabled: boolean | undefined;
-    if (value === 'Создать аккаунт') {
-      isDisabled = !name || !password;
-    } else {
-      isDisabled = undefined;
-    }
-    return (
-      <button
-        className='buttonStyle'
-        disabled={isDisabled}
-        type='submit'
-        onClick={onClick}
-      >
-        {value}
-      </button>
-    );
-  };
-
   return (
     <div ref={authPageRef}>
       <form>
@@ -73,6 +67,9 @@ const RegistrationForm = () => {
               setName((e.target as HTMLInputElement).value)
             }
             className='input'
+            autoComplete='off'
+            id={'name-input'}
+            ref={nameInputRef}
           />
         </div>
         <div className='row'>
@@ -80,19 +77,31 @@ const RegistrationForm = () => {
           <input
             name='password'
             value={password}
+            autoComplete='off'
             onInput={(e: React.FormEvent<HTMLInputElement>) =>
               setPassword((e.target as HTMLInputElement).value)
             }
             className='input'
+            id={'password-input'}
+            ref={passwordInputRef}
           />
         </div>
         <div className='centerStyle'>
-          <Button value={'Создать аккаунт'} onClick={onRegistationClick} />
+          <Button
+            id={'registration-submit-button'}
+            value={'Создать аккаунт'}
+            onClick={onRegistationClick}
+            disabled={!name || !password}
+            ref={submitButtonRef}
+          />
         </div>
         <div>
           <Button
+            id={'to-auth-submit-button'}
             value={'Вернуться к авторизации'}
             onClick={() => navigate('/auth')}
+            disabled={false}
+            ref={toAuthButtonRef}
           />
         </div>
       </form>

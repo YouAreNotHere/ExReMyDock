@@ -1,20 +1,21 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import '@/app/App.css';
-import { useRequest } from '@/shared/hooks/useRequest';
+import '../../../app/App.css';
+import { useRequest } from '../../../shared/hooks/useRequest';
 import {
   editTodo,
   changeEditedTodoId,
   deleteTodo,
   completeTodo,
-} from '@/actions';
+} from '../../../actions';
 import { ITodosProps } from '../types/ITodosRequest';
+import { IRootState } from '../types/RootState';
 
 const TodoForm = ({ todo }: ITodosProps) => {
   const [newTodoText, setNewTodoText] = useState('');
-  const inputRef = useRef<any>();
+  const inputRef = useRef(null);
   const dispatch = useDispatch();
-  const editedTodo = useSelector((state: any) => state.editedTodoId);
+  const editedTodo = useSelector((state: IRootState) => state.editedTodoId);
 
   let todoContent;
   const { makeRequest: deleteTodoRequest } = useRequest({
@@ -35,17 +36,19 @@ const TodoForm = ({ todo }: ITodosProps) => {
     url: '/todos/saveEditedTodo',
   });
 
-  const onDeleteHandler = async (e: any) => {
+  const onDeleteHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     await deleteTodoRequest();
     dispatch(deleteTodo(todo.id));
   };
 
-  const onCompleteHandler = async (e: any) => {
+  const onCompleteHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     await completeTodoRequest();
     dispatch(completeTodo(todo.id));
   };
 
-  const onSavedEditedHandler = async (e: any) => {
+  const onSavedEditedHandler = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+  ) => {
     await saveEditedTodoRequest();
     dispatch(editTodo(newTodoText, todo.id));
     dispatch(changeEditedTodoId(null));
