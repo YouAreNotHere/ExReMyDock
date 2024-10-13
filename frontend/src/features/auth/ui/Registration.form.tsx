@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authRequest } from '../api/auth.request';
-import Button from '../../../shared/button/Button';
+import Button from '@/shared/button/Button';
+//import Button from '../../../shared/button/Button';
 import { useArrowNavigation } from '../../../shared/hooks/useArrowNavigation';
 
 const RegistrationForm = () => {
