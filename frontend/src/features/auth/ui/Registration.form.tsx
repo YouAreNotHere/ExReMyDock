@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { authRequest } from '../api/auth.request';
+import { authRequest } from '@/features/auth/api/auth.request';
 import { IconButtonProps } from '@mui/material';
 
 const RegistrationForm = () => {
@@ -8,7 +8,7 @@ const RegistrationForm = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
-  const authPageRef: any = useRef(null);
+  const authPageRef = useRef(null);
 
   useEffect(() => {
     if (!authPageRef.current) return;
@@ -22,7 +22,7 @@ const RegistrationForm = () => {
     return () => window.removeEventListener('keydown', handleEsc);
   }, []);
 
-  const onRegistationClick = async (e: any) => {
+  const onRegistationClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     try {
@@ -43,7 +43,7 @@ const RegistrationForm = () => {
   const Button = ({ value, onClick }: IconButtonProps) => {
     let isDisabled: boolean | undefined;
     if (value === 'Создать аккаунт') {
-      isDisabled = !name || !password ? true : false;
+      isDisabled = !name || !password;
     } else {
       isDisabled = undefined;
     }
@@ -69,7 +69,9 @@ const RegistrationForm = () => {
           <input
             name='name'
             value={name}
-            onInput={(e: any) => setName(e.target.value)}
+            onInput={(e: React.FormEvent<HTMLInputElement>) =>
+              setName((e.target as HTMLInputElement).value)
+            }
             className='input'
           />
         </div>
@@ -78,7 +80,9 @@ const RegistrationForm = () => {
           <input
             name='password'
             value={password}
-            onInput={(e: any) => setPassword(e.target.value)}
+            onInput={(e: React.FormEvent<HTMLInputElement>) =>
+              setPassword((e.target as HTMLInputElement).value)
+            }
             className='input'
           />
         </div>

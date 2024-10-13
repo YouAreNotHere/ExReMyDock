@@ -1,4 +1,4 @@
-import { ITodos } from '../features/todo/types/ITodosRequest';
+import { ITodos } from '@/features/todo/types/ITodosRequest';
 
 const todos = (state: any = [], action: { [key: string]: string | number }) => {
   switch (action.type) {

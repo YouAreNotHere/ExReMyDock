@@ -1,26 +1,16 @@
-import React, { useState, useRef, useEffect } from 'react';
-import '../../../app/App.css';
+import React, { useState, useRef } from 'react';
+import '@/app/App.css';
 import { useNavigate } from 'react-router-dom';
-import { authRequest } from '../api/auth.request';
+import { authRequest } from '@/features/auth/api/auth.request';
 import { useDispatch } from 'react-redux';
-import { changeId } from '../../../actions/index';
-//import useButtonFocus from '../../../shared/hooks/useButtonFocus';
-import { useArrowNavigation } from '../../../shared/hooks/useArrowNavigation';
+import { changeId } from '@/actions';
+import { useArrowNavigation } from '@/shared/hooks/useArrowNavigation';
 
 const AuthForm = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  //const useFocus: any = useButtonFocus();
-  // const focusToNameInput = useFocus(
-  //   nameInputRef.current,
-  //   nameInputRef.current.focus,
-  //   'ArrowDown',
-  // );
-  //focusToNameInput();
-  let user_id;
-
   const [errorMessage, setErrorMessage] = useState('');
 
   const nameInputRef = useRef(null);
@@ -29,7 +19,7 @@ const AuthForm = () => {
 
   useArrowNavigation([nameInputRef, passwordInputRef, submitButtonRef]);
 
-  const onLoginClick = async (e: any) => {
+  const onLoginClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
       const url = 'http://localhost:8081/auth/signin';
@@ -54,29 +44,10 @@ const AuthForm = () => {
     }
   };
 
-  const onRegistationClick = async (e: any) => {
+  const onRegistationClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     navigate('/registration');
   };
-
-  // const Button = ({ value, onClick }: any) => {
-  //   let isDisabled: boolean | undefined;
-  //   if (value === 'Войти') {
-  //     isDisabled = !name || !password ? true : false;
-  //   } else {
-  //     isDisabled = undefined;
-  //   }
-  //   return (
-  //     <button
-  //       className='buttonStyle'
-  //       disabled={isDisabled}
-  //       type='submit'
-  //       onClick={onClick}
-  //     >
-  //       {value}
-  //     </button>
-  //   );
-  // };
 
   return (
     <div>
@@ -89,18 +60,12 @@ const AuthForm = () => {
             id='auth-input-name'
             name='name'
             value={name}
-            onInput={(e: any) => setName(e.target.value)}
+            onInput={(e: React.FormEvent<HTMLInputElement>) =>
+              setName((e.target as HTMLInputElement).value)
+            }
             className='input'
             autoComplete='off'
             ref={nameInputRef}
-            // onKeyDown={(event) => {
-            //   if (event.key === 'ArrowDown') {
-            //     if (passwordInputRef.current) {
-            //       passwordInputRef.current.focus();
-            //     }
-            //   }
-            //   //useFocus(event, 'ArrowDown', passwordInputRef);
-            // }}
           />
         </div>
         <div className='row'>
@@ -109,17 +74,12 @@ const AuthForm = () => {
             id='auth-password-input'
             name='password'
             value={password}
-            onInput={(e: any) => setPassword(e.target.value)}
+            onInput={(e: React.FormEvent<HTMLInputElement>) =>
+              setPassword((e.target as HTMLInputElement).value)
+            }
             ref={passwordInputRef}
-            // type={'password'}
+            type={'password'}
             autoComplete='off'
-            // onKeyDown={(event) => {
-            //   if (event.key === 'ArrowUp') {
-            //     if (nameInputRef.current) {
-            //       nameInputRef.current.focus();
-            //     }
-            //   }
-            // }}
             className='input'
           />
         </div>
