@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
-import { useRequest } from '@/shared/hooks/useRequest';
+import React, { useEffect, useRef, useState } from 'react';
+import { useRequest } from '../../../shared/hooks/useRequest';
 import { useDispatch } from 'react-redux';
-import { loadTodos } from '@/actions';
+import { loadTodos } from '../../../actions';
 
 const AddTodo = () => {
   const dispatch = useDispatch();
-  const ref: any = useRef();
+  const ref = useRef(null);
   const [text, setText] = useState('');
 
   const { makeRequest: addTodo } = useRequest({
@@ -25,7 +25,7 @@ const AddTodo = () => {
     setText('');
   }, [todos]);
 
-  const onClickHandler = async (e: any) => {
+  const onClickHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     await addTodo();
     await getTodos();
   };

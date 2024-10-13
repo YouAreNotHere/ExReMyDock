@@ -2,20 +2,20 @@ import { useEffect } from 'react';
 import TodoForm from './Todo.form';
 import { useSelector, useDispatch } from 'react-redux';
 import AddTodo from './AddTodo.form';
-import { useRequest } from '@/shared/hooks/useRequest';
-import { loadTodos } from '@/actions';
+import { useRequest } from '../../../shared/hooks/useRequest';
+import { loadTodos } from '../../../actions';
 import { ITodos } from '@/features/todo/types/ITodosRequest';
+import { IRootState } from '@/features/todo/types/RootState';
 
 const TodosForm = () => {
-  const dispatch: any = useDispatch();
-  const todos = useSelector((state: any) => state.todos);
-  const currentFilter = useSelector((state: any) => state.todoFilters);
+  const dispatch = useDispatch();
+  const todos: ITodos[] = useSelector((state: IRootState) => state.todos);
+  const currentFilter = useSelector((state: IRootState) => state.todoFilters);
   let currentTodos: Array<ITodos> = [];
 
   const setTodosToState = (todos: ITodos[]) => {
     console.log('set to');
-    const newTodos: any = todos.map(
-      //Если поставить подходящий для ситуации ITodos[] на 38 строке в диспатче будет ошибка"
+    const newTodos: ITodos[] = todos.map(
       (todo: ITodos): ITodos =>
         todo.completed === 0
           ? { ...todo, completed: false }
@@ -36,15 +36,15 @@ const TodosForm = () => {
     onSuccess: setTodosToState,
   });
 
-  useEffect((): any => {
+  useEffect(() => {
     getTodos();
   }, []);
 
   if (todos) {
-    const activeTodos = todos.filter(
+    const activeTodos: ITodos[] = todos.filter(
       (todo: ITodos) => todo.completed === false,
     );
-    const completeTodos = todos.filter(
+    const completeTodos: ITodos[] = todos.filter(
       (todo: ITodos) => todo.completed === true,
     );
 

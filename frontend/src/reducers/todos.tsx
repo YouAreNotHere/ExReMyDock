@@ -1,6 +1,10 @@
 import { ITodos } from '@/features/todo/types/ITodosRequest';
+import { IRootState } from '@/features/todo/types/RootState';
 
-const todos = (state: any = [], action: { [key: string]: string | number }) => {
+const todos = (
+  state: ITodos[] = [],
+  action: { [key: string]: string | number },
+) => {
   switch (action.type) {
     case 'ADD_TODO':
       return [

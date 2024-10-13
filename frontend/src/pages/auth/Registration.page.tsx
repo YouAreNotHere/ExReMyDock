@@ -1,6 +1,6 @@
 import React from 'react';
-import { FormLayout } from '@/shared/layouts/FormLayout';
-import RegistrationForm from '@/features/auth/ui/Registration.form';
+import { FormLayout } from '../../shared/layouts/FormLayout';
+import RegistrationForm from '../../features/auth/ui/Registration.form';
 
 const RegistrationPage = () => {
   return (
