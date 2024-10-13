@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import TodoForm from './Todo.form';
 import { useSelector, useDispatch } from 'react-redux';
 import AddTodo from './AddTodo.form';
-import { useRequest } from '../../../shared/hooks/useRequest';
-import { loadTodos } from '../../../actions';
-import { ITodos } from '../types/ITodosRequest';
+import { useRequest } from '@/shared/hooks/useRequest';
+import { loadTodos } from '@/actions';
+import { ITodos } from '@/features/todo/types/ITodosRequest';
 
 const TodosForm = () => {
   const dispatch: any = useDispatch();

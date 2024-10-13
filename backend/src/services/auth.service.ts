@@ -1,5 +1,6 @@
 import db from '../database/db';
 import bcrypt from 'bcrypt';
+import { QueryResult } from 'mysql2';
 
 class AuthService {
   public async signup(user: { name: string; password: string }) {
@@ -43,7 +44,7 @@ class AuthService {
   }
 
   public async getUserByName(user: { name: string; password: string }) {
-    const query = `SELECT * FROM users WHERE name = "${user.name}"`;
+    const query: string = `SELECT * FROM users WHERE name = "${user.name}"`;
 
     try {
       return await db.query(query);
