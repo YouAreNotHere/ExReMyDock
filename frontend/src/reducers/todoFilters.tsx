@@ -1,4 +1,4 @@
-import { VisibilityFilters } from '@/actions/index';
+import { VisibilityFilters } from '../actions/index';
 
 const todoFilters = (
   state = VisibilityFilters.SHOW_ALL,

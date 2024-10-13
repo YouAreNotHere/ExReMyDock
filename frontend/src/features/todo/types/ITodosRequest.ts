@@ -29,12 +29,7 @@ interface ITodos {
 }
 
 interface ITodosProps {
-  todo: {
-    id: number;
-    user_id: number;
-    text: string;
-    completed: boolean | number;
-  };
+  todo: ITodos;
 }
 
 export type {

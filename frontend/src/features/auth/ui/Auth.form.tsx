@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react';
-import '@/app/App.css';
+import '../../../app/App.css';
 import { useNavigate } from 'react-router-dom';
-import { authRequest } from '@/features/auth/api/auth.request';
+import { authRequest } from '../../auth/api/auth.request';
 import { useDispatch } from 'react-redux';
-import { changeId } from '@/actions';
-import { useArrowNavigation } from '@/shared/hooks/useArrowNavigation';
+import { changeId } from '../../../actions';
+import { useArrowNavigation } from '../../../shared/hooks/useArrowNavigation';
+import Button from '../../../shared/button/Button';
 
 const AuthForm = () => {
   const [name, setName] = useState('');
@@ -16,8 +17,14 @@ const AuthForm = () => {
   const nameInputRef = useRef(null);
   const passwordInputRef = useRef(null);
   const submitButtonRef = useRef(null);
+  const toRegistrationButtonRef = useRef(null);
 
-  useArrowNavigation([nameInputRef, passwordInputRef, submitButtonRef]);
+  useArrowNavigation([
+    nameInputRef,
+    passwordInputRef,
+    submitButtonRef,
+    toRegistrationButtonRef,
+  ]);
 
   const onLoginClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -84,21 +91,22 @@ const AuthForm = () => {
           />
         </div>
         <div className='centerStyle'>
-          <button
+          <Button
             id='auth-submit-button'
-            ref={submitButtonRef}
-            className='buttonStyle'
-            disabled={!name || !password}
-            type='submit'
+            value={'Войти'}
             onClick={onLoginClick}
-          >
-            Войти
-          </button>
+            disabled={!name || !password}
+            ref={submitButtonRef}
+          />
           <div>
             <p>В первый раз?</p>
-            <button className='buttonStyle' onClick={onRegistationClick}>
-              Создать аккаунт
-            </button>
+            <Button
+              id={'registration-page-submit-button'}
+              value={'Создать аккаунт'}
+              onClick={onRegistationClick}
+              disabled={false}
+              ref={toRegistrationButtonRef}
+            />
           </div>
         </div>
       </form>
