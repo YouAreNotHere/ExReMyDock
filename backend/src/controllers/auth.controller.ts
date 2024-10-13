@@ -25,7 +25,8 @@ class AuthController {
       return;
     }
 
-    const user: any = await AuthService.signin(req.body);
+    const user: false | 'error' | { id: number; name: string } =
+      await AuthService.signin(req.body);
 
     if (!user) {
       res.status(500).send({ message: 'Некорректный пароль' });
@@ -33,10 +34,6 @@ class AuthController {
 
     console.log(`Пользователь авторизован`);
 
-    console.log(
-      'Записываю в session: user.id ' + user.id,
-      'и user.name ' + user.name,
-    );
     req.session.user = {
       id: (user as any).id as number,
       name: (user as any).name as string,

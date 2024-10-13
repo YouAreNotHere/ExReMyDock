@@ -1,13 +1,10 @@
 import React from 'react';
-import TodosForm from '../../features/todo/ui/Todos.form';
-import FilterBar from '../../features/todo/ui/FilterBar.form';
-// import {useRequest} from "../../shared/hooks/useRequest";
+import TodosForm from '@/features/todo/ui/Todos.form';
+import FilterBar from '@/features/todo/ui/FilterBar.form';
 import { useNavigate } from 'react-router-dom';
-import { useRequest } from '../../shared/hooks/useRequest';
-// import {useNavigate} from "react-router-dom";
+import { useRequest } from '@/shared/hooks/useRequest';
 
 const TodosPage = () => {
-  // стоит убрать логику логаута из TodosPage куда-нибудь в shared, например, ибо эта логика не относится к todos
   const navigate = useNavigate();
   const onLogoutSuccess = () => {
     navigate('/auth');

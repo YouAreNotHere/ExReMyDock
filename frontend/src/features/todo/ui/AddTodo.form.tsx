@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { useRequest } from '../../../shared/hooks/useRequest';
+import { useRequest } from '@/shared/hooks/useRequest';
 import { useDispatch } from 'react-redux';
-import { loadTodos } from '../../../actions';
+import { loadTodos } from '@/actions';
 
 const AddTodo = () => {
   const dispatch = useDispatch();
@@ -28,10 +28,6 @@ const AddTodo = () => {
   const onClickHandler = async (e: any) => {
     await addTodo();
     await getTodos();
-
-    // console.log('Подтянулись тудушки в аддТуду = ' + todos);
-    // dispatch(loadTodos(todos));
-    // setText('');
   };
 
   return (

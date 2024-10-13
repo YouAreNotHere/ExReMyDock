@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { changeCurrentFilter } from '../../../actions';
+import { changeCurrentFilter } from '@/actions';
 
 const FilterBar = () => {
   const dispatch = useDispatch();
