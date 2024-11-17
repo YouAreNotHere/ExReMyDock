@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import {useEffect, useState} from 'react';
 import TodoForm from './Todo.form';
 import { useSelector, useDispatch } from 'react-redux';
 import AddTodo from './AddTodo.form';
@@ -6,15 +6,17 @@ import { useRequest } from '../../../shared/hooks/useRequest';
 import { loadTodos } from '../../../actions';
 import { ITodos } from '@/features/todo/types/ITodosRequest';
 import { IRootState } from '@/features/todo/types/RootState';
+import Modal from "../../../shared/modal/Modal";
 
 const TodosForm = () => {
   const dispatch = useDispatch();
   const todos: ITodos[] = useSelector((state: IRootState) => state.todos);
   const currentFilter = useSelector((state: IRootState) => state.todoFilters);
+  const todoInModal: number | null = useSelector((state: IRootState) => state.todoIdInModal);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   let currentTodos: Array<ITodos> = [];
 
   const setTodosToState = (todos: ITodos[]) => {
-    console.log('set to');
     const newTodos: ITodos[] = todos.map(
       (todo: ITodos): ITodos =>
         todo.completed === 0
@@ -25,7 +27,6 @@ const TodosForm = () => {
     const newTodosMoreTodos: boolean =
       JSON.stringify(todos).length < JSON.stringify(newTodos).length;
     if (newTodosMoreTodos) {
-      console.log('N' + newTodos.length);
       dispatch(loadTodos(newTodos));
     }
   };
@@ -60,9 +61,10 @@ const TodosForm = () => {
   return (
     <div>
       <AddTodo />
+      <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
       <ul>
         {currentTodos.map((todo: ITodos) => {
-          return <TodoForm key={todo.id} todo={todo} />;
+          return <TodoForm key={todo.id} todo={todo} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>;
         })}
       </ul>
     </div>

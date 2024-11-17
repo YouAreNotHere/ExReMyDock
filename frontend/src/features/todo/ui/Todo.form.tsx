@@ -7,11 +7,21 @@ import {
   changeEditedTodoId,
   deleteTodo,
   completeTodo,
+  todoIdInModal
 } from '../../../actions';
-import { ITodosProps } from '../types/ITodosRequest';
+import {ITodos, ITodosProps} from '../types/ITodosRequest';
 import { IRootState } from '../types/RootState';
+import Button from "../../../shared/button/Button";
+import SuggestButtonIcon from "../../../shared/button/SuggestButtonIcon";
+import EditButtonIcon from "../../../shared/button/EditButtonIcon";
 
-const TodoForm = ({ todo }: ITodosProps) => {
+interface Props {
+  todo: ITodos;
+  isModalOpen: boolean;
+  setIsModalOpen: (isModalOpen: boolean) => void;
+}
+
+const TodoForm = ({ todo, isModalOpen, setIsModalOpen}: Props) => {
   const [newTodoText, setNewTodoText] = useState('');
   const inputRef = useRef(null);
   const dispatch = useDispatch();
@@ -22,12 +32,6 @@ const TodoForm = ({ todo }: ITodosProps) => {
     method: 'POST',
     body: { id: todo.id },
     url: '/todos/deleteTodo',
-  });
-
-  const { makeRequest: completeTodoRequest } = useRequest({
-    method: 'POST',
-    body: { id: todo.id, completed: !todo.completed },
-    url: '/todos/completeTodo',
   });
 
   const { makeRequest: saveEditedTodoRequest } = useRequest({
@@ -41,57 +45,50 @@ const TodoForm = ({ todo }: ITodosProps) => {
     dispatch(deleteTodo(todo.id));
   };
 
-  const onCompleteHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    await completeTodoRequest();
-    dispatch(completeTodo(todo.id));
-  };
-
   const onSavedEditedHandler = async (
     e: React.MouseEvent<HTMLButtonElement>,
   ) => {
     await saveEditedTodoRequest();
-    dispatch(editTodo(newTodoText, todo.id));
+    //dispatch(editTodo(newTodoText, todo.id, additionalText));
     dispatch(changeEditedTodoId(null));
     setNewTodoText('');
   };
 
+  const onTextClickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+    dispatch(todoIdInModal(todo.id));
+    setIsModalOpen(!isModalOpen);
+  }
+
   if (!todo) {
     todoContent = <p>Its place to your first todo!</p>;
   }
-  if (editedTodo === todo.id) {
     todoContent = (
-      <div key={todo.id}>
-        <input
-          ref={inputRef}
-          value={newTodoText}
-          onChange={(e) => {
-            setNewTodoText(e.target.value);
-          }}
-        />
-        <button className='addPadding' onClick={onSavedEditedHandler}>
-          Save
-        </button>
-      </div>
+        <li key={todo.id} className={todo.completed ? 'сompleted' : 'todo_bar'}>
+          <div onClick={onTextClickHandler} className="task-text">
+            {todo.text}
+          </div>
+          <div className={"buttons-wrapper"}>
+            <Button
+                id={"edit-todo-button"}
+                value={""}
+                onClick={() => {
+                  dispatch(changeEditedTodoId(todo.id))
+                  dispatch(todoIdInModal(todo.id))
+                  setIsModalOpen(!isModalOpen)
+                }}
+                disabled={false}
+                className={"edit-todo-button"}>
+              <EditButtonIcon className={"edit-todo-icon"}/>
+            </Button>
+            <Button
+                id={"delete-todo-button"}
+                value={""}
+                onClick={onDeleteHandler}
+                disabled={false}
+                className={"delete-todo__button"}/>
+          </div>
+        </li>
     );
-  } else {
-    todoContent = (
-      <li key={todo.id} className={todo.completed ? 'сompleted' : ''}>
-        {todo.text}
-        <button className='addPadding' onClick={onDeleteHandler}>
-          Delete todo
-        </button>
-        <button
-          className='addPadding'
-          onClick={() => dispatch(changeEditedTodoId(todo.id))}
-        >
-          Edit
-        </button>
-        <button onClick={onCompleteHandler} className='addPadding'>
-          {!todo.completed ? 'Complete' : 'Uncomplete'}
-        </button>
-      </li>
-    );
-  }
   return todoContent;
 };
 

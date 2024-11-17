@@ -1,0 +1,19 @@
+version: "3"
+services:
+  backend:
+    build: ./ExReMyDock/backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    container_name: blog-api
+  frontend:
+    build: ./ExReMyDock/frontend
+    ports:
+      - "80:80"
+    container_name: blog-client
+  db:
+    image: mysql
+    ports:
+      - "27017:27017"
+    container_name: blog-db

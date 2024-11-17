@@ -20,7 +20,6 @@ const AddTodo = () => {
   });
 
   useEffect(() => {
-    console.log('Подтянулись тудушки в аддТуду = ' + todos);
     dispatch(loadTodos(todos));
     setText('');
   }, [todos]);

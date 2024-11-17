@@ -26,6 +26,7 @@ interface ITodos {
   user_id: number;
   text: string;
   completed: boolean | number;
+  additionalText?: string | undefined;
 }
 
 interface ITodosProps {

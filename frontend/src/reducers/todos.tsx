@@ -22,7 +22,7 @@ const todos = (
         if (todo.id !== action.id) {
           return todo;
         } else {
-          return { ...todo, text: action.text };
+          return { ...todo, text: action.text, additionalText: action.additionalText };
         }
       });
     case 'COMPLETE_TODO':

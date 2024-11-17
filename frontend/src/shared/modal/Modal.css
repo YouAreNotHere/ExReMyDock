@@ -1,0 +1,104 @@
+.modal{
+    position: absolute;
+    color: white;
+    background: cadetblue;
+    border-radius: 25px;
+    display: flex;
+    z-index: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    height: 50%;
+    top: 25%;
+    left: 25%;
+}
+
+.hidden-modal{
+    display: none;
+}
+
+.close-modal-button {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.close-modal-button::before,
+.close-modal-button::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    width: 20px;
+    height: 2px;
+    background: white;
+}
+
+.close-modal-button::before {
+    transform: rotate(45deg);
+}
+
+.close-modal-button::after {
+    transform: rotate(-45deg);
+}
+
+.transparent{
+    opacity: 0.5;
+}
+
+.edit-button{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border-color: transparent;
+    align-content: center;
+}
+
+.edit-icon{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.сompleted {
+    color: gray;
+    text-decoration: line-through;
+    display: flex;
+}
+
+.complete-button{
+    margin: 5px;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border-color: transparent;
+    position: absolute;
+    top: 10px;
+    left: 25%;
+}
+
+.complete-icon{
+    position: relative;
+    top: -5px;
+    left: -7px;
+}
+
+.modal-text__input{
+    margin: 15px;
+    border-radius: 5px;
+}
+
+.modal-additional-text__input{
+    width: 70%;
+    height: 60%;
+    border-radius: 5px;
+}

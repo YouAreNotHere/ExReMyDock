@@ -44,7 +44,6 @@ const useRequest = (props: IUseRequestProps) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         setData(data);
         setErrorMessage(null);
         if (onSuccess) {

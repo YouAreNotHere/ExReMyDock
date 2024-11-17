@@ -22,6 +22,14 @@
 .сompleted {
   color: gray;
   text-decoration: line-through;
+  display: flex;
+}
+
+.todo_bar{
+  display: flex;
+  position: relative;
+  margin-top: 10px;
+  justify-content: space-around;
 }
 
 .addPadding {
@@ -30,4 +38,56 @@
 
 .completedFilter {
   display: none;
+}
+
+.buttons-wrapper{
+  display: flex;
+  width: 60px;
+  justify-content: space-between;
+}
+
+.edit-todo-button{
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.edit-todo-icon{
+  position: relative;
+  top: -2px;
+  left: -7px;
+}
+
+.delete-todo__button {
+  position: relative;
+  right: 15px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-todo__button::before,
+.delete-todo__button::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  width: 20px;
+  height: 2px;
+  background: white;
+}
+
+.delete-todo__button::before {
+  transform: rotate(45deg);
+}
+
+.delete-todo__button::after {
+  transform: rotate(-45deg);
+}
+
+.task-text{
+  width: 50%;
 }

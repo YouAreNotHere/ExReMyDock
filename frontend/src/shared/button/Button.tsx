@@ -7,21 +7,23 @@ const Button = forwardRef(
       value: string;
       onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
       disabled: boolean;
+      className? : string;
+      children? : any;
     },
     ref:React.ForwardedRef<HTMLButtonElement>,
   ) => {
-    const { id, value, onClick, disabled } = props;
-    console.log(ref);
+    const { id, value, onClick, disabled, className, children} = props;
     return (
       <button
         id={id}
         ref={ref}
-        className='buttonStyle'
+        className={className ? className : 'buttonStyle'}
         disabled={disabled}
         type='submit'
         onClick={onClick}
       >
         {value}
+          {children}
       </button>
     );
   },

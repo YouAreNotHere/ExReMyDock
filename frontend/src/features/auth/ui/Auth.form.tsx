@@ -61,7 +61,7 @@ const AuthForm = () => {
       <form>
         <div className='row'>
           <label htmlFor='name' className='label'>
-            name
+            Имя
           </label>
           <input
             id='auth-input-name'
@@ -76,7 +76,7 @@ const AuthForm = () => {
           />
         </div>
         <div className='row'>
-          <label className='label'>password</label>
+          <label className='label'>Пароль</label>
           <input
             id='auth-password-input'
             name='password'

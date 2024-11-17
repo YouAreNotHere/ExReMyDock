@@ -14,7 +14,7 @@ class TodosService {
     newTodo: { userId: number; text: string; completed: boolean },
     userId: number,
   ) {
-    const query = `INSERT INTO todos (user_id, text, completed) VALUES ("${userId}", "${newTodo.text}", ${newTodo.completed});`;
+    const query = `INSERT INTO todos (user_id, text, completed, additionalText) VALUES ("${userId}", "${newTodo.text}", ${newTodo.completed}, "");`;
     try {
       return await db.query(query);
     } catch (error) {
@@ -47,9 +47,9 @@ class TodosService {
     }
   }
 
-  public async saveEditedTodo(idAndText: { id: number; text: string }) {
-    const { id, text } = idAndText;
-    const query: string = `UPDATE todos SET text = "${text}" WHERE id = "${id}";`;
+  public async saveEditedTodo(idAndText: { id: number; text: string, additionalText: string }) {
+    const { id, text, additionalText } = idAndText;
+    const query: string = `UPDATE todos SET text = "${text}", additionalText = "${additionalText}" WHERE id = "${id}";`;
     try {
       return await db.query(query);
     } catch (error) {
