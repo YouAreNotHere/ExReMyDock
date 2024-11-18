@@ -8,20 +8,28 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width: 50%;
-    height: 50%;
-    top: 25%;
-    left: 25%;
+    min-width: 50%;
+    min-height: 50%;
+    top: 15%;
+    bottom: 15%;
+    left: 10%;
+    right: 10%;
 }
 
 .hidden-modal{
     display: none;
 }
 
+.text-with-buttons__wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .close-modal-button {
-    position: absolute;
-    right: 15px;
-    top: 15px;
+    margin: 10px;
+    align-self: start;
+    position: relative;
     width: 20px;
     height: 20px;
     background: transparent;
@@ -53,9 +61,7 @@
 }
 
 .edit-button{
-    position: absolute;
-    top: 15px;
-    left: 15px;
+    margin-left: 15px;
     width: 20px;
     height: 20px;
     background: transparent;
@@ -101,4 +107,19 @@
     width: 70%;
     height: 60%;
     border-radius: 5px;
+}
+
+.modal-text,
+.сompleted{
+    max-width: 60%;
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
+.modal-text:hover{
+    opacity: 0.5;
+}
+
+.modal-text:active{
+    opacity: 0.2;
 }

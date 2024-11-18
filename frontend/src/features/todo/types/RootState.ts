@@ -1,8 +1,8 @@
-import { ITodos } from './ITodosRequest';
+import { ITodo } from './ITodosRequest';
 import { VisibilityFilters } from '@/actions';
 
 interface IRootState {
-  todos: ITodos[];
+  todos: ITodo[];
   editedTodoId: number | null;
   todoFilters: string;
   todoIdInModal: number | null;

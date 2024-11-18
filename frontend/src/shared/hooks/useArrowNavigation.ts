@@ -6,7 +6,6 @@ const useArrowNavigation = (refs: RefObject<any>[]) => {
   const changeFocusByKeyDown = useCallback(
     (event: KeyboardEvent) => {
       if (!refs.every((ref) => !!ref.current)) return;
-      console.log(refs[0]);
 
       if (event.key === 'ArrowUp') {
         const nextIndex =
@@ -37,7 +36,7 @@ const useArrowNavigation = (refs: RefObject<any>[]) => {
     if (!event.target) return;
 
     const clickedIndex = refs.findIndex(
-      (ref) => ref.current.id === (event.target as any).id,
+      (ref) => ref?.current?.id === (event.target as any).id,
     );
 
     if (clickedIndex !== -1) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../modal/Modal.css'
+import '../../features/todo/ui/modal/Modal.css'
 
 const EditButtonIcon = ({className}: {className: string}) => {
     return (

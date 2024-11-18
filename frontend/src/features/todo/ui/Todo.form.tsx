@@ -9,14 +9,14 @@ import {
   completeTodo,
   todoIdInModal
 } from '../../../actions';
-import {ITodos, ITodosProps} from '../types/ITodosRequest';
+import {ITodo, ITodosProps} from '../types/ITodosRequest';
 import { IRootState } from '../types/RootState';
 import Button from "../../../shared/button/Button";
 import SuggestButtonIcon from "../../../shared/button/SuggestButtonIcon";
 import EditButtonIcon from "../../../shared/button/EditButtonIcon";
 
 interface Props {
-  todo: ITodos;
+  todo: ITodo;
   isModalOpen: boolean;
   setIsModalOpen: (isModalOpen: boolean) => void;
 }
@@ -63,10 +63,8 @@ const TodoForm = ({ todo, isModalOpen, setIsModalOpen}: Props) => {
     todoContent = <p>Its place to your first todo!</p>;
   }
     todoContent = (
-        <li key={todo.id} className={todo.completed ? 'сompleted' : 'todo_bar'}>
-          <div onClick={onTextClickHandler} className="task-text">
-            {todo.text}
-          </div>
+        <li key={todo.id} className= "todo_bar">
+            <p onClick={onTextClickHandler} className={todo.completed ? 'сompleted-text' : 'task-text'}>{todo.text}</p>
           <div className={"buttons-wrapper"}>
             <Button
                 id={"edit-todo-button"}

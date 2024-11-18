@@ -4,21 +4,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import AddTodo from './AddTodo.form';
 import { useRequest } from '../../../shared/hooks/useRequest';
 import { loadTodos } from '../../../actions';
-import { ITodos } from '@/features/todo/types/ITodosRequest';
+import { ITodo } from '@/features/todo/types/ITodosRequest';
 import { IRootState } from '@/features/todo/types/RootState';
-import Modal from "../../../shared/modal/Modal";
+import Modal from "./modal/Modal";
+import '../../../app/App.css'
 
 const TodosForm = () => {
   const dispatch = useDispatch();
-  const todos: ITodos[] = useSelector((state: IRootState) => state.todos);
+  const todos: ITodo[] = useSelector((state: IRootState) => state.todos);
   const currentFilter = useSelector((state: IRootState) => state.todoFilters);
   const todoInModal: number | null = useSelector((state: IRootState) => state.todoIdInModal);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  let currentTodos: Array<ITodos> = [];
+  let currentTodos: Array<ITodo> = [];
 
-  const setTodosToState = (todos: ITodos[]) => {
-    const newTodos: ITodos[] = todos.map(
-      (todo: ITodos): ITodos =>
+  const setTodosToState = (todos: ITodo[]) => {
+    const newTodos: ITodo[] = todos.map(
+      (todo: ITodo): ITodo =>
         todo.completed === 0
           ? { ...todo, completed: false }
           : { ...todo, completed: true },
@@ -42,11 +43,11 @@ const TodosForm = () => {
   }, []);
 
   if (todos) {
-    const activeTodos: ITodos[] = todos.filter(
-      (todo: ITodos) => todo.completed === false,
+    const activeTodos: ITodo[] = todos.filter(
+      (todo: ITodo) => todo.completed === false,
     );
-    const completeTodos: ITodos[] = todos.filter(
-      (todo: ITodos) => todo.completed === true,
+    const completeTodos: ITodo[] = todos.filter(
+      (todo: ITodo) => todo.completed === true,
     );
 
     if (currentFilter == 'SHOW_COMPLETED') {
@@ -59,11 +60,11 @@ const TodosForm = () => {
   }
 
   return (
-    <div>
+    <div className="app-wrapper">
       <AddTodo />
       <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
-      <ul>
-        {currentTodos.map((todo: ITodos) => {
+      <ul className="todos-list">
+        {currentTodos.map((todo: ITodo) => {
           return <TodoForm key={todo.id} todo={todo} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>;
         })}
       </ul>

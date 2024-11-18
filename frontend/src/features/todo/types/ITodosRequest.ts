@@ -21,7 +21,7 @@ interface ISaveEditedTodoRequest {
   text: string;
 }
 
-interface ITodos {
+interface ITodo {
   id: number;
   user_id: number;
   text: string;
@@ -30,7 +30,7 @@ interface ITodos {
 }
 
 interface ITodosProps {
-  todo: ITodos;
+  todo: ITodo;
 }
 
 export type {
@@ -39,6 +39,6 @@ export type {
   IDeleteTodoRequest,
   ICompleteTodoRequest,
   ISaveEditedTodoRequest,
-  ITodos,
+  ITodo,
   ITodosProps,
 };

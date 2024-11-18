@@ -1,6 +1,5 @@
 .App {
   width: 100vw;
-  height: 100vh;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -8,6 +7,7 @@
   align-items: center;
   background-color: #282c34;
   color: gainsboro;
+  padding: 70px 0 0 0;
 }
 
 .buttonStyle {
@@ -16,7 +16,6 @@
 
 .centerStyle {
   justify-content: center;
-  margin-left: 5vw;
 }
 
 .сompleted {
@@ -29,7 +28,8 @@
   display: flex;
   position: relative;
   margin-top: 10px;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .addPadding {
@@ -88,6 +88,38 @@
   transform: rotate(-45deg);
 }
 
-.task-text{
-  width: 50%;
+.task-text,
+.сompleted-text {
+  min-width: 50%;
+  max-width: 80%;
+  white-space: normal; /* Позволяет обычный перенос строк */
+  word-wrap: break-word; /* Позволяет длинным словам переноситься */
+  overflow-wrap: break-word; /* Современный аналог */
+}
+
+.task-text:hover{
+  color: white;
+}
+
+.task-text:active{
+  opacity: 0.2;
+}
+
+.app-wrapper{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.todos-list{
+  min-width: 30%;
+  max-width: 60%;
+  padding: 0;
+}
+
+.add-todo-form{
+  display: flex;
 }

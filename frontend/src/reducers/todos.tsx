@@ -1,8 +1,8 @@
-import { ITodos } from '@/features/todo/types/ITodosRequest';
+import { ITodo } from '@/features/todo/types/ITodosRequest';
 import { IRootState } from '@/features/todo/types/RootState';
 
 const todos = (
-  state: ITodos[] = [],
+  state: ITodo[] = [],
   action: { [key: string]: string | number },
 ) => {
   switch (action.type) {
@@ -18,7 +18,7 @@ const todos = (
     case 'LOAD_TODOS':
       return action.todos;
     case 'EDIT_TODO':
-      return state.map((todo: ITodos) => {
+      return state.map((todo: ITodo) => {
         if (todo.id !== action.id) {
           return todo;
         } else {
@@ -26,11 +26,11 @@ const todos = (
         }
       });
     case 'COMPLETE_TODO':
-      return state.map((todo: ITodos) =>
+      return state.map((todo: ITodo) =>
         todo.id === action.id ? { ...todo, completed: !todo.completed } : todo,
       );
     case 'DELETE_TODO':
-      return state.filter((todo: ITodos) => todo.id !== action.id);
+      return state.filter((todo: ITodo) => todo.id !== action.id);
     default:
       return state;
   }

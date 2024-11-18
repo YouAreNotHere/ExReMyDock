@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useRequest } from '../../../shared/hooks/useRequest';
 import { useDispatch } from 'react-redux';
 import { loadTodos } from '../../../actions';
+import '../../../app/App.css'
 
 const AddTodo = () => {
   const dispatch = useDispatch();
@@ -30,10 +31,10 @@ const AddTodo = () => {
   };
 
   return (
-    <>
+    <div className="add-todo-form">
       <input ref={ref} onChange={(e) => setText(e.target.value)} value={text} />
       <button onClick={onClickHandler}>Add Todo</button>
-    </>
+    </div>
   );
 };
 
