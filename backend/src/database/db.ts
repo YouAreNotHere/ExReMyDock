@@ -7,7 +7,7 @@ class db {
     this.pool = createPool({
       host: 'localhost',
       user: 'YouAreNotHere',
-      password: '123456',
+      password: 'A40698546d',
       database: 'test_database',
       waitForConnections: true,
       connectionLimit: 10,
@@ -46,6 +46,7 @@ class db {
 
   public async createTables() {
     await this.createUsersTable();
+    await this.createTodosTable();
 
     console.log('MySQL tables was created');
   }
@@ -65,14 +66,15 @@ class db {
     const sql = `
       CREATE TABLE IF NOT EXISTS todos (
           id INT AUTO_INCREMENT PRIMARY KEY,
-          user_id NOT NULL,
+          user_id INT NOT NULL,
           text VARCHAR(255) NOT NULL,
-          status VARCHAR(100) NOT NULL,
           additionalText VARCHAR(255) NOT NULL,
+          completed VARCHAR(100) NOT NULL
       );
     `;
     await this.query(sql);
   }
+
 }
 
 export default new db();

@@ -5,19 +5,18 @@ import {IRootState} from "@/features/todo/types/RootState";
 import "./SearchInput.css"
 
 const SearchInput = () => {
-    const [text, setText] = useState('Поиск');
+    const [text, setText] = useState('');
+    const regText = new RegExp(text,"gi");
     const todos: ITodo[] = useSelector((state: IRootState) => state.todos);
-    const likelyTodos = todos?.filter((todo: ITodo) => {
-        const shortTodoText = todo.text.toLowerCase().split("").splice(0,text.length).join("");
-        if (shortTodoText === text.toLowerCase() && text.length) return true;
-    });
+    const likelyTodos = todos?.filter((todo: ITodo) => regText.test(todo.text) );
 
 
     return(
         <div>
             <input
                 onChange={(e) => setText(e.target.value)}
-                value={text} />
+                value={text}
+                placeholder="Поиск" />
             <ul className="suggest-todos-list">
                 {likelyTodos?.map((todo: ITodo) => (
                     <li key={todo.id} className= "suggest-todo">
