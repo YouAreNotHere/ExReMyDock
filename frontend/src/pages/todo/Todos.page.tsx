@@ -28,7 +28,7 @@ const TodosPage = () => {
         {isLoading ? 'Загрузка...' : 'Выйти'}
       </button>
       {errorMessage && <p>{errorMessage}</p>}
-        <SearchInput/>
+        {/*<SearchInput/>*/}
       <TodosForm />
       <FilterBar />
     </div>

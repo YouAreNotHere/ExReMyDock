@@ -92,6 +92,7 @@
 .сompleted-text {
   min-width: 50%;
   max-width: 80%;
+  padding: 10px;
   white-space: normal; /* Позволяет обычный перенос строк */
   word-wrap: break-word; /* Позволяет длинным словам переноситься */
   overflow-wrap: break-word; /* Современный аналог */
@@ -118,8 +119,21 @@
   min-width: 30%;
   max-width: 60%;
   padding: 0;
+  list-style-type: none;
 }
 
 .add-todo-form{
   display: flex;
+}
+
+.focused-todo{
+  min-width: 50%;
+  max-width: 80%;
+  padding: 10px;
+  white-space: normal; /* Позволяет обычный перенос строк */
+  word-wrap: break-word; /* Позволяет длинным словам переноситься */
+  overflow-wrap: break-word; /* Современный аналог */
+  background-color: aliceblue;
+  color: black;
+  border-radius: 25px;
 }
