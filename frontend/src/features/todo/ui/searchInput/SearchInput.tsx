@@ -15,13 +15,14 @@ const SearchInput = ({onClickHandler}: any) => {
     return(
         <div>
             <input
+                className="modal-text__input"
                 onChange={(e) => setText(e.target.value)}
                 value={text}
                 placeholder="Поиск" />
             <ul className="suggest-todos-list">
                 {likelyTodos?.map((todo: ITodo) => (
                     <li key={todo.id} className= "suggest-todo" onClick={() => onClickHandler(todo.id)}>
-                        <p>
+                        <p className="suggest-todo__text">{todo.text}
                             {todo.text}
                         </p>
                     </li>

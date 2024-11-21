@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { loadTodos } from '../../../actions';
 import '../../../app/App.css'
 
-const AddTodo = () => {
+const AddTodo = ({className}: {className: string}) => {
   const dispatch = useDispatch();
   const ref = useRef(null);
   const [text, setText] = useState('');
@@ -31,9 +31,9 @@ const AddTodo = () => {
   };
 
   return (
-    <div className="add-todo-form">
+    <div className={className}>
       <input ref={ref} onChange={(e) => setText(e.target.value)} value={text} />
-      <button onClick={onClickHandler}>Add Todo</button>
+      <button onClick={onClickHandler}>Добавить задание</button>
     </div>
   );
 };

@@ -83,9 +83,7 @@ const TodosForm = () => {
   }
 
   return (
-    <div className="app-wrapper">
-      <SearchInput onClickHandler = {scrollById}/>
-      <AddTodo />
+    <div className="todos-wrapper">
       <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
       <ul className="todos-list">
         {currentTodos.map((todo: ITodo) => {

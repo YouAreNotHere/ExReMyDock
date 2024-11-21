@@ -99,8 +99,12 @@
 }
 
 .modal-text__input{
-    margin: 15px;
+    height: 25px;
     border-radius: 5px;
+    display: grid;
+    min-width: 150px;
+    max-width: 250px;
+    grid-area: auto;
 }
 
 .modal-additional-text__input{
