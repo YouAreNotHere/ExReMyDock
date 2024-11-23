@@ -1,5 +1,5 @@
 .modal{
-    position: absolute;
+    position: fixed;
     color: white;
     background: cadetblue;
     border-radius: 25px;
@@ -9,19 +9,43 @@
     justify-content: space-between;
     align-items: center;
     min-width: 50%;
-    min-height: 50%;
+    max-height: 45%;
     top: 15%;
     bottom: 15%;
     left: 10%;
     right: 10%;
 }
 
+@media (min-width: 600px) and (max-width: 900px) {
+    .modal{
+        max-width: 40%;
+        left: 25%;
+    }
+}
+
+@media (min-width: 901px) {
+    .modal{
+        max-width: 25%;
+        left: 30%;
+    }
+}
+
 .hidden-modal{
     display: none;
 }
 
+.modal-input-and-textarea__wrapper{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
 .text-with-buttons__wrapper{
     display: flex;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
 }
@@ -77,8 +101,15 @@
 
 .сompleted {
     color: gray;
+    opacity: 0.5;
     text-decoration: line-through;
     display: flex;
+}
+.сompleted:hover {
+    color: gray;
+    text-decoration: line-through;
+    display: flex;
+    color: white;
 }
 
 .complete-button{
@@ -115,15 +146,27 @@
 
 .modal-text,
 .сompleted{
+    color: gainsboro;
     max-width: 60%;
     white-space: normal;
     overflow-wrap: break-word;
+    justify-items: center;
+    justify-content: center;
 }
 
 .modal-text:hover{
-    opacity: 0.5;
+    color: white;
 }
 
 .modal-text:active{
     opacity: 0.2;
+}
+
+.text-modal__wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
 }

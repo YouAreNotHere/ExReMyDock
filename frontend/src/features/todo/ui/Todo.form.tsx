@@ -7,7 +7,7 @@ import {
   changeEditedTodoId,
   deleteTodo,
   completeTodo,
-  todoIdInModal
+  changeTodoIdInModal
 } from '../../../actions';
 import {ITodo, ITodosProps} from '../types/ITodosRequest';
 import { IRootState } from '../types/RootState';
@@ -55,7 +55,7 @@ const TodoForm = ({ todo, isModalOpen, setIsModalOpen}: Props) => {
   };
 
   const onTextClickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
-    dispatch(todoIdInModal(todo.id));
+    dispatch(changeTodoIdInModal(todo.id));
     setIsModalOpen(!isModalOpen);
   }
 
@@ -64,14 +64,17 @@ const TodoForm = ({ todo, isModalOpen, setIsModalOpen}: Props) => {
   }
     todoContent = (
         <li key={todo.id} className= "todo_bar">
-            <p onClick={onTextClickHandler} className={todo.completed ? 'сompleted-text' : 'task-text'}>{todo.text}</p>
+            <p
+                onClick={onTextClickHandler}
+                className={todo.completed ? 'сompleted-text' : 'task-text'}>{todo.text}
+            </p>
           <div className={"buttons-wrapper"}>
             <Button
                 id={"edit-todo-button"}
                 value={""}
                 onClick={() => {
                   dispatch(changeEditedTodoId(todo.id))
-                  dispatch(todoIdInModal(todo.id))
+                  dispatch(changeTodoIdInModal(todo.id))
                   setIsModalOpen(!isModalOpen)
                 }}
                 disabled={false}

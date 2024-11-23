@@ -3,12 +3,13 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /*justify-content: center;*/
   align-items: center;
   background-color: #282c34;
   color: gainsboro;
   padding: 20px 0 0 0;
-  height: 100%;
+  /*height: 100vh;*/
+  min-height: 100vh;
 }
 
 .app-wrapper{
@@ -112,11 +113,24 @@
 .task-text,
 .сompleted-text {
   min-width: 50%;
-  max-width: 80%;
-  padding: 10px;
+  max-width: 70%;
+  padding: 0px;
   white-space: normal; /* Позволяет обычный перенос строк */
   word-wrap: break-word; /* Позволяет длинным словам переноситься */
   overflow-wrap: break-word; /* Современный аналог */
+}
+
+.сompleted-text{
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.сompleted-text:hover{
+  opacity: 1;
+}
+
+.сompleted-text:active{
+  opacity: 0.5;
 }
 
 .task-text:hover{
@@ -136,24 +150,7 @@
 
 .todos-list{
   list-style-type: none;
-}
-
-.add-todo-form{
-  position: absolute;
-  color: white;
-  background: cadetblue;
-  border-radius: 25px;
-  display: flex;
-  z-index: 1;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  min-width: 50%;
-  min-height: 50%;
-  top: 15%;
-  bottom: 15%;
-  left: 10%;
-  right: 10%;
+  padding: 0;
 }
 
 .display-hidden{

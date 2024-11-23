@@ -1,0 +1,7 @@
+.filter-bar{
+    display: flex;
+    justify-content: space-between;
+    min-width: 30%;
+    max-width: 60%;
+    margin-bottom: 15px;
+}

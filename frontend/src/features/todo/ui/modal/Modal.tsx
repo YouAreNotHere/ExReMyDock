@@ -23,6 +23,8 @@ const Modal = ({isModalOpen, setIsModalOpen}: Props) =>{
     const dispatch = useDispatch();
     let currentTodo: ITodo | undefined;
     if (!!todoIdInModal) currentTodo = todos?.find((todo: ITodo) => todo.id === todoIdInModal);
+    console.log(currentTodo?.text);
+    console.log("isModalOpen", isModalOpen);
     const [newTodoText, setNewTodoText] = useState(currentTodo?.text);
     const [newAdditionalText, setNewAdditionalText] = useState(currentTodo?.additionalText);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -84,7 +86,7 @@ const Modal = ({isModalOpen, setIsModalOpen}: Props) =>{
     return (
         <div className={isModalOpen ? "modal" : "hidden-modal"}>
             {editedTodo === todoIdInModal ? (
-                <div key={currentTodo?.id}>
+                <div key={currentTodo?.id} className="modal-input-and-textarea__wrapper">
                     <input
                         ref={inputRef}
                         value={newTodoText}
@@ -96,7 +98,7 @@ const Modal = ({isModalOpen, setIsModalOpen}: Props) =>{
                     <textarea
                         ref = {additionalInputRef}
                         value={newAdditionalText}
-                        onChange={(e) =>    setNewAdditionalText(e.target.value)}
+                        onChange={(e) => setNewAdditionalText(e.target.value)}
                         className = "modal-additional-text__input"
                         />
                     <div>
@@ -111,7 +113,7 @@ const Modal = ({isModalOpen, setIsModalOpen}: Props) =>{
                     </div>
                 </div>
             ) : (
-                <div>
+                <div className="text-modal__wrapper">
                     <div className="text-with-buttons__wrapper">
                         <Button
                             id={"edit-todo-button"}
@@ -135,7 +137,7 @@ const Modal = ({isModalOpen, setIsModalOpen}: Props) =>{
                             disabled={false}
                             className="close-modal-button"/>
                     </div>
-                    <p className={currentTodo?.additionalText ? "" : "transparent"}>
+                    <p className={currentTodo?.additionalText ? "modal-text" : "transparent"}>
                         {currentTodo?.additionalText ? currentTodo?.additionalText : "Здесь можно написать дополнение к задаче..."}
                     </p>
                 </div>

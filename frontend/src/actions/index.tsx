@@ -52,7 +52,7 @@ export const changeEditedTodoId = (editedTodoId: number | null) => ({
   editedTodoId: editedTodoId,
 });
 
-export const todoIdInModal = (todoId: number | null) => ({
+export const changeTodoIdInModal = (todoId: number | null) => ({
   type: "CHANGE_TODO_ID_IN_MODAL",
   todoIdInModal: todoId,
 })

@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
-import { changeCurrentFilter } from '../../../actions';
+import { changeCurrentFilter } from '../../../../actions';
+import "./FilterBar.css"
 
 const FilterBar = () => {
   const dispatch = useDispatch();
@@ -29,11 +30,11 @@ const FilterBar = () => {
   };
 
   return (
-    <>
+    <div className="filter-bar">
       <ShowAllButton />
       <ShowActiveOnlyButton />
       <ShowCompleteOnlyButton />
-    </>
+    </div>
   );
 };
 

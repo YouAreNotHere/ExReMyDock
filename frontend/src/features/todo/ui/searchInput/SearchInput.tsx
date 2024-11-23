@@ -3,30 +3,55 @@ import {useSelector} from "react-redux";
 import {ITodo} from "@/features/todo/types/ITodosRequest";
 import {IRootState} from "@/features/todo/types/RootState";
 import "./SearchInput.css"
+import Button from "../../../../shared/button/Button";
 
-const SearchInput = ({onClickHandler}: any) => {
+const SearchInput = ({getMap, ref}: any) => {
     const [text, setText] = useState('');
+    const [showShortSuggest, setShowShortSuggest] = useState(true);
     let regText : RegExp;
     if (!!text) regText = new RegExp(`^${text}+`,"i");
     const todos: ITodo[] = useSelector((state: IRootState) => state.todos);
     const likelyTodos = todos?.filter((todo: ITodo) => regText?.test(todo.text));
+    const shortSuggestList = likelyTodos?.filter((todo: ITodo, index) => index < 5);
+    const isMoreThenFiveSuggest = likelyTodos?.length >= 6;
+    let currentSuggest = showShortSuggest ? shortSuggestList : likelyTodos;
 
+    const scrollById = (id: number) => {
+        const map = getMap();
+        const node = map.get(id);
+        node.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'center',
+        });
+        const text = node.querySelector("p");
+        text.className = "focused-todo"
+        setTimeout(() => text.className = "task-text", 1500);
+    }
 
     return(
-        <div>
+        <div className="suggest-input-and-list__wrapper">
             <input
-                className="modal-text__input"
+                className="suggest-todo__input"
                 onChange={(e) => setText(e.target.value)}
                 value={text}
                 placeholder="Поиск" />
             <ul className="suggest-todos-list">
-                {likelyTodos?.map((todo: ITodo) => (
-                    <li key={todo.id} className= "suggest-todo" onClick={() => onClickHandler(todo.id)}>
-                        <p className="suggest-todo__text">{todo.text}
+                { currentSuggest?.map((todo: ITodo) => (
+                    <li key={todo.id} className= "suggest-todo" onClick={() => scrollById(todo.id)}>
+                        <p className="suggest-todo__text">
                             {todo.text}
                         </p>
                     </li>
                 ))}
+                {isMoreThenFiveSuggest ? (  <Button
+                    id={"show-more-suggest-todo-button"}
+                    value={showShortSuggest ? "Показать больше" : "Показать меньше"}
+                    onClick={()=> setShowShortSuggest(!showShortSuggest)}
+                    disabled={false}
+                    className="show-more-suggest-todo__button"
+                />):
+                null}
             </ul>
         </div>
     )
