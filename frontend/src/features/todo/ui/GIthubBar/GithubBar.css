@@ -1,0 +1,21 @@
+.github-bar{
+    display: flex;
+    align-items: center;
+}
+
+.github-userName{
+    color: white;
+}
+
+.github__img{
+    margin-left: 15px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+}
+
+@media (max-width: 700px) {
+    .github-bar{
+        display: none;
+    }
+}

@@ -4,8 +4,17 @@ import todos from './todos';
 import todoFilters from './todoFilters';
 import editedTodoId from './editedTodo';
 import todoIdInModal from "./todoInModal";
+import currentUsername from "./currentUsername";
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-const todoApp = combineReducers({ editedTodoId, todos, todoFilters, todoIdInModal});
-const store = configureStore({ reducer: todoApp });
+const persistConfig = {
+    key: 'root',
+    storage,
+};
 
-export default store;
+const todoApp: any = combineReducers({ editedTodoId, todos, todoFilters, todoIdInModal, currentUsername});
+const persistedReducer = persistReducer(persistConfig, todoApp);
+export const store = configureStore({ reducer: persistedReducer});
+
+export const persistor = persistStore(store);

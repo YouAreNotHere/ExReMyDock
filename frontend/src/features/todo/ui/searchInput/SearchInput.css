@@ -45,7 +45,7 @@
     width: 100%;
 }
 
-@media (min-width: 370px) and (max-width: 500px) {
+@media  (max-width: 500px) {
     .suggest-todo__input {
         width: 100px;
     }
@@ -56,14 +56,16 @@
     }
 }
 
-@media (min-width: 750px) and (max-width: 900px) {
+@media (min-width: 750px) and (max-width: 999px) {
     .suggest-todo__input {
         width: 300px;
     }
 }
 
-@media (min-width: 901px) {
+@media (min-width: 1000px) {
     .suggest-todo__input {
         width: 500px;
+        margin-left: 15px;
+        margin-right: 15px;
     }
 }

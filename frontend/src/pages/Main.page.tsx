@@ -9,6 +9,7 @@ import AddTodo from "../features/todo/ui/AddTodoForm/AddTodo.form";
 import TodosForm from "../features/todo/ui/Todos.form";
 import Button from "../shared/button/Button";
 import {ITodo} from "../features/todo/types/ITodosRequest";
+import GithabBar from "../features/todo/ui/GIthubBar/GithabBar";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ const MainPage = () => {
               onClick={() => setIsOpenAddModal(!isOpenAddModal)}
               disabled={false}/>
           <SearchInput ref = {itemsRef} getMap = {() => getMap()}/>
+          <GithabBar/>
           <button onClick={logoutRequest} className="logout-button">
             {isLoading ? 'Загрузка...' : 'Выйти'}
           </button>

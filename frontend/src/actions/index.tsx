@@ -1,11 +1,9 @@
 import { ITodo } from '../features/todo/types/ITodosRequest';
 
-export const changeId = (userId: number) => {
-  return {
-    type: 'CHANGE_USER_ID',
-    userId: userId,
-  };
-};
+export const changeCurrentUsername = (username: string) => ({
+    type: 'CHANGE_CURRENT_USERNAME',
+    username,
+});
 
 export const VisibilityFilters = {
   SHOW_ALL: 'SHOW_ALL',

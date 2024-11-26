@@ -13,8 +13,11 @@ interface Props{
 
 const AddTodo = ({isOpenAddModal, setIsOpenAddModal}: Props) => {
   const dispatch = useDispatch();
-  const ref = useRef(null);
+  const ref: any = useRef(null);
   const [text, setText] = useState('');
+  useEffect(() => {
+    if (!!ref.current) ref.current.focus();
+  }, [isOpenAddModal]);
 
   const { makeRequest: addTodo } = useRequest({
     method: 'POST',

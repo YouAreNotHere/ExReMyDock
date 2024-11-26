@@ -23,8 +23,6 @@ const Modal = ({isModalOpen, setIsModalOpen}: Props) =>{
     const dispatch = useDispatch();
     let currentTodo: ITodo | undefined;
     if (!!todoIdInModal) currentTodo = todos?.find((todo: ITodo) => todo.id === todoIdInModal);
-    console.log(currentTodo?.text);
-    console.log("isModalOpen", isModalOpen);
     const [newTodoText, setNewTodoText] = useState(currentTodo?.text);
     const [newAdditionalText, setNewAdditionalText] = useState(currentTodo?.additionalText);
     const inputRef = useRef<HTMLInputElement>(null);

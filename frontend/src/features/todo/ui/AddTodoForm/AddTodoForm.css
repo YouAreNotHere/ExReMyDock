@@ -16,6 +16,13 @@
     right: 10%;
 }
 
+@media (min-width: 600px) {
+    .add-todo-form{
+        max-width: 40%;
+        left: 25%;
+    }
+}
+
 .close-add-modal-button {
     margin: 10px;
     align-self: start;

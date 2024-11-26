@@ -5,19 +5,22 @@ import TodosPage from '../../pages/todo/Todos.page';
 import MainPage from "../../pages/Main.page";
 import NotFoundPage from '../../pages/not-found.page';
 import { Provider } from 'react-redux';
-import store from '../../reducers';
+import {store, persistor} from '../../reducers';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const Navigation = () => {
   return (
     <Provider store={store}>
-      <Router>
-        <Routes>
-          <Route path='/' element={<MainPage />} />
-          <Route path='/auth' element={<AuthPage />} />
-          <Route path='/registration' element={<RegistrationPage />} />
-          <Route path='*' element={<NotFoundPage />} />
-        </Routes>
-      </Router>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <Routes>
+            <Route path='/' element={<MainPage />} />
+            <Route path='/auth' element={<AuthPage />} />
+            <Route path='/registration' element={<RegistrationPage />} />
+            <Route path='*' element={<NotFoundPage />} />
+          </Routes>
+        </Router>
+      </PersistGate>
     </Provider>
   );
 };

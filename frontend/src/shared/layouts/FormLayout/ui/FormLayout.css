@@ -12,6 +12,12 @@
   border-radius: 28px;
 }
 
+@media (max-width: 500px) {
+  .form-layout{
+    width: 80%;
+  }
+}
+
 .row {
   width: 250px;
   display: flex;

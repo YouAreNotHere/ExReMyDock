@@ -2,13 +2,15 @@ import React, { useState, useRef } from 'react';
 import '../../../app/App.css';
 import { useNavigate } from 'react-router-dom';
 import { authRequest } from '../../auth/api/auth.request';
-import { useDispatch } from 'react-redux';
-import { changeId } from '../../../actions';
+import {useDispatch, useSelector} from 'react-redux';
+import { changeCurrentUsername } from '../../../actions';
 import { useArrowNavigation } from '../../../shared/hooks/useArrowNavigation';
 import Button from '../../../shared/button/Button';
+import {IRootState} from "../../todo/types/RootState";
 
 const AuthForm = () => {
-  const [name, setName] = useState('');
+  const username: string | undefined = useSelector((state: IRootState) => state.currentUsername);
+  const [name, setName] = useState(username);
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,22 +32,22 @@ const AuthForm = () => {
     e.preventDefault();
     try {
       const url = 'http://localhost:8081/auth/signin';
-      const response = await authRequest({ name, password }, url);
-
-      if (!response.ok) {
-        const error = await response.json();
-        setErrorMessage(error.message);
-      } else {
-        const user = await response.json();
-        if (user === false) {
-          console.log('Некорректный пароль');
-          return;
+      if (!name || !password) return;
+        const response = await authRequest({ name, password }, url);
+        if (!response.ok) {
+          const error = await response.json();
+          setErrorMessage(error.message);
+        } else {
+          const user = await response.json();
+          if (user === false) {
+            console.log('Некорректный пароль');
+            return;
+          }
+          console.log('Авторизация успешна');
+          dispatch(changeCurrentUsername(name));
+          console.log("current username" + name)
+          navigate('/');
         }
-        console.log('Авторизация успешна');
-        dispatch(changeId(user.id));
-
-        navigate('/');
-      }
     } catch (error) {
       setErrorMessage(JSON.stringify(error));
     }

@@ -6,6 +6,7 @@ interface IRootState {
   editedTodoId: number | null;
   todoFilters: string;
   todoIdInModal: number | null;
+  currentUsername: string | undefined;
 }
 
 export type { IRootState };

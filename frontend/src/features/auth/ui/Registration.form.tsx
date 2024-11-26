@@ -58,7 +58,7 @@ const RegistrationForm = () => {
       <form>
         <div className='row'>
           <label htmlFor='name' className='label'>
-            name
+            Имя
           </label>
           <input
             name='name'
@@ -70,10 +70,11 @@ const RegistrationForm = () => {
             autoComplete='off'
             id={'name-input'}
             ref={nameInputRef}
+            placeholder={"Username с github"}
           />
         </div>
         <div className='row'>
-          <label className='label'>password</label>
+          <label className='label'>Пароль</label>
           <input
             name='password'
             value={password}
@@ -84,6 +85,7 @@ const RegistrationForm = () => {
             className='input'
             id={'password-input'}
             ref={passwordInputRef}
+            placeholder={"******"}
           />
         </div>
         <div className='centerStyle'>
