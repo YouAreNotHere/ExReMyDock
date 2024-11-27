@@ -1,0 +1,14 @@
+{
+  "name": "ExReMyDock",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node server/index.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": "20.17.0"
+  }
+}

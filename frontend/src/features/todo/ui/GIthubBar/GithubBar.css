@@ -1,6 +1,12 @@
 .github-bar{
     display: flex;
     align-items: center;
+    position: relative;
+    width: 170px;
+}
+
+.github-pic-with-username:hover{
+    opacity: 0.5;
 }
 
 .github-userName{
@@ -15,7 +21,55 @@
 }
 
 @media (max-width: 700px) {
+    .github__img{
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
     .github-bar{
         display: none;
     }
+}
+
+.display-none{
+    display: none;
+}
+
+.github-pic-with-username{
+    display: flex;
+    align-items: center;
+}
+
+.repos-list{
+    list-style-type: none;
+    position: absolute;
+    background-color: aliceblue;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 15px 15px 15px;
+    margin: 0;
+    top: -17px;
+    left: 0px;
+}
+
+.repos-list-header {
+    border-bottom: 1px solid black;
+    font-size: 18px;
+}
+
+@media (max-width: 770px) {
+    .repos-list{
+        display: none;
+    }
+    .github-bar{
+        width: auto;
+    }
+}
+
+.repos-list-header:hover{
+    opacity: 0.5;
 }

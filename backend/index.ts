@@ -5,10 +5,16 @@ import db from './src/database/db';
 import { initRouting } from './src/routes';
 import { initMiddlewares } from './src/middlewares';
 import { sessionMiddleware } from './src/middlewares/session.middleware';
+import path from "node:path";
 
 const app = express();
 
-const PORT = 8081;
+const PORT = process.env.PORT || 5000;
+
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+});
 
 initMiddlewares(app);
 initRouting(app);
