@@ -8,13 +8,22 @@ import { sessionMiddleware } from './src/middlewares/session.middleware';
 import path from "node:path";
 
 const app = express();
+let PORT: any;
+if (process.env.NODE_ENV === "production") {
+  PORT = process.env.PORT || 3000;
 
-const PORT = process.env.PORT || 5000;
+  app.use(express.static(path.join(__dirname, '../frontend/build')));
+  app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+  });
+}else{
+  PORT = 3001;
+  console.log("⚠️ Not seeing your changes as you develop?");
+  console.log(
+      "⚠️ Do you need to set 'start': 'npm run development' in package.json?"
+  );
+}
 
-app.use(express.static(path.join(__dirname, '../frontend/build')));
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
-});
 
 initMiddlewares(app);
 initRouting(app);
