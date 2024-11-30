@@ -5,10 +5,10 @@ class db {
 
   constructor() {
     this.pool = createPool({
-      host: 'localhost',
-      user: 'YouAreNotHere',
-      password: 'A40698546d',
-      database: 'test_database',
+      host: 'sql207.infinityfree.com', 
+      user: 'if0_37807995',            
+      password: 'KS1FcrmGHt0',          
+      database: 'if0_37807995_XXX',  
       waitForConnections: true,
       connectionLimit: 10,
       queueLimit: 0,
