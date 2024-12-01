@@ -8,7 +8,7 @@ class db {
       host: 'sql7.freemysqlhosting.net', 
       user: 'sql7748877',            
       password: 'JhTdsabbh5',          
-      database: '	sql7748877',  
+      database: 'sql7748877',  
       waitForConnections: true,
       connectionLimit: 10,
       queueLimit: 0,
