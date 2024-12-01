@@ -14,7 +14,9 @@ class TodosService {
     newTodo: { userId: number; text: string; completed: boolean },
     userId: number,
   ) {
-    const query = `INSERT INTO todos (user_id, text, completed, additionalText) VALUES ("${userId}", "${newTodo.text}", ${newTodo.completed}, "");`;
+    console.log("session user id", userId);
+    console.log("todo in service", newTodo, newTodo.text);
+    const query = `INSERT INTO todos (user_id, text, additionalText, completed) VALUES ("${userId}", "${newTodo.text}", "", ${newTodo.completed});`;
     try {
       return await db.query(query);
     } catch (error) {

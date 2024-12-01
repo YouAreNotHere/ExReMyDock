@@ -18,6 +18,7 @@ class TodosController {
 
   public async addTodo(req: Request, res: Response) {
     const userId: number = req.session.user?.id as number;
+    console.log("Request в controller", req.body)
     const result = await TodosService.addTodo(req.body, userId);
     if (result === 'error') {
       res
