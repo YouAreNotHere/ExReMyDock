@@ -66,7 +66,7 @@ const TodoForm = ({ todo, isModalOpen, setIsModalOpen}: Props) => {
         <li key={todo.id} className= "todo_bar">
             <p
                 onClick={onTextClickHandler}
-                className={todo.completed || todo.completed === "0" ? 'сompleted-text' : 'task-text'}>{todo.text}
+                className={todo.completed || todo.completed !== "0" ? 'task-text' : 'сompleted-text'}>{todo.text}
             </p>
           <div className={"buttons-wrapper"}>
             <Button
