@@ -48,8 +48,8 @@ const MainPage = () => {
               className={"open-addTodo-modal__button"}
               onClick={() => setIsOpenAddModal(!isOpenAddModal)}
               disabled={false}/>
-          <SearchInput ref = {itemsRef} getMap = {() => getMap()}/>
-          <GithabBar/>
+          {/* <SearchInput ref = {itemsRef} getMap = {() => getMap()}/>
+          <GithabBar/> */}
           <button onClick={logoutRequest} className="logout-button">
             {isLoading ? 'Загрузка...' : 'Выйти'}
           </button>

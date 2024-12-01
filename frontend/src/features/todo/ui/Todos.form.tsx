@@ -46,6 +46,8 @@ const TodosForm = forwardRef(function TodosForm(props: any, ref){
   }, []);
 
   if (todos) {
+    console.log(todos)
+    debugger;
     const activeTodos: ITodo[] = todos.filter(
         (todo: ITodo) => todo.completed === false,
     );
