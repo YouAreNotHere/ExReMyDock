@@ -23,7 +23,7 @@ const useRequest = (props: IUseRequestProps) => {
     try {
       let response;
       if (method === 'POST') {
-        response = await fetch(`https://exremydock-1.onrender.com/${url}`, {
+        response = await fetch(`https://exremydock-1.onrender.com${url}`, {
           method,
           body: JSON.stringify(body),
           credentials: 'include',
