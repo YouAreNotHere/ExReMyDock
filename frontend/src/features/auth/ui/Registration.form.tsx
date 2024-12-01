@@ -39,7 +39,7 @@ const RegistrationForm = () => {
     e.preventDefault();
 
     try {
-      const url = 'http://localhost:8081/auth/signup';
+      const url = 'https://exremydock-1.onrender.com/auth/signup';
       const response = await authRequest({ name, password }, url);
 
       if (!response.ok) {
