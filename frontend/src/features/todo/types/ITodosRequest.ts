@@ -25,7 +25,7 @@ interface ITodo {
   id: number;
   user_id: number;
   text: string;
-  completed: boolean | number;
+  completed: boolean | number | string;
   additionalText?: string | undefined;
 }
 

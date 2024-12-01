@@ -22,7 +22,7 @@ const TodosForm = forwardRef(function TodosForm(props: any, ref){
   const setTodosToState = (todos: ITodo[]) => {
     const newTodos: ITodo[] = todos.map(
         (todo: ITodo): ITodo =>
-            todo.completed === 0
+            todo.completed === "0"
                 ? { ...todo, completed: false }
                 : { ...todo, completed: true },
     );
