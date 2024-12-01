@@ -43,7 +43,6 @@ const TodosForm = forwardRef(function TodosForm(props: any, ref){
 
   useEffect(() => {
     getTodos();
-    console.log("get todos вызвался из useeffect", todos)
   }, []);
 
   if (todos) {

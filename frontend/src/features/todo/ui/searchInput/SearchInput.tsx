@@ -11,11 +11,17 @@ const SearchInput = ({getMap, ref}: any) => {
     let regText : RegExp;
     if (!!text) regText = new RegExp(`^${text}+`,"i");
     const todos: ITodo[] = useSelector((state: IRootState) => state.todos);
-    if (!todos) return (<div></div>);
-    const likelyTodos = todos?.filter((todo: ITodo) => regText?.test(todo.text));
-    const shortSuggestList = likelyTodos?.filter((todo: ITodo, index) => index < 5);
-    const isMoreThenFiveSuggest = likelyTodos?.length >= 6;
-    let currentSuggest = showShortSuggest ? shortSuggestList : likelyTodos;
+    let isMoreThenFiveSuggest: boolean;
+    let currentSuggest: ITodo[];
+    if (Array.isArray(todos)){
+        const likelyTodos: ITodo[] = todos?.filter((todo: ITodo) => regText?.test(todo.text));
+        const shortSuggestList: ITodo[] = likelyTodos?.filter((todo: ITodo, index) => index < 5);
+        isMoreThenFiveSuggest = likelyTodos?.length >= 6;
+        currentSuggest = showShortSuggest ? shortSuggestList : likelyTodos;
+    }else {
+        isMoreThenFiveSuggest = false;
+        currentSuggest = [];
+    }
 
     const scrollById = (id: number) => {
         const map = getMap();
