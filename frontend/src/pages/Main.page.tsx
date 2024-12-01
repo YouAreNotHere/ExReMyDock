@@ -10,6 +10,8 @@ import TodosForm from "../features/todo/ui/Todos.form";
 import Button from "../shared/button/Button";
 import {ITodo} from "../features/todo/types/ITodosRequest";
 import GithabBar from "../features/todo/ui/GIthubBar/GithabBar";
+import { useSelector } from 'react-redux';
+import { IRootState } from '../features/todo/types/RootState';
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -19,6 +21,7 @@ const MainPage = () => {
   const [isOpenAddModal, setIsOpenAddModal] = React.useState(false);
   const [isTodoModalOpen, setIsTodoModalOpen] = useState(false);
   const itemsRef: any = useRef<ITodo[]>(null);
+  const todos = useSelector((state: IRootState) => state.todos)
 
   const {
     isLoading,
@@ -56,7 +59,7 @@ const MainPage = () => {
           {errorMessage && <p>{errorMessage}</p>}
         </div>
       <TodosForm ref = {itemsRef} getMap = {() => getMap()}/>
-        <FilterBar />
+        {Array.isArray(todos) ? <FilterBar /> : null}
         <AddTodo isOpenAddModal = {isOpenAddModal} setIsOpenAddModal = {setIsOpenAddModal} />
       </div>
   )

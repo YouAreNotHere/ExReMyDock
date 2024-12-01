@@ -15,13 +15,14 @@ const AddTodo = ({isOpenAddModal, setIsOpenAddModal}: Props) => {
   const dispatch = useDispatch();
   const ref: any = useRef(null);
   const [text, setText] = useState('');
+  const [additionalText, setAdditionalText] = useState('');
   useEffect(() => {
     if (!!ref.current) ref.current.focus();
   }, [isOpenAddModal]);
 
   const { makeRequest: addTodo } = useRequest({
     method: 'POST',
-    body: { text, completed: false },
+    body: { text, additionalText, completed: false },
     url: '/todos/addTodo',
   });
 
@@ -54,8 +55,10 @@ const AddTodo = ({isOpenAddModal, setIsOpenAddModal}: Props) => {
           disabled={false}
           className="close-add-modal-button"/>
       <textarea
+          value={additionalText}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setAdditionalText(e.target.value)}
           className="additional-text__input"
-          placeholder={"Описание задания"}/>
+          placeholder={"Описание задания"} />
       <button onClick={onClickHandler}>Добавить задание</button>
     </div>
   );
