@@ -23,7 +23,7 @@ const useRequest = (props: IUseRequestProps) => {
     try {
       let response;
       if (method === 'POST') {
-        response = await fetch(`http://localhost:8081${url}`, {
+        response = await fetch(`https://exremydock-1.onrender.com/${url}`, {
           method,
           body: JSON.stringify(body),
           credentials: 'include',
@@ -32,7 +32,7 @@ const useRequest = (props: IUseRequestProps) => {
           },
         });
       } else {
-        response = await fetch(`http://localhost:8081${url}`, {
+        response = await fetch(`https://exremydock-1.onrender.com${url}`, {
           method,
           ...params,
           credentials: 'include',
