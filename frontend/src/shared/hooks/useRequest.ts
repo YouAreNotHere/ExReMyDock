@@ -31,6 +31,7 @@ const useRequest = (props: IUseRequestProps) => {
             'Content-Type': 'application/json',
           },
         });
+        console.log("post запрос отправлен")
       } else {
         response = await fetch(`https://exremydock-1.onrender.com${url}`, {
           method,
@@ -40,17 +41,21 @@ const useRequest = (props: IUseRequestProps) => {
             'Content-Type': 'application/json',
           },
         });
+        console.log("get запрос отправлен")
       }
 
       if (response.ok) {
         const data = await response.json();
         setData(data);
         setErrorMessage(null);
+        console.log("ответ получен", response)
         if (onSuccess) {
           onSuccess(data);
+          console.log("вызывается onSuccess")
         }
       } else {
         const error = await response.json();
+        console.log("Response в useRequest не ок")
 
         if (response.status === 401) {
           navigate('/auth');
@@ -61,6 +66,7 @@ const useRequest = (props: IUseRequestProps) => {
     } catch (e) {
       setErrorMessage(JSON.stringify(e));
       setData(null);
+      console.log("Catch в useRequest")
     } finally {
       setIsLoading(false);
     }
