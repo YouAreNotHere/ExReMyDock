@@ -1,20 +1,24 @@
 import { createPool, Pool } from 'mysql2/promise';
+require('dotenv').config();
 
 class db {
   private pool: Pool;
+  isProduction = process.env.NODE_ENV === 'production';
 
   constructor() {
     this.pool = createPool({
-      host: 'sql7.freemysqlhosting.net', 
-      user: 'sql7749064',
-      password: 'Z54f46IuQy',
-      database: 'sql7749064',
+      host: this.isProduction ? process.env.DB_HOST : process.env.DB_HOST_DEV,
+      user: this.isProduction ? process.env.DB_USER : process.env.DB_USER_DEV,
+      password: this.isProduction ? process.env.DB_PASSWORD : process.env.DB_PASSWORD_DEV,
+      database: this.isProduction ? process.env.DB_DATABASE : process.env.DB_DATABASE_DEV,
       charset: 'utf8mb4',
       waitForConnections: true,
       connectionLimit: 10,
       queueLimit: 0,
     });
     console.log('MySQL pool was created...');
+    console.log(this.isProduction);
+    console.log(process.env.DB_HOST, process.env.DB_HOST_DEV);
   }
 
   public async query(sql: string) {

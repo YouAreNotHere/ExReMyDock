@@ -31,9 +31,16 @@ const AuthForm = () => {
   const onLoginClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      const url = 'https://exremydock-1.onrender.com/auth/signin';
+      let url;
+
+      if (process.env.NODE_ENV === 'production') {
+        url = process.env.REACT_APP_API_URL_PROD;
+      } else {
+        url = process.env.REACT_APP_API_URL_DEV;
+      }
+
       if (!name || !password) return;
-        const response = await authRequest({ name, password }, url);
+        const response = await authRequest({ name, password }, `${url}/auth/signin`);
         if (!response.ok) {
           const error = await response.json();
           setErrorMessage(error.message);
