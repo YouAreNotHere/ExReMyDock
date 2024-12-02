@@ -39,8 +39,15 @@ const RegistrationForm = () => {
     e.preventDefault();
 
     try {
-      const url = 'https://exremydock-1.onrender.com/auth/signup';
-      const response = await authRequest({ name, password }, url);
+      let url;
+
+      if (process.env.NODE_ENV === 'production') {
+        url = process.env.REACT_APP_API_URL_PROD;
+      } else {
+        url = process.env.REACT_APP_API_URL_DEV;
+      }
+
+      const response = await authRequest({ name, password }, `${url}/auth/signup`);
 
       if (!response.ok) {
         const error = await response.json();

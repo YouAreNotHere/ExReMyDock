@@ -6,6 +6,7 @@ import { initRouting } from './src/routes';
 import { initMiddlewares } from './src/middlewares';
 import { sessionMiddleware } from './src/middlewares/session.middleware';
 import path from "node:path";
+require('dotenv').config();
 
 const app = express();
 // let PORT: any;

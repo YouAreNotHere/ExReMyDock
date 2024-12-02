@@ -20,10 +20,20 @@ const useRequest = (props: IUseRequestProps) => {
 
   const makeRequest = async () => {
     setIsLoading(true);
+    let urlAdress;
+
+    if (process.env.NODE_ENV === 'production') {
+      urlAdress = process.env.REACT_APP_API_URL_PROD;
+    } else {
+      urlAdress = "process.env.REACT_APP_API_URL_DEV;"
+    }
+
+    console.log("urlAdress",urlAdress);
+
     try {
       let response;
       if (method === 'POST') {
-        response = await fetch(`https://exremydock-1.onrender.com${url}`, {
+        response = await fetch(`${urlAdress}${url}`, {
           method,
           body: JSON.stringify(body),
           credentials: 'include',
@@ -33,7 +43,7 @@ const useRequest = (props: IUseRequestProps) => {
         });
         console.log("post запрос отправлен")
       } else {
-        response = await fetch(`https://exremydock-1.onrender.com${url}`, {
+        response = await fetch(`${urlAdress}${url}`, {
           method,
           ...params,
           credentials: 'include',
