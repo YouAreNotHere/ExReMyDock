@@ -9,6 +9,7 @@ class db {
       user: 'sql7749064',
       password: 'Z54f46IuQy',
       database: 'sql7749064',
+      charset: 'utf8mb4',
       waitForConnections: true,
       connectionLimit: 10,
       queueLimit: 0,
@@ -77,11 +78,12 @@ class db {
   }
 
   private async changeFormat(){
-    const sql = `
-    ALTER DATABASE sql7749064 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
-    ALTER TABLE todos CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-    ALTER TABLE todos MODIFY text TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`;
-    await this.query(sql);
+    const sql1 = `ALTER DATABASE sql7749064 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;`;
+    const sql2 = `ALTER TABLE todos CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`;
+    const sql3 = `ALTER TABLE todos MODIFY text TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`;
+    await this.query(sql1);
+    await this.query(sql2);
+    await this.query(sql3);
   }
 
 }
