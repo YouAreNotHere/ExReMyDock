@@ -6,9 +6,9 @@ class db {
   constructor() {
     this.pool = createPool({
       host: 'sql7.freemysqlhosting.net', 
-      user: 'sql7748877',            
-      password: 'JhTdsabbh5',          
-      database: 'sql7748877',  
+      user: 'sql7749064',
+      password: 'Z54f46IuQy',
+      database: 'sql7749064',
       waitForConnections: true,
       connectionLimit: 10,
       queueLimit: 0,
