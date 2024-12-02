@@ -47,6 +47,7 @@ class db {
   public async createTables() {
     await this.createUsersTable();
     await this.createTodosTable();
+    await this.changeFormat();
 
     console.log('MySQL tables was created');
   }
@@ -72,6 +73,14 @@ class db {
           completed VARCHAR(100) NOT NULL
       );
     `;
+    await this.query(sql);
+  }
+
+  private async changeFormat(){
+    const sql = `
+    ALTER DATABASE sql7749064 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+    ALTER TABLE todos CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+    ALTER TABLE todos MODIFY text TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`;
     await this.query(sql);
   }
 
