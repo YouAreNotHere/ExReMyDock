@@ -25,7 +25,7 @@ const useRequest = (props: IUseRequestProps) => {
     if (process.env.NODE_ENV === 'production') {
       urlAdress = process.env.REACT_APP_API_URL_PROD;
     } else {
-      urlAdress = "process.env.REACT_APP_API_URL_DEV;"
+      urlAdress = process.env.REACT_APP_API_URL_DEV;
     }
 
     console.log("urlAdress",urlAdress);

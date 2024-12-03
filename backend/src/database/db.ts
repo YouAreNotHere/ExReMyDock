@@ -11,7 +11,7 @@ class db {
       user: this.isProduction ? process.env.DB_USER : process.env.DB_USER_DEV,
       password: this.isProduction ? process.env.DB_PASSWORD : process.env.DB_PASSWORD_DEV,
       database: this.isProduction ? process.env.DB_DATABASE : process.env.DB_DATABASE_DEV,
-      charset: 'utf8mb4',
+      // charset: 'utf8mb4',
       waitForConnections: true,
       connectionLimit: 10,
       queueLimit: 0,
@@ -52,7 +52,6 @@ class db {
   public async createTables() {
     await this.createUsersTable();
     await this.createTodosTable();
-    await this.changeFormat();
 
     console.log('MySQL tables was created');
   }
@@ -79,15 +78,6 @@ class db {
       );
     `;
     await this.query(sql);
-  }
-
-  private async changeFormat(){
-    const sql1 = `ALTER DATABASE sql7749064 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;`;
-    const sql2 = `ALTER TABLE todos CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`;
-    const sql3 = `ALTER TABLE todos MODIFY text TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`;
-    await this.query(sql1);
-    await this.query(sql2);
-    await this.query(sql3);
   }
 
 }

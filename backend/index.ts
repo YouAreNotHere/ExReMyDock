@@ -9,27 +9,27 @@ import path from "node:path";
 require('dotenv').config();
 
 const app = express();
-// let PORT: any;
-// if (process.env.NODE_ENV === "production") {
-//   PORT = process.env.PORT || 3000;
+let PORT: any;
+if (process.env.NODE_ENV === "production") {
+  PORT = process.env.PORT || 3000;
 
-//   app.use(express.static(path.join(__dirname, '../frontend/build')));
-//   app.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
-//   });
-// }else{
-//   PORT = 3001;
-//   console.log("⚠️ Not seeing your changes as you develop?");
-//   console.log(
-//       "⚠️ Do you need to set 'start': 'npm run development' in package.json?"
-//   );
-// }
-
-const PORT = 8081;
-app.use(express.static(path.join(__dirname, '../frontend/build')));
+  app.use(express.static(path.join(__dirname, '../frontend/build')));
   app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
   });
+}else{
+  PORT = 8081;
+  console.log("⚠️ Not seeing your changes as you develop?");
+  console.log(
+      "⚠️ Do you need to set 'start': 'npm run development' in package.json?"
+  );
+}
+
+// const PORT = 8081;
+// app.use(express.static(path.join(__dirname, '../frontend/build')));
+//   app.get('/', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+//   });
 
 initMiddlewares(app);
 initRouting(app);
