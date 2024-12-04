@@ -18,7 +18,7 @@ const Spinner = ({isLoading}: {isLoading: boolean}) =>{
         strokeWidth="4"
         fill="none"
         strokeLinecap="round"
-        className={isLoading ? "spin" : "spin"}
+        className={isLoading ? "spin" : "spin-hidden"}
         style={{ animation: 'spin 1s linear infinite' }}
       />
     </svg>

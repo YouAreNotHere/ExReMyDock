@@ -65,7 +65,7 @@ const AddTodo = ({isOpenAddModal, setIsOpenAddModal}: Props) => {
         value={"Добавить задание"}
         onClick={onClickHandler}
         disabled={isGetTodosLoading || isAddTodoLoading}/>
-      <Spinner isLoading={isGetTodosLoading}/>
+      <Spinner isLoading={isGetTodosLoading || isAddTodoLoading}/>
     </div>
   );
 };
