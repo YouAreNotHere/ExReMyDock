@@ -20,13 +20,13 @@ const AddTodo = ({isOpenAddModal, setIsOpenAddModal}: Props) => {
     if (!!ref.current) ref.current.focus();
   }, [isOpenAddModal]);
 
-  const { makeRequest: addTodo } = useRequest({
+  const { makeRequest: addTodo, isLoading : isAddTodoLoading  } = useRequest({
     method: 'POST',
     body: { text, additionalText, completed: false },
     url: '/todos/addTodo',
   });
 
-  const { data: todos, makeRequest: getTodos } = useRequest({
+  const { data: todos, makeRequest: getTodos, isLoading: isGetTodosLoading  } = useRequest({
     method: 'GET',
     url: '/todos/getTodos',
   });
@@ -52,7 +52,7 @@ const AddTodo = ({isOpenAddModal, setIsOpenAddModal}: Props) => {
           id={"close-modal-button"}
           value={""}
           onClick={()=> setIsOpenAddModal(!isOpenAddModal)}
-          disabled={false}
+          disabled={isGetTodosLoading || isAddTodoLoading}
           className="close-add-modal-button"/>
       <textarea
           value={additionalText}

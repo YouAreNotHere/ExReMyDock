@@ -11,7 +11,7 @@ class db {
       user: this.isProduction ? process.env.DB_USER : process.env.DB_USER_DEV,
       password: this.isProduction ? process.env.DB_PASSWORD : process.env.DB_PASSWORD_DEV,
       database: this.isProduction ? process.env.DB_DATABASE : process.env.DB_DATABASE_DEV,
-      // charset: 'utf8mb4',
+      charset: 'utf8mb4',
       waitForConnections: true,
       connectionLimit: 10,
       queueLimit: 0,
