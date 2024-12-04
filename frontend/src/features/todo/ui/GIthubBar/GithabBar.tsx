@@ -19,7 +19,6 @@ const GithubBar = () => {
         xhr.onload = () => {
             return new Promise(resolve => {
                 const data = JSON.parse(xhr.response);
-                console.log(data);
                 img.src = data.avatar_url;
                 img.className = "github__img";
                 setUserPic(img);

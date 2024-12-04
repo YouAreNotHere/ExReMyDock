@@ -1,6 +1,7 @@
 import "./Spinner.css"
 
 const Spinner = ({isLoading}: {isLoading: boolean}) =>{
+  console.log(isLoading);
   return (
     <svg
       width="40"
@@ -17,7 +18,7 @@ const Spinner = ({isLoading}: {isLoading: boolean}) =>{
         strokeWidth="4"
         fill="none"
         strokeLinecap="round"
-        className={isLoading ? "spin" : "spin-hidden"}
+        className={isLoading ? "spin" : "spin"}
         style={{ animation: 'spin 1s linear infinite' }}
       />
     </svg>

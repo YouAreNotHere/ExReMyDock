@@ -26,7 +26,6 @@ const TodosForm = forwardRef(function TodosForm(props: any, ref){
                 ? { ...todo, completed: false }
                 : { ...todo, completed: true },
     );
-    console.log(newTodos);
 
     const newTodosMoreTodos: boolean =
         JSON.stringify(todos).length < JSON.stringify(newTodos).length;
