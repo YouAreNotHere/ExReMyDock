@@ -5,6 +5,7 @@ import { loadTodos } from '../../../../actions';
 import '../../../../app/App.css'
 import "./AddTodoForm.css"
 import Button from '../../../../shared/button/Button';
+import Spinner from '../../../../shared/effects/spinner/Spinner';
 
 interface Props{
   isOpenAddModal: boolean,
@@ -59,7 +60,12 @@ const AddTodo = ({isOpenAddModal, setIsOpenAddModal}: Props) => {
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setAdditionalText(e.target.value)}
           className="additional-text__input"
           placeholder={"Описание задания"} />
-      <button onClick={onClickHandler}>Добавить задание</button>
+      <Button
+        id={"add-todo-button"}
+        value={"Добавить задание"}
+        onClick={onClickHandler}
+        disabled={isGetTodosLoading || isAddTodoLoading}/>
+      <Spinner isLoading={isGetTodosLoading}/>
     </div>
   );
 };

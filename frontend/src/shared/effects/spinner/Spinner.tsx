@@ -1,10 +1,28 @@
 import "./Spinner.css"
 
-const spinner = () =>{
+const Spinner = ({isLoading}: {isLoading: boolean}) =>{
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" className = "spin">
-    <circle cx="50" cy="50" r="40" stroke="blue" stroke-width="8" fill="none"/>
+    <svg
+      width="40"
+      height="40"
+      viewBox="0 0 40 40"
+      xmlns="http://www.w3.org/2000/svg"
+      className="spinner"
+    >
+      <circle
+        cx="20"
+        cy="20"
+        r="18"
+        stroke="grey"
+        strokeWidth="4"
+        fill="none"
+        strokeLinecap="round"
+        className={isLoading ? "spin" : "spin-hidden"}
+        style={{ animation: 'spin 1s linear infinite' }}
+      />
     </svg>
-    )
+  )
 }
+
+export default Spinner;
 
