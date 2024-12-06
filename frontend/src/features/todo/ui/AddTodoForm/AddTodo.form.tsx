@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useRequest } from '../../../../shared/hooks/useRequest';
 import { useDispatch } from 'react-redux';
 import { loadTodos } from '../../../../actions';
-import '../../../../app/App.css'
+import '../../../../app/App.scss'
 import "./AddTodoForm.css"
 import Button from '../../../../shared/button/Button';
 import Spinner from '../../../../shared/effects/spinner/Spinner';

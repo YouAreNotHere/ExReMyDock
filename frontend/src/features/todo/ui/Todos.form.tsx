@@ -7,7 +7,7 @@ import {changeTodoIdInModal, loadTodos} from '../../../actions';
 import { ITodo } from '@/features/todo/types/ITodosRequest';
 import { IRootState } from '@/features/todo/types/RootState';
 import Modal from "./modal/Modal";
-import '../../../app/App.css'
+import '../../../app/App.scss'
 import SearchInput from "./searchInput/SearchInput";
 
 const TodosForm = forwardRef(function TodosForm(props: any, ref){

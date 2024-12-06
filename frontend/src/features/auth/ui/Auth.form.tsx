@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import '../../../app/App.css';
+import '../../../app/App.scss';
 import { useNavigate } from 'react-router-dom';
 import { authRequest } from '../../auth/api/auth.request';
 import {useDispatch, useSelector} from 'react-redux';

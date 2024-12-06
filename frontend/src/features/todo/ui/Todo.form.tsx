@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import '../../../app/App.css';
+import '../../../app/App.scss';
 import { useRequest } from '../../../shared/hooks/useRequest';
 import {
   editTodo,

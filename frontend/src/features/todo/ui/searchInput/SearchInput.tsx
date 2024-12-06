@@ -43,7 +43,7 @@ const SearchInput = ({getMap, ref}: any) => {
                 onChange={(e) => setText(e.target.value)}
                 value={text}
                 placeholder="Поиск" />
-            <ul className="suggest-todos-list">
+            <ul className={currentSuggest.length > 0 ? "suggest-input-and-list" : "suggest-todos-list__hidden"}>
                 { currentSuggest?.map((todo: ITodo) => (
                     <li key={todo.id} className= "suggest-todo" onClick={() => scrollById(todo.id)}>
                         <p className="suggest-todo__text">

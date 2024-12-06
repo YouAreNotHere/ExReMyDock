@@ -4,7 +4,7 @@ import {useRequest} from "../shared/hooks/useRequest";
 import { useNavigate } from 'react-router-dom';
 import FilterBar from "../features/todo/ui/FilterBar/FilterBar.form";
 import SearchInput from "../features/todo/ui/searchInput/SearchInput";
-import "../app/App.css"
+import "../app/App.scss"
 import AddTodo from "../features/todo/ui/AddTodoForm/AddTodo.form";
 import TodosForm from "../features/todo/ui/Todos.form";
 import Button from "../shared/button/Button";

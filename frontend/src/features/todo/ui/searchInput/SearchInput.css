@@ -19,6 +19,10 @@
     min-width: 50%;
 }
 
+.suggest-todos-list__hidden{
+    display: none;
+}
+
 .suggest-todo:last-child {
     border-bottom: none;
 }

@@ -7,7 +7,7 @@ const GithubBar = () => {
     const [userPic, setUserPic] = useState<any>();
     const [name, setName] = useState<string>();
     const userName: string | undefined = useSelector((state: IRootState) => state.currentUsername);
-    const [repList, setRepList] = useState([]);
+    const [repList, setRepList]: any = useState([]);
     const [isRepListOpen, setIsRepListOpen] = useState(false);
 
     useEffect(() => {
@@ -38,6 +38,9 @@ const GithubBar = () => {
                         console.log("При загрузке реп что-то пошло не так")
                     }
                 })
+              .catch((error: any) =>{
+                setRepList(null);
+              })
         }
         xhr.onerror = () =>{
             console.log("При загрузке профиля github что-то пошло не так")
