@@ -54,3 +54,8 @@ export const changeTodoIdInModal = (todoId: number | null) => ({
   type: "CHANGE_TODO_ID_IN_MODAL",
   todoIdInModal: todoId,
 })
+
+export const changeCurrentTheme = (isDark: boolean) => ({
+  type: 'CHANGE_CURRENT_THEME',
+  isDark,
+})

@@ -60,13 +60,13 @@
     }
 }
 
-@media (min-width: 750px) and (max-width: 999px) {
+@media (min-width: 750px) and (max-width: 1199px) {
     .suggest-todo__input {
         width: 300px;
     }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1200px) {
     .suggest-todo__input {
         width: 500px;
         margin-left: 15px;

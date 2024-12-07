@@ -1,18 +1,18 @@
-//$light-background: white;
 $light-background: aliceblue;
 $light-text: black;
-$light-button-background: white;
+$light-button-background:  aliceblue;
 $light-button-text: black;
-//$light-inner-background: aliceblue;
 $light-inner-background: white;
 $light-nav-background: #c7c7ff;
+$light-cross-color: black;
 
 $dark-background: #282c34;
 $dark-text: gainsboro;
 $dark-button-background: gray;
 $dark-button-text: white;
 $dark-inner-background: #30303d;
-$dark-nav-background: black;
+$dark-nav-background: #0b0b40;
+$dark-cross-color: white;
 
 
 :root {
@@ -22,6 +22,7 @@ $dark-nav-background: black;
   --button-text: #{$light-button-text};
   --inner-background: #{$light-inner-background};
   --nav-background: #{$light-nav-background};
+  --cross-color: #{$light-cross-color};
   width: 100%;
   text-align: center;
   display: flex;
@@ -38,6 +39,7 @@ $dark-nav-background: black;
   --button-text: #{$dark-button-text};
   --inner-background: #{$dark-inner-background};
   --nav-background: #{$dark-nav-background};
+  --cross-color: #{$dark-cross-color};
 }
 
 body {
@@ -52,9 +54,10 @@ button {
   color: var(--button-text);
   border: none;
   border-radius: 5px;
-  padding: 10px 20px;
+  padding: 10px 10px;
   cursor: pointer;
   align-items: center;
+  justify-content: center;
 }
 
 .App {
@@ -156,7 +159,7 @@ button {
   left: 0px;
   width: 20px;
   height: 2px;
-  background: white;
+  background: var(--cross-color);
 }
 
 .delete-todo__button::before {
@@ -247,4 +250,10 @@ button {
   min-width: 55px;
   max-width: 200px;
   height: 26px;
+}
+
+@media (max-width: 771px) {
+  .logout-button{
+    display: none;
+  }
 }

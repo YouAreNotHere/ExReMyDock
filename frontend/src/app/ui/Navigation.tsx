@@ -7,8 +7,10 @@ import NotFoundPage from '../../pages/not-found.page';
 import { Provider } from 'react-redux';
 import {store, persistor} from '../../reducers';
 import { PersistGate } from 'redux-persist/integration/react';
+import { useEffect, useState } from 'react';
 
 const Navigation = () => {
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

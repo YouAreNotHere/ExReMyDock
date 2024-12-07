@@ -2,6 +2,7 @@ import "./GithubBar.css";
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {IRootState} from "../../types/RootState";
+import Menu from './Menu';
 
 const GithubBar = () => {
     const [userPic, setUserPic] = useState<any>();
@@ -9,14 +10,20 @@ const GithubBar = () => {
     const userName: string | undefined = useSelector((state: IRootState) => state.currentUsername);
     const [repList, setRepList]: any = useState([]);
     const [isRepListOpen, setIsRepListOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {
         let xhr = new XMLHttpRequest();
-        if (!userName || userName.length <4) return;
+        if (!userName) return;
         xhr.open("GET", `https://api.github.com/users/${userName}`);
         xhr.send();
         let img = document.createElement("img");
         xhr.onload = () => {
+            if (xhr.status !== 200){
+              console.log("Ошибка", xhr.status);
+              setUserPic(null);
+              return;
+            }
             return new Promise(resolve => {
                 const data = JSON.parse(xhr.response);
                 img.src = data.avatar_url;
@@ -48,25 +55,14 @@ const GithubBar = () => {
     }, []);
 
     return(
-        <div className={userPic ? "github-bar" : "display-none"}>
-            {isRepListOpen && repList ?
-                (<div>
-                    <ul className="repos-list">
-                        <p
-                            className="repos-list-header"
-                            onClick={()=> setIsRepListOpen(!isRepListOpen)}>
-                            Ваши проекты
-                        </p>
-                        {repList.map((repo: any) => {
-                            return <li key={repo}>{repo}</li>;
-                        })}
-                    </ul>
-                </div>)
-                :
-                (<div className="github-pic-with-username" onClick={() => setIsRepListOpen(!isRepListOpen)}>
+        <div className={"github-bar"}>
+            {isMenuOpen ?
+                <Menu isMenuOpen={isMenuOpen} repos={repList} closeMenu={() => setIsMenuOpen(!isMenuOpen)}/>
+                : null}
+                <div className="github-pic-with-username" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     <p className="github-userName">{name ? name : userName}</p>
-                    <img className="github__img" src = {userPic?.src}/>
-                </div>)}
+                    {userPic ? (<img className="github__img" src = {userPic?.src}/>) : null}
+                </div>
                 </div>
             )
             }
