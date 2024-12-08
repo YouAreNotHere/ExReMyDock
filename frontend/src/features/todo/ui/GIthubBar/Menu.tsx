@@ -14,6 +14,7 @@ const Menu = ({isMenuOpen, closeMenu, repos}: Props) =>{
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isRepListOpen, setIsRepListOpen] = useState(false);
   const navigate = useNavigate();
+  console.log(isDarkMode);
 
   const onLogoutSuccess = () => {
     navigate('/auth');
@@ -53,8 +54,8 @@ const Menu = ({isMenuOpen, closeMenu, repos}: Props) =>{
   ) : null;
 
   return (
-    <div className="menu-wrapper">
-      <div className={isMenuOpen ? "menu" : "menu-hidden"}>
+    <div className={isMenuOpen ? "menu-wrapper" : "menu-wrapper-hidden"}>
+      <div className= "menu">
         <Button
           id={"close-modal-button"}
           value={""}

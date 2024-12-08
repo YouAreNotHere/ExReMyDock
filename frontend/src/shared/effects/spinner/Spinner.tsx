@@ -1,7 +1,6 @@
 import "./Spinner.css"
 
 const Spinner = ({isLoading}: {isLoading: boolean}) =>{
-  console.log(isLoading);
   return (
     <svg
       width="40"

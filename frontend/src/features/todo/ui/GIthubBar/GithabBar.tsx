@@ -56,9 +56,7 @@ const GithubBar = () => {
 
     return(
         <div className={"github-bar"}>
-            {isMenuOpen ?
                 <Menu isMenuOpen={isMenuOpen} repos={repList} closeMenu={() => setIsMenuOpen(!isMenuOpen)}/>
-                : null}
                 <div className="github-pic-with-username" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     <p className="github-userName">{name ? name : userName}</p>
                     {userPic ? (<img className="github__img" src = {userPic?.src}/>) : null}

@@ -36,7 +36,6 @@ const deleteTodoRequest = async (payload: IDeleteTodoRequest) =>
   });
 
 const completeTodoRequest = async (payload: ICompleteTodoRequest) => {
-  console.log(payload);
   await fetch('http://localhost:8081/todos/completeTodo', {
     method: 'POST',
       credentials: 'include',
