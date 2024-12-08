@@ -1,9 +1,11 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { changeCurrentFilter } from '../../../../actions';
 import "./FilterBar.css"
+import { IRootState } from '../../types/RootState';
 
 const FilterBar = () => {
   const dispatch = useDispatch();
+  const todos = useSelector((state: IRootState) => state.todos);
 
   const ShowCompleteOnlyButton = () => {
     return (
@@ -30,7 +32,7 @@ const FilterBar = () => {
   };
 
   return (
-    <div className="filter-bar">
+    <div className={todos.length > 0 ? "filter-bar" : "filter-bar-hidden"}>
       <ShowAllButton />
       <ShowActiveOnlyButton />
       <ShowCompleteOnlyButton />

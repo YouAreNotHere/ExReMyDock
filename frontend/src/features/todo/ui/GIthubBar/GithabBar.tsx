@@ -3,13 +3,14 @@ import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {IRootState} from "../../types/RootState";
 import Menu from './Menu';
+import ReposList from './ReposList';
 
 const GithubBar = () => {
     const [userPic, setUserPic] = useState<any>();
     const [name, setName] = useState<string>();
     const userName: string | undefined = useSelector((state: IRootState) => state.currentUsername);
-    const [repList, setRepList]: any = useState([]);
-    const [isRepListOpen, setIsRepListOpen] = useState(false);
+    const [repos, setRepos]: any = useState([]);
+    const [isReposListOpen, setIsReposListOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {
@@ -39,14 +40,14 @@ const GithubBar = () => {
                     xhr.send();
                     xhr.onload = () =>{
                         const data = JSON.parse(xhr.response);
-                        setRepList(data.map((repo: any) => repo.name));
+                        setRepos(data.map((repo: any) => repo.name));
                     };
                     xhr.onerror = () =>{
                         console.log("При загрузке реп что-то пошло не так")
                     }
                 })
               .catch((error: any) =>{
-                setRepList(null);
+                setRepos(null);
               })
         }
         xhr.onerror = () =>{
@@ -56,7 +57,17 @@ const GithubBar = () => {
 
     return(
         <div className={"github-bar"}>
-                <Menu isMenuOpen={isMenuOpen} repos={repList} closeMenu={() => setIsMenuOpen(!isMenuOpen)}/>
+                <Menu
+                  isMenuOpen={isMenuOpen}
+                  repos={repos}
+                  closeMenu={() => setIsMenuOpen(!isMenuOpen)}
+                  isReposListOpen={isReposListOpen}
+                  setIsReposListOpen={setIsReposListOpen}
+                />
+                <ReposList
+                  repos={repos}
+                  isReposListOpen={isReposListOpen}
+                  setIsReposListOpen={() => setIsReposListOpen(!isReposListOpen)}/>
                 <div className="github-pic-with-username" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     <p className="github-userName">{name ? name : userName}</p>
                     {userPic ? (<img className="github__img" src = {userPic?.src}/>) : null}

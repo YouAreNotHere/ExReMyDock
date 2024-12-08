@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../features/todo/ui/modal/Modal.css'
+import '../../app/App.scss'
 
 const EditButtonIcon = ({className}: {className: string}) => {
     return (

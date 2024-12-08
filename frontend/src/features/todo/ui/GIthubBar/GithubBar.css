@@ -36,17 +36,32 @@
 
 .repos-list{
     list-style-type: none;
-    position: absolute;
-    background-color: aliceblue;
-    color: black;
+    background-color: var(--background-color);
+    color: var(--text-color);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     padding: 0 15px 15px 15px;
     margin: 0;
-    top: -17px;
+    border-radius: 15px;
+}
+
+.repos-list-wrapper{
+    position: absolute;
+    background-color: transparent;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    top: 55px;
     left: 0px;
+}
+
+.repos-list-wrapper-hidden{
+    display: none;
 }
 
 .repos-list-header {
@@ -117,7 +132,7 @@
     right: 0px;
     width: 20px;
     height: 2px;
-    background: var(--cross-color);
+    background: var(--icon-color);
 }
 
 .close__button::before {

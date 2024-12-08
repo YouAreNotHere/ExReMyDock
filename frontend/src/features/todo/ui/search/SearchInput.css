@@ -5,9 +5,9 @@
     align-items: center;
 }
 
-.suggest-todos-list{
-    background-color: aliceblue;
-    color: black;
+.suggest-list{
+    background-color: var(--background-color);
+    color: var(--button-text);
     list-style-type: none;
     display: flex;
     flex-direction: column;
@@ -16,10 +16,27 @@
     padding: 0;
     border-radius: 15px;
     max-width: 80%;
-    min-width: 50%;
+    position: absolute;
+    z-index: 1;
+    top: 55px;
+    left: 37%;
 }
 
-.suggest-todos-list__hidden{
+@media (min-width: 500px) {
+    .suggest-list{
+        max-width: 40%;
+        min-width: 30%;
+    }
+}
+
+@media (max-width: 499px) {
+    .suggest-list{
+        min-width: 60px;
+        margin-left: -20px;
+    }
+}
+
+.suggest-list-hidden{
     display: none;
 }
 

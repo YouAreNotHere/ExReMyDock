@@ -8,7 +8,7 @@ import { ITodo } from '@/features/todo/types/ITodosRequest';
 import { IRootState } from '@/features/todo/types/RootState';
 import Modal from "./modal/Modal";
 import '../../../app/App.scss'
-import SearchInput from "./searchInput/SearchInput";
+import SearchInput from "@/features/todo/ui/search/SearchInput";
 
 const TodosForm = forwardRef(function TodosForm(props: any, ref){
   const dispatch = useDispatch();

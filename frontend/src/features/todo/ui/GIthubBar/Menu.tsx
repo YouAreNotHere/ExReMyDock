@@ -7,14 +7,14 @@ import { useNavigate } from 'react-router-dom';
 interface Props{
   isMenuOpen: boolean,
   closeMenu: () => void,
-  repos: ITodo[]
+  repos: ITodo[],
+  isReposListOpen: boolean,
+  setIsReposListOpen: (isOpen: boolean) => void,
 }
 
-const Menu = ({isMenuOpen, closeMenu, repos}: Props) =>{
+const Menu = ({isMenuOpen, closeMenu, repos, isReposListOpen, setIsReposListOpen}: Props) =>{
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isRepListOpen, setIsRepListOpen] = useState(false);
   const navigate = useNavigate();
-  console.log(isDarkMode);
 
   const onLogoutSuccess = () => {
     navigate('/auth');
@@ -38,21 +38,6 @@ const Menu = ({isMenuOpen, closeMenu, repos}: Props) =>{
     }
   }, [isDarkMode]);
 
-  const repList = isRepListOpen ? (
-      <div>
-    <ul className="repos-list">
-      <p
-        className="repos-list-header"
-        onClick={()=> setIsRepListOpen(!isRepListOpen)}>
-        Ваши проекты
-      </p>
-      {repos.map((repo: any) => {
-        return <li key={repo}>{repo}</li>;
-      })}
-    </ul>
-  </div>
-  ) : null;
-
   return (
     <div className={isMenuOpen ? "menu-wrapper" : "menu-wrapper-hidden"}>
       <div className= "menu">
@@ -66,16 +51,22 @@ const Menu = ({isMenuOpen, closeMenu, repos}: Props) =>{
         <Button
           id={"change-theme-button"}
           value={isDarkMode ? "Светлая тема" : "Темная тема"}
-          onClick={() => setIsDarkMode(!isDarkMode)}
+          onClick={() => {
+            setIsDarkMode(!isDarkMode)
+            closeMenu()
+          }
+          }
           disabled={false} />
         {repos.length > 1 ?
           <Button
             id={"show-repList-button"}
             value={"Список ваших проектов"}
-            onClick={() => setIsRepListOpen(!isRepListOpen)}
+            onClick={() => {
+              setIsReposListOpen(!isReposListOpen)
+              closeMenu();
+            }}
             disabled={false} />
           : null}
-        {repList}
         <Button
           id={"logout-button"}
           value={"Выйти"}

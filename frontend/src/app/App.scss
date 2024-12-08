@@ -4,7 +4,7 @@ $light-button-background:  aliceblue;
 $light-button-text: black;
 $light-inner-background: white;
 $light-nav-background: #c7c7ff;
-$light-cross-color: black;
+$light-icon-color: black;
 
 $dark-background: #282c34;
 $dark-text: gainsboro;
@@ -12,7 +12,7 @@ $dark-button-background: gray;
 $dark-button-text: white;
 $dark-inner-background: #30303d;
 $dark-nav-background: #0b0b40;
-$dark-cross-color: white;
+$dark-icon-color: white;
 
 
 :root {
@@ -22,7 +22,7 @@ $dark-cross-color: white;
   --button-text: #{$light-button-text};
   --inner-background: #{$light-inner-background};
   --nav-background: #{$light-nav-background};
-  --cross-color: #{$light-cross-color};
+  --icon-color: #{$light-icon-color};
   width: 100%;
   text-align: center;
   display: flex;
@@ -39,7 +39,7 @@ $dark-cross-color: white;
   --button-text: #{$dark-button-text};
   --inner-background: #{$dark-inner-background};
   --nav-background: #{$dark-nav-background};
-  --cross-color: #{$dark-cross-color};
+  --icon-color: #{$dark-icon-color};
 }
 
 body {
@@ -159,7 +159,7 @@ button {
   left: 0px;
   width: 20px;
   height: 2px;
-  background: var(--cross-color);
+  background: var(--icon-color);
 }
 
 .delete-todo__button::before {
