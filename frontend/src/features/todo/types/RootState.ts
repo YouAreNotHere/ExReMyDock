@@ -7,7 +7,7 @@ interface IRootState {
   todoFilters: string;
   todoIdInModal: number | null;
   currentUsername: string | undefined;
-  isDark: boolean;
+  isDarkMode: boolean;
 }
 
 export type { IRootState };

@@ -5,6 +5,7 @@ $light-button-text: black;
 $light-inner-background: white;
 $light-nav-background: #c7c7ff;
 $light-icon-color: black;
+$light-modal-background: #c7c7ff;
 
 $dark-background: #282c34;
 $dark-text: gainsboro;
@@ -13,6 +14,7 @@ $dark-button-text: white;
 $dark-inner-background: #30303d;
 $dark-nav-background: #0b0b40;
 $dark-icon-color: white;
+$dark-modal-background: darkcyan;
 
 
 :root {
@@ -23,6 +25,7 @@ $dark-icon-color: white;
   --inner-background: #{$light-inner-background};
   --nav-background: #{$light-nav-background};
   --icon-color: #{$light-icon-color};
+  --modal-background: #{$light-modal-background};
   width: 100%;
   text-align: center;
   display: flex;
@@ -40,6 +43,7 @@ $dark-icon-color: white;
   --inner-background: #{$dark-inner-background};
   --nav-background: #{$dark-nav-background};
   --icon-color: #{$dark-icon-color};
+  --modal-background: #{$dark-modal-background};
 }
 
 body {
@@ -97,10 +101,6 @@ button {
   height: 26px;
 }
 
-.centerStyle {
-  justify-content: center;
-}
-
 .сompleted {
   color: gray;
   text-decoration: line-through;
@@ -123,7 +123,7 @@ button {
   display: none;
 }
 
-.buttons-wrapper{
+.edit-delete__buttons-wrapper{
   display: flex;
   width: 60px;
   justify-content: space-between;
@@ -137,9 +137,16 @@ button {
 }
 
 .edit-todo-icon{
+  display: block;
   position: relative;
   top: -2px;
   left: -7px;
+  z-index: 2;
+}
+
+.svg{
+  width: 19px;
+  height: 19px;
 }
 
 .delete-todo__button {

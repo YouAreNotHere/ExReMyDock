@@ -3,6 +3,9 @@ import Button from '../../../../shared/button/Button';
 import { ITodo } from '../../types/ITodosRequest';
 import { useRequest } from '../../../../shared/hooks/useRequest';
 import { useNavigate } from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import { IRootState } from '../../../todo/types/RootState';
+import {changeCurrentTheme} from '../../../../actions/index';
 
 interface Props{
   isMenuOpen: boolean,
@@ -13,7 +16,9 @@ interface Props{
 }
 
 const Menu = ({isMenuOpen, closeMenu, repos, isReposListOpen, setIsReposListOpen}: Props) =>{
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const isDarkMode = useSelector((state: IRootState) => state.isDarkMode);
+  console.log(isDarkMode);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onLogoutSuccess = () => {
@@ -30,13 +35,13 @@ const Menu = ({isMenuOpen, closeMenu, repos, isReposListOpen, setIsReposListOpen
     onSuccess: onLogoutSuccess,
   });
 
-  useEffect(() => {
-    if (isDarkMode) {
-      document.body.classList.add('dark-theme');
-    } else {
-      document.body.classList.remove('dark-theme');
-    }
-  }, [isDarkMode]);
+  // useEffect(() => {
+  //   if (isDarkMode) {
+  //     document.body.classList.add('dark-theme');
+  //   } else {
+  //     document.body.classList.remove('dark-theme');
+  //   }
+  // }, [isDarkMode]);
 
   return (
     <div className={isMenuOpen ? "menu-wrapper" : "menu-wrapper-hidden"}>
@@ -52,7 +57,7 @@ const Menu = ({isMenuOpen, closeMenu, repos, isReposListOpen, setIsReposListOpen
           id={"change-theme-button"}
           value={isDarkMode ? "Светлая тема" : "Темная тема"}
           onClick={() => {
-            setIsDarkMode(!isDarkMode)
+            dispatch(changeCurrentTheme(!isDarkMode))
             closeMenu()
           }
           }

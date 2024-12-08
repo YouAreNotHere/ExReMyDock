@@ -68,10 +68,10 @@ const TodoForm = ({ todo, isModalOpen, setIsModalOpen}: Props) => {
                 onClick={onTextClickHandler}
                 className={todo.completed || todo.completed !== "0" ? 'task-text' : 'сompleted-text'}>{todo.text}
             </p>
-          <div className={"buttons-wrapper"}>
+          <div className={"edit-delete__buttons-wrapper"}>
             <Button
                 id={"edit-todo-button"}
-                value={""}
+                value={"Ред"}
                 onClick={() => {
                   dispatch(changeEditedTodoId(todo.id))
                   dispatch(changeTodoIdInModal(todo.id))

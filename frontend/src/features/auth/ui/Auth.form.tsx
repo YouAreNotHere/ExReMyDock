@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import '../../../app/App.scss';
+import "../../../shared/layouts/FormLayout/ui/FormLayout.css"
 import { useNavigate } from 'react-router-dom';
 import { authRequest } from '../../auth/api/auth.request';
 import {useDispatch, useSelector} from 'react-redux';
@@ -67,7 +68,7 @@ const AuthForm = () => {
 
   return (
     <div>
-      <form>
+      <form className = "login-form">
         <div className='row'>
           <label htmlFor='name' className='label'>
             Имя
@@ -99,7 +100,7 @@ const AuthForm = () => {
             className='input'
           />
         </div>
-        <div className='centerStyle'>
+        <div className='buttons-wrapper'>
           <Button
             id='auth-submit-button'
             value={'Войти'}

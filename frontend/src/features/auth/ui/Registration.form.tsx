@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { authRequest } from '../api/auth.request';
 import Button from '../../../shared/button/Button';
 import { useArrowNavigation } from '../../../shared/hooks/useArrowNavigation';
+import "../../../shared/layouts/FormLayout/ui/FormLayout.css"
 
 const RegistrationForm = () => {
   const [name, setName] = useState('');
@@ -62,7 +63,7 @@ const RegistrationForm = () => {
 
   return (
     <div ref={authPageRef}>
-      <form>
+      <form className="login-form">
         <div className='row'>
           <label htmlFor='name' className='label'>
             Имя
@@ -95,7 +96,7 @@ const RegistrationForm = () => {
             placeholder={"******"}
           />
         </div>
-        <div className='centerStyle'>
+        <div className='buttons-wrapper'>
           <Button
             id={'registration-submit-button'}
             value={'Создать аккаунт'}
@@ -103,8 +104,6 @@ const RegistrationForm = () => {
             disabled={!name || !password}
             ref={submitButtonRef}
           />
-        </div>
-        <div>
           <Button
             id={'to-auth-submit-button'}
             value={'Вернуться к авторизации'}
