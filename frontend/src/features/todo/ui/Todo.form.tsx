@@ -62,16 +62,17 @@ const TodoForm = ({ todo, isModalOpen, setIsModalOpen}: Props) => {
   if (!todo) {
     todoContent = <p>Its place to your first todo!</p>;
   }
+  // console.log(todo);
     todoContent = (
         <li key={todo.id} className= "todo_bar">
             <p
                 onClick={onTextClickHandler}
-                className={todo.completed || todo.completed !== "0" ? 'task-text' : 'сompleted-text'}>{todo.text}
+                className={todo.completed ?'сompleted-text' : 'task-text' }>{todo.text}
             </p>
           <div className={"edit-delete__buttons-wrapper"}>
             <Button
                 id={"edit-todo-button"}
-                value={"Ред"}
+                value={""}
                 onClick={() => {
                   dispatch(changeEditedTodoId(todo.id))
                   dispatch(changeTodoIdInModal(todo.id))

@@ -7,7 +7,7 @@ const Spinner = ({isLoading}: {isLoading: boolean}) =>{
       height="40"
       viewBox="0 0 40 40"
       xmlns="http://www.w3.org/2000/svg"
-      className="spinner"
+      className={isLoading ? "spinner" : "spinner-hidden"}
     >
       <circle
         cx="20"
@@ -17,7 +17,7 @@ const Spinner = ({isLoading}: {isLoading: boolean}) =>{
         strokeWidth="4"
         fill="none"
         strokeLinecap="round"
-        className={isLoading ? "spin" : "spin-hidden"}
+        className="spin"
         style={{ animation: 'spin 1s linear infinite' }}
       />
     </svg>

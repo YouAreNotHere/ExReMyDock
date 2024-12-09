@@ -4,10 +4,12 @@ import { authRequest } from '../api/auth.request';
 import Button from '../../../shared/button/Button';
 import { useArrowNavigation } from '../../../shared/hooks/useArrowNavigation';
 import "../../../shared/layouts/FormLayout/ui/FormLayout.css"
+import Spinner from '../../../shared/effects/spinner/Spinner';
 
 const RegistrationForm = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
   const authPageRef = useRef(null);
@@ -38,6 +40,7 @@ const RegistrationForm = () => {
 
   const onRegistationClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    setIsLoading(!isLoading)
 
     try {
       let url;
@@ -53,11 +56,14 @@ const RegistrationForm = () => {
       if (!response.ok) {
         const error = await response.json();
         setErrorMessage(error.message);
+        setIsLoading(!isLoading);
       } else {
+        setIsLoading(!isLoading);
         navigate('/auth');
       }
     } catch (error) {
       setErrorMessage(JSON.stringify(error));
+      setIsLoading(!isLoading);
     }
   };
 
@@ -114,6 +120,7 @@ const RegistrationForm = () => {
         </div>
       </form>
       {errorMessage && <p className='error-message'>{errorMessage}</p>}
+      <Spinner isLoading={isLoading}/>
     </div>
   );
 };

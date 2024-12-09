@@ -1,23 +1,30 @@
 .modal{
     position: fixed;
     color: white;
-    background: cadetblue;
+    background: var(--modal-background);
     border-radius: 25px;
     display: flex;
     z-index: 1;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    min-width: 50%;
     max-height: 45%;
     top: 15%;
     bottom: 15%;
     left: 10%;
     right: 10%;
+    padding: 10px;
+}
+
+@media (max-width: 599px) {
+    .modal{
+        min-width: 50%;
+    }
 }
 
 @media (min-width: 600px) and (max-width: 900px) {
     .modal{
+        min-width: 30%;
         max-width: 40%;
         left: 25%;
     }
@@ -25,8 +32,8 @@
 
 @media (min-width: 901px) {
     .modal{
-        max-width: 25%;
-        left: 30%;
+        max-width: 30%;
+        left: 35%;
     }
 }
 
@@ -41,6 +48,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    gap: 10px;
+    padding: 10px;
 }
 
 .text-with-buttons__wrapper{
@@ -147,7 +156,7 @@
 
 .modal-text,
 .сompleted{
-    color: gainsboro;
+    color: var(--text-color);
     max-width: 60%;
     white-space: normal;
     overflow-wrap: break-word;

@@ -34,15 +34,25 @@ const TodosForm = forwardRef(function TodosForm(props: any, ref){
     }
   };
 
-  const { makeRequest: getTodos } = useRequest({
+  // const setTodosToState =  (todos: any) =>{
+  //   dispatch(loadTodos(newTodos))
+  // }
+
+  const { makeRequest: getTodos, data: newTodos } = useRequest({
     method: 'GET',
     url: '/todos/getTodos',
-    onSuccess: setTodosToState,
+    // onSuccess: setTodosToState,
   });
 
   useEffect(() => {
-    getTodos();
+    const setTodosToState = async () =>{
+      await getTodos();
+      // console.log(newTodos);
+      // await dispatch(loadTodos(newTodos))
+    }
+    setTodosToState()
   }, []);
+  //Dobavit todos, choby ne pererenderivalos`.
 
   if (todos) {
     if (!Array.isArray(todos)) return

@@ -52,10 +52,11 @@ const useRequest = (props: IUseRequestProps) => {
 
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
         setData(data);
         setErrorMessage(null);
         if (onSuccess) {
-          onSuccess(data);
+           onSuccess(data);
         }
       } else {
         const error = await response.json();

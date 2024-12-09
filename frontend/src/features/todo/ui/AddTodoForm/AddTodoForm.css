@@ -1,7 +1,7 @@
 .add-todo-form{
     position: fixed;
     color: white;
-    background: cadetblue;
+    background: var(--modal-background);
     border-radius: 25px;
     display: flex;
     z-index: 1;

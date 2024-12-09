@@ -1,15 +1,18 @@
 // import React from 'react';
 // import '../../features/todo/ui/modal/Modal.css'
 // import '../../app/App.scss'
+import {useSelector} from 'react-redux';
+import { IRootState } from '../../features/todo/types/RootState';
 
 const EditButtonIcon = ({className}: {className: string}) => {
+    const isDarkMode = useSelector((state: IRootState) => state.isDarkMode);
     return (
         <svg
             className={className}
             width="19"
             height="19"
             viewBox="0 0 19 19"
-            fill="black"
+            fill={isDarkMode ? "white" : "black" }
             xmlns="http://www.w3.org/2000/svg"
         >
             <path
@@ -23,7 +26,7 @@ const EditButtonIcon = ({className}: {className: string}) => {
              7C18.5917 6.71869 18.7498 6.3371 18.7498 5.93922C18.7498 5.54133
               18.5917 5.15975 18.3103 4.87844ZM5.68969 17.5H1.5V13.3103L9.75 5.06031L13.9397
                9.25L5.68969 17.5ZM15 8.18875L10.8103 4L13.0603 1.75L17.25 5.93875L15 8.18875Z"
-                fill="black"
+                fill={isDarkMode ? "white" : "black" }
             />
         </svg>
     )

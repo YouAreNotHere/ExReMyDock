@@ -17,7 +17,6 @@ interface Props{
 
 const Menu = ({isMenuOpen, closeMenu, repos, isReposListOpen, setIsReposListOpen}: Props) =>{
   const isDarkMode = useSelector((state: IRootState) => state.isDarkMode);
-  console.log(isDarkMode);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -34,14 +33,6 @@ const Menu = ({isMenuOpen, closeMenu, repos, isReposListOpen, setIsReposListOpen
     url: '/auth/logout',
     onSuccess: onLogoutSuccess,
   });
-
-  // useEffect(() => {
-  //   if (isDarkMode) {
-  //     document.body.classList.add('dark-theme');
-  //   } else {
-  //     document.body.classList.remove('dark-theme');
-  //   }
-  // }, [isDarkMode]);
 
   return (
     <div className={isMenuOpen ? "menu-wrapper" : "menu-wrapper-hidden"}>

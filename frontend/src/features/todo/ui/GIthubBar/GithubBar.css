@@ -93,15 +93,15 @@
     flex-direction: column;
     justify-content: space-around;
     border-radius: 5px;
-    left: auto;
-    z-index: 2;
     gap: 5px;
     padding: 5px;
 }
 
 .menu-wrapper{
-    position: fixed;
-    z-index: 1;
+    display: flex;
+    width: 150px;
+    position: absolute;
+    z-index: 2;
     background-color: var(--nav-background);
     top: 60px;
     right: 12%;

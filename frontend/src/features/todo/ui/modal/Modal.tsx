@@ -99,14 +99,17 @@ const Modal = ({isModalOpen, setIsModalOpen}: Props) =>{
                         onChange={(e) => setNewAdditionalText(e.target.value)}
                         className = "modal-additional-text__input"
                         />
-                    <div>
+                    <div className="buttons-wrapper">
                         <button className='addPadding' onClick={onSavedEditedHandler}>
                             Сохранить
                         </button>
                         <Button
                             id={"modal-additional-text__input"}
                             value={"Отменить"}
-                            onClick={onCancelEditHandler}
+                            onClick={() => {
+                                onCancelEditHandler()
+                                setIsModalOpen(!isModalOpen);
+                            }}
                             disabled={false}/>
                     </div>
                 </div>
@@ -123,7 +126,7 @@ const Modal = ({isModalOpen, setIsModalOpen}: Props) =>{
                             <EditButtonIcon className={"edit-todo"}/>
                         </Button>
                         <p
-                            className={currentTodo?.completed ? "сompleted " : "modal-text"}
+                            className={currentTodo?.completed ? "modal-text" : "сompleted "}
                             onClick={onCompleteHandler}
                             title="Нажми на текст задачи, чтобы пометить её как выполненную">
                             {currentTodo?.text}

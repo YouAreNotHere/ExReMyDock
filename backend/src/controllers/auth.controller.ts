@@ -20,6 +20,7 @@ class AuthController {
   }
 
   public async signin(req: Request, res: Response) {
+    console.log("Auth на бэке")
     if (!(await AuthService.checkIsValidCredentials(req.body))) {
       res.status(401).send({ message: 'Неверный логин или пароль' });
       return;
@@ -40,6 +41,7 @@ class AuthController {
     };
 
     res.send(user);
+    console.log(user);
   }
 
   public async logout(req: Request, res: Response) {
