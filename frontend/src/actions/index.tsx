@@ -1,9 +1,18 @@
 import { ITodo } from '../features/todo/types/ITodosRequest';
 
-export const changeCurrentUsername = (username: string) => ({
-    type: 'CHANGE_CURRENT_USERNAME',
-    username,
-});
+// export const changeCurrentUser = (userName: string, userId: number) => ({
+//     type: 'CHANGE_CURRENT_USER',
+//     userName,
+//     userId,
+// });
+
+export const changeCurrentUser = (userName: string, userId: number) => {
+  console.log("action")
+  return {
+  type: 'CHANGE_CURRENT_USER',
+  userName,
+  userId,
+}};
 
 export const VisibilityFilters = {
   SHOW_ALL: 'SHOW_ALL',
@@ -44,6 +53,19 @@ export const completeTodo = (id: number | undefined) => ({
   type: 'COMPLETE_TODO',
   id: id,
 });
+
+export const addTodo = (id: string,
+                        userId: number,
+                        text: string | undefined,
+                        complited: boolean,
+                        additionalText: string | undefined) => ({
+  type: "ADD_TODO",
+  id,
+  userId,
+  text,
+  complited,
+  additionalText,
+})
 
 export const changeEditedTodoId = (editedTodoId: number | null) => ({
   type: 'CHANGE_EDITED_TODO_ID',

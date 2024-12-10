@@ -6,7 +6,7 @@ interface IRootState {
   editedTodoId: number | null;
   todoFilters: string;
   todoIdInModal: number | null;
-  currentUsername: string | undefined;
+  currentUser: {userName: string ,userId: number};
   isDarkMode: boolean;
 }
 

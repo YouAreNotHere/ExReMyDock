@@ -22,7 +22,7 @@ const Modal = ({isModalOpen, setIsModalOpen}: Props) =>{
     const editedTodo = useSelector((state: IRootState) => state.editedTodoId);
     const dispatch = useDispatch();
     let currentTodo: ITodo | undefined;
-    if (!!todoIdInModal) currentTodo = todos?.find((todo: ITodo) => todo.id === todoIdInModal);
+    if (!todoIdInModal) currentTodo = todos?.find((todo: ITodo) => todo.id === todoIdInModal);
     const [newTodoText, setNewTodoText] = useState(currentTodo?.text);
     const [newAdditionalText, setNewAdditionalText] = useState(currentTodo?.additionalText);
     const inputRef = useRef<HTMLInputElement>(null);

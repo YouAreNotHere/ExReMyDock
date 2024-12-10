@@ -11,7 +11,7 @@
 // import {useRequest} from '../../../shared/hooks/useRequest';
 //
 // const AuthForm = () => {
-//   const username: string | undefined = useSelector((state: IRootState) => state.currentUsername);
+//   const username: string | undefined = useSelector((state: IRootState) => state.currentUser);
 //   const [name, setName] = useState(username);
 //   const [password, setPassword] = useState('');
 //   const navigate = useNavigate();
@@ -139,15 +139,15 @@ import "../../../shared/layouts/FormLayout/ui/FormLayout.css"
 import { useNavigate } from 'react-router-dom';
 import { authRequest } from '../../auth/api/auth.request';
 import {useDispatch, useSelector} from 'react-redux';
-import { changeCurrentUsername } from '../../../actions';
+import { changeCurrentUser } from '../../../actions';
 import { useArrowNavigation } from '../../../shared/hooks/useArrowNavigation';
 import Button from '../../../shared/button/Button';
 import {IRootState} from "../../todo/types/RootState";
 import Spinner from '../../../shared/effects/spinner/Spinner';
 
 const AuthForm = () => {
-  const username: string | undefined = useSelector((state: IRootState) => state.currentUsername);
-  const [name, setName] = useState(username);
+  // const username: string | undefined = useSelector((state: IRootState) => state.currentUser.userName);
+  const [name, setName] = useState("");
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -191,8 +191,8 @@ const AuthForm = () => {
           return;
         }
         console.log('Авторизация успешна');
-        dispatch(changeCurrentUsername(name));
-        console.log("current username" + name)
+        console.log(user);
+        dispatch(changeCurrentUser(user.id, user.name));
         setIsLoading(!isLoading);
         navigate('/');
       }

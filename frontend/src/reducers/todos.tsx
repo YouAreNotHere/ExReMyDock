@@ -7,12 +7,15 @@ const todos = (
 ) => {
   switch (action.type) {
     case 'ADD_TODO':
+      state = [];
       return [
         ...state,
         {
           id: action.id,
+          userId: action.userId,
           text: action.text,
-          complete: false,
+          completed: 0,
+          additionalText: action.additionalText,
         },
       ];
     case 'LOAD_TODOS':

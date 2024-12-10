@@ -52,6 +52,11 @@ const useRequest = (props: IUseRequestProps) => {
 
       if (response.ok) {
         const data = await response.json();
+        if (!Array.isArray(data)) {
+          setErrorMessage(data)
+          console.log(data)
+          return
+        }
         setData(data);
         setErrorMessage(null);
         if (onSuccess) {
@@ -59,6 +64,7 @@ const useRequest = (props: IUseRequestProps) => {
         }
       } else {
         const error = await response.json();
+        console.log(error)
 
         if (response.status === 401) {
           navigate('/auth');

@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useRequest } from '../../../../shared/hooks/useRequest';
-import { useDispatch } from 'react-redux';
-import { loadTodos } from '../../../../actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadTodos, addTodo } from '../../../../actions';
 import '../../../../app/App.scss'
 import "./AddTodoForm.css"
 import Button from '../../../../shared/button/Button';
 import Spinner from '../../../../shared/effects/spinner/Spinner';
+import { v4 as uuidv4 } from 'uuid';
+import { IRootState } from '@/features/todo/types/RootState';
 
 interface Props{
   isOpenAddModal: boolean,
@@ -17,20 +19,23 @@ const AddTodo = ({isOpenAddModal, setIsOpenAddModal}: Props) => {
   const ref: any = useRef(null);
   const [text, setText] = useState('');
   const [additionalText, setAdditionalText] = useState('');
+  const currentUser = useSelector((state: IRootState) => state.currentUser);
+
   useEffect(() => {
     if (!!ref.current) ref.current.focus();
   }, [isOpenAddModal]);
+  const newId = uuidv4();
 
-  const { makeRequest: addTodo, isLoading : isAddTodoLoading  } = useRequest({
+  const { makeRequest: addNewTodo, isLoading : isAddTodoLoading  } = useRequest({
     method: 'POST',
-    body: { text, additionalText, completed: false },
+    body: { id: newId, text, additionalText, completed: false },
     url: '/todos/addTodo',
   });
 
   const { data: todos, makeRequest: getTodos, isLoading: isGetTodosLoading,  } = useRequest({
     method: 'GET',
     url: '/todos/getTodos',
-    // onSuccess: (data)=>dispatch(loadTodos(data))
+    onSuccess: (data)=>dispatch(loadTodos(data))
   });
 
   useEffect(() => {
@@ -39,8 +44,10 @@ const AddTodo = ({isOpenAddModal, setIsOpenAddModal}: Props) => {
   }, [todos]);
 
   const onClickHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    await addTodo();
-    await getTodos();
+    await addNewTodo();
+    dispatch(addTodo(newId, currentUser.userId, text, false, additionalText));
+
+    // await getTodos();
     setIsOpenAddModal(!isOpenAddModal);
   };
 

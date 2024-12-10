@@ -4,7 +4,7 @@ import todos from './todos';
 import todoFilters from './todoFilters';
 import editedTodoId from './editedTodo';
 import todoIdInModal from "./todoInModal";
-import currentUsername from "./currentUsername";
+import currentUser from "./currentUser";
 import isDarkMode from './isDarkMode';
 import {
   persistStore,
@@ -23,7 +23,7 @@ const persistConfig = {
     storage,
 };
 
-const todoApp: any = combineReducers({ editedTodoId, todos, todoFilters, todoIdInModal, currentUsername, isDarkMode});
+const todoApp: any = combineReducers({ editedTodoId, todos, todoFilters, todoIdInModal, currentUser, isDarkMode});
 const persistedReducer = persistReducer(persistConfig, todoApp);
 // export const store = configureStore({
 //   reducer: persistedReducer,
