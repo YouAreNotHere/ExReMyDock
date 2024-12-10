@@ -59,7 +59,7 @@ const MainPage = () => {
           {errorMessage && <p>{errorMessage}</p>}
         </div>
       <TodosForm ref = {itemsRef} getMap = {() => getMap()}/>
-        {Array.isArray(todos) ? <FilterBar /> : null}
+        <FilterBar />
         <AddTodo isOpenAddModal = {isOpenAddModal} setIsOpenAddModal = {setIsOpenAddModal} />
       </div>
   )

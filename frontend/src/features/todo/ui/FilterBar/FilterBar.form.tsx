@@ -32,7 +32,7 @@ const FilterBar = () => {
   };
 
   return (
-    <div className={todos.length > 0 ? "filter-bar" : "filter-bar-hidden"}>
+    <div className={todos?.length > 0 ? "filter-bar" : "filter-bar-hidden"}>
       <ShowAllButton />
       <ShowActiveOnlyButton />
       <ShowCompleteOnlyButton />

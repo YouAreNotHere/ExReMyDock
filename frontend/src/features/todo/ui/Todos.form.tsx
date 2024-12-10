@@ -1,76 +1,44 @@
 import {useEffect, useRef, useState, forwardRef} from 'react';
 import TodoForm from './Todo.form';
 import { useSelector, useDispatch } from 'react-redux';
-import AddTodo from './AddTodoForm/AddTodo.form';
 import { useRequest } from '../../../shared/hooks/useRequest';
 import {changeTodoIdInModal, loadTodos} from '../../../actions';
 import { ITodo } from '@/features/todo/types/ITodosRequest';
 import { IRootState } from '@/features/todo/types/RootState';
 import Modal from "./modal/Modal";
 import '../../../app/App.scss'
-import SearchInput from "@/features/todo/ui/search/SearchInput";
 
 const TodosForm = forwardRef(function TodosForm(props: any, ref){
   const dispatch = useDispatch();
-  const todos: ITodo[] = useSelector((state: IRootState) => state.todos);
+  // const todos: ITodo[] = useSelector((state: IRootState) => state.todos);
   const currentFilter = useSelector((state: IRootState) => state.todoFilters);
-  const todoInModal: number | null = useSelector((state: IRootState) => state.todoIdInModal);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [getTodosCounter, setGetTodosCounter] = useState(0);
   const {getMap} = props;
   let currentTodos: Array<ITodo> = [];
 
-  const setTodosToState = (todos: ITodo[]) => {
-    const newTodos: ITodo[] = todos.map(
-        (todo: ITodo): ITodo =>
-            todo.completed === "0"
-                ? { ...todo, completed: false }
-                : { ...todo, completed: true },
-    );
-
-    const newTodosMoreTodos: boolean =
-        JSON.stringify(todos).length < JSON.stringify(newTodos).length;
-    if (newTodosMoreTodos) {
-      dispatch(loadTodos(newTodos));
-    }
-  };
-
-  // const setTodosToState =  (todos: any) =>{
-  //   dispatch(loadTodos(newTodos))
-  // }
-
-  const { makeRequest: getTodos, data: newTodos } = useRequest({
+  const { makeRequest: getTodos, data: todos } = useRequest({
     method: 'GET',
     url: '/todos/getTodos',
-    // onSuccess: setTodosToState,
+    onSuccess: (data) => dispatch(loadTodos(data)),
   });
 
   useEffect(() => {
-    const setTodosToState = async () =>{
-      await getTodos();
-      // console.log(newTodos);
-      // await dispatch(loadTodos(newTodos))
-    }
-    setTodosToState()
+    getTodos();
+    setGetTodosCounter((n)=> n+1)
   }, []);
-  //Dobavit todos, choby ne pererenderivalos`.
 
-  if (todos) {
-    if (!Array.isArray(todos)) return
-    const activeTodos: ITodo[] = todos.filter(
-        (todo: ITodo) => todo.completed === false,
-    );
-    const completeTodos: ITodo[] = todos.filter(
-        (todo: ITodo) => todo.completed === true,
-    );
-
+  if (Array.isArray(todos)) {
     if (currentFilter == 'SHOW_COMPLETED') {
-      currentTodos = completeTodos;
+      currentTodos = todos.filter((todo: ITodo) => todo.completed === 1);
     } else if (currentFilter == 'SHOW_ACTIVE') {
-      currentTodos = activeTodos;
+      currentTodos = todos.filter((todo: ITodo) => todo.completed === 0);
     } else {
       currentTodos = todos;
     }
   }
+  console.log(currentTodos);
+  console.log(getTodosCounter);
 
   return (
       <div className="todos-wrapper">

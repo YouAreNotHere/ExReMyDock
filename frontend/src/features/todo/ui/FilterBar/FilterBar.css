@@ -1,4 +1,5 @@
 .filter-bar{
+    margin-top: 70px;
     display: flex;
     gap: 5px;
     justify-content: space-between;

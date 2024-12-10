@@ -58,9 +58,7 @@ const Modal = ({isModalOpen, setIsModalOpen}: Props) =>{
         dispatch(completeTodo(currentTodo?.id));
     };
 
-    const onSavedEditedHandler = async (
-        e: React.MouseEvent<HTMLButtonElement>,
-    ) => {
+    const onSavedEditedHandler = async () => {
         await saveEditedTodoRequest();
         dispatch(editTodo(newTodoText, currentTodo?.id, newAdditionalText));
         dispatch(changeEditedTodoId(null));
@@ -100,9 +98,16 @@ const Modal = ({isModalOpen, setIsModalOpen}: Props) =>{
                         className = "modal-additional-text__input"
                         />
                     <div className="buttons-wrapper">
-                        <button className='addPadding' onClick={onSavedEditedHandler}>
-                            Сохранить
-                        </button>
+                        <Button
+                          id = "save-edited-todo-button"
+                          disabled={false}
+                          value={"Сохранить"}
+                          className='addPadding'
+                          onClick={() => {
+                              onSavedEditedHandler();
+                              setIsModalOpen(!isModalOpen);
+                          }}
+                        />
                         <Button
                             id={"modal-additional-text__input"}
                             value={"Отменить"}
@@ -126,7 +131,7 @@ const Modal = ({isModalOpen, setIsModalOpen}: Props) =>{
                             <EditButtonIcon className={"edit-todo"}/>
                         </Button>
                         <p
-                            className={currentTodo?.completed ? "modal-text" : "сompleted "}
+                            className={currentTodo?.completed ? "сompleted " : "modal-text"}
                             onClick={onCompleteHandler}
                             title="Нажми на текст задачи, чтобы пометить её как выполненную">
                             {currentTodo?.text}

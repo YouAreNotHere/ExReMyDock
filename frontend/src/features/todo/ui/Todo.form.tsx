@@ -3,16 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import '../../../app/App.scss';
 import { useRequest } from '../../../shared/hooks/useRequest';
 import {
-  editTodo,
   changeEditedTodoId,
   deleteTodo,
-  completeTodo,
   changeTodoIdInModal
 } from '../../../actions';
 import {ITodo, ITodosProps} from '../types/ITodosRequest';
-import { IRootState } from '../types/RootState';
 import Button from "../../../shared/button/Button";
-import SuggestButtonIcon from "../../../shared/button/SuggestButtonIcon";
 import EditButtonIcon from "../../../shared/button/EditButtonIcon";
 
 interface Props {
@@ -22,10 +18,7 @@ interface Props {
 }
 
 const TodoForm = ({ todo, isModalOpen, setIsModalOpen}: Props) => {
-  const [newTodoText, setNewTodoText] = useState('');
-  const inputRef = useRef(null);
   const dispatch = useDispatch();
-  const editedTodo = useSelector((state: IRootState) => state.editedTodoId);
 
   let todoContent;
   const { makeRequest: deleteTodoRequest } = useRequest({
@@ -34,24 +27,9 @@ const TodoForm = ({ todo, isModalOpen, setIsModalOpen}: Props) => {
     url: '/todos/deleteTodo',
   });
 
-  const { makeRequest: saveEditedTodoRequest } = useRequest({
-    method: 'POST',
-    body: { id: todo.id, text: newTodoText },
-    url: '/todos/saveEditedTodo',
-  });
-
   const onDeleteHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     await deleteTodoRequest();
     dispatch(deleteTodo(todo.id));
-  };
-
-  const onSavedEditedHandler = async (
-    e: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    await saveEditedTodoRequest();
-    //dispatch(editTodo(newTodoText, todo.id, additionalText));
-    dispatch(changeEditedTodoId(null));
-    setNewTodoText('');
   };
 
   const onTextClickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -62,7 +40,6 @@ const TodoForm = ({ todo, isModalOpen, setIsModalOpen}: Props) => {
   if (!todo) {
     todoContent = <p>Its place to your first todo!</p>;
   }
-  // console.log(todo);
     todoContent = (
         <li key={todo.id} className= "todo_bar">
             <p

@@ -6,6 +6,7 @@ $light-inner-background: white;
 $light-nav-background: #c7c7ff;
 $light-icon-color: black;
 $light-modal-background: #c7c7ff;
+$light-active-button: white;
 
 $dark-background: #282c34;
 $dark-text: gainsboro;
@@ -15,6 +16,7 @@ $dark-inner-background: #30303d;
 $dark-nav-background: #0b0b40;
 $dark-icon-color: white;
 $dark-modal-background: darkcyan;
+$dark-active-button: black;
 
 
 :root {
@@ -26,6 +28,7 @@ $dark-modal-background: darkcyan;
   --nav-background: #{$light-nav-background};
   --icon-color: #{$light-icon-color};
   --modal-background: #{$light-modal-background};
+  --active-button: #{$light-active-button};
   width: 100%;
   text-align: center;
   display: flex;
@@ -44,6 +47,7 @@ $dark-modal-background: darkcyan;
   --nav-background: #{$dark-nav-background};
   --icon-color: #{$dark-icon-color};
   --modal-background: #{$dark-modal-background};
+  --active-button: #{$dark-active-button};
 }
 
 body {
@@ -62,6 +66,18 @@ button {
   cursor: pointer;
   align-items: center;
   justify-content: center;
+}
+
+button:active{
+  background: var(--active-button);
+}
+
+button:hover{
+  opacity: 0.5;
+}
+
+text:hover{
+  opacity: 0.5;
 }
 
 .App {
@@ -207,7 +223,7 @@ button {
 }
 
 .task-text:hover{
-  color: white;
+  opacity: 0.5;
 }
 
 .task-text:active{
@@ -215,6 +231,7 @@ button {
 }
 
 .todos-wrapper{
+  margin-top: 60px;
   min-width: 30%;
   padding: 0;
   list-style-type: none;

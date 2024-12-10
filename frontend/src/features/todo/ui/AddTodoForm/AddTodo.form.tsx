@@ -27,9 +27,10 @@ const AddTodo = ({isOpenAddModal, setIsOpenAddModal}: Props) => {
     url: '/todos/addTodo',
   });
 
-  const { data: todos, makeRequest: getTodos, isLoading: isGetTodosLoading  } = useRequest({
+  const { data: todos, makeRequest: getTodos, isLoading: isGetTodosLoading,  } = useRequest({
     method: 'GET',
     url: '/todos/getTodos',
+    // onSuccess: (data)=>dispatch(loadTodos(data))
   });
 
   useEffect(() => {
