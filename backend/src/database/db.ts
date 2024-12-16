@@ -52,6 +52,7 @@ class db {
   public async createTables() {
     await this.createUsersTable();
     await this.createTodosTable();
+    // await this.changeFormat();
 
     console.log('MySQL tables was created');
   }
@@ -70,13 +71,24 @@ class db {
   private async createTodosTable() {
     const sql = `
       CREATE TABLE IF NOT EXISTS todos (
-          id INT AUTO_INCREMENT PRIMARY KEY,
+          id VARCHAR(255) PRIMARY KEY,
           user_id INT NOT NULL,
           text VARCHAR(255) NOT NULL,
           additionalText VARCHAR(255) NOT NULL,
           completed VARCHAR(100) NOT NULL
       );
     `;
+    await this.query(sql);
+  }
+
+  private async changeFormat(){
+    const sql = `DROP TABLE todos;`;
+    const sql1 = `ALTER DATABASE test_database CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;`;
+    const sql2 = `ALTER TABLE todos CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`;
+    const sql3 = `ALTER TABLE todos MODIFY text TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`;
+    await this.query(sql1);
+    await this.query(sql2);
+    await this.query(sql3);
     await this.query(sql);
   }
 

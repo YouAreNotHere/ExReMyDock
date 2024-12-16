@@ -11,12 +11,12 @@ class TodosService {
   }
 
   public async addTodo(
-    newTodo: { userId: number; text: string; additionalText: string, completed: boolean },
+    newTodo: { userId: number; id: "string", text: string; additionalText: string, completed: boolean },
     userId: number,
   ) {
     console.log("session user id", userId);
     console.log("todo in service", newTodo, newTodo.text);
-    const query = `INSERT INTO todos (user_id, text, additionalText, completed) VALUES ("${userId}", "${newTodo.text}", "${newTodo.additionalText}", ${newTodo.completed});`;
+    const query = `INSERT INTO todos (id, user_id, text, additionalText, completed) VALUES ("${newTodo.id}", "${userId}", "${newTodo.text}", "${newTodo.additionalText}", ${newTodo.completed});`;
     try {
       return await db.query(query);
     } catch (error) {

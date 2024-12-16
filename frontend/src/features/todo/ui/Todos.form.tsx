@@ -10,14 +10,14 @@ import '../../../app/App.scss'
 
 const TodosForm = forwardRef(function TodosForm(props: any, ref){
   const dispatch = useDispatch();
-  // const todos: ITodo[] = useSelector((state: IRootState) => state.todos);
+  const todos: ITodo[] = useSelector((state: IRootState) => state.todos);
   const currentFilter = useSelector((state: IRootState) => state.todoFilters);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [getTodosCounter, setGetTodosCounter] = useState(0);
   const {getMap} = props;
   let currentTodos: Array<ITodo> = [];
 
-  const { makeRequest: getTodos, data: todos } = useRequest({
+  const { makeRequest: getTodos, data: newTodos } = useRequest({
     method: 'GET',
     url: '/todos/getTodos',
     onSuccess: (data) => dispatch(loadTodos(data)),

@@ -7,7 +7,6 @@ const todos = (
 ) => {
   switch (action.type) {
     case 'ADD_TODO':
-      state = [];
       return [
         ...state,
         {
@@ -33,6 +32,8 @@ const todos = (
         todo.id === action.id ? { ...todo, completed: !todo.completed } : todo,
       );
     case 'DELETE_TODO':
+      console.log(state)
+      console.log(state.filter((todo: ITodo) => todo.id !== action.id))
       return state.filter((todo: ITodo) => todo.id !== action.id);
     default:
       return state;

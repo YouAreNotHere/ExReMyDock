@@ -7,6 +7,7 @@ class TodosController {
     if (!userId) res.redirect('auth');
 
     const result: any = await TodosService.getTodosByUserId(Number(userId));
+    console.log(JSON.stringify(result));
     console.log(result.rows);
     if (!(result?.rows as any)?.length) {
       res.status(200).send({ message: 'Тудушек не найдено' });
