@@ -7,7 +7,6 @@ import { ITodo } from '../features/todo/types/ITodosRequest';
 // });
 
 export const changeCurrentUser = (userName: string, userId: number) => {
-  console.log("action")
   return {
   type: 'CHANGE_CURRENT_USER',
   userName,

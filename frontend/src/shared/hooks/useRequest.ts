@@ -52,11 +52,6 @@ const useRequest = (props: IUseRequestProps) => {
 
       if (response.ok) {
         const data = await response.json();
-        if (!Array.isArray(data)) {
-          setErrorMessage(data)
-          console.log(data)
-          return
-        }
         setData(data);
         setErrorMessage(null);
         if (onSuccess) {

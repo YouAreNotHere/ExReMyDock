@@ -17,10 +17,18 @@ const TodosForm = forwardRef(function TodosForm(props: any, ref){
   const {getMap} = props;
   let currentTodos: Array<ITodo> = [];
 
+  const dispatchTodos = (data: any) => {
+    if (Array.isArray(data)){
+      dispatch(loadTodos(data))
+    }else{
+      dispatch(loadTodos([]))
+    }
+  };
+
   const { makeRequest: getTodos, data: newTodos } = useRequest({
     method: 'GET',
     url: '/todos/getTodos',
-    onSuccess: (data) => dispatch(loadTodos(data)),
+    onSuccess: dispatchTodos,
   });
 
   useEffect(() => {
@@ -38,7 +46,7 @@ const TodosForm = forwardRef(function TodosForm(props: any, ref){
     }
   }
   console.log(currentTodos);
-  console.log(getTodosCounter);
+  console.log(getTodosCounter +1);
 
   return (
       <div className="todos-wrapper">

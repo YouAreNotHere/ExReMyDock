@@ -192,7 +192,7 @@ const AuthForm = () => {
         }
         console.log('Авторизация успешна');
         console.log(user);
-        dispatch(changeCurrentUser(user.id, user.name));
+        dispatch(changeCurrentUser(user.name, user.id));
         setIsLoading(!isLoading);
         navigate('/');
       }

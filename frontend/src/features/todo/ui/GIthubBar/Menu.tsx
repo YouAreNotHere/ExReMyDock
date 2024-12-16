@@ -5,7 +5,8 @@ import { useRequest } from '../../../../shared/hooks/useRequest';
 import { useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { IRootState } from '../../../todo/types/RootState';
-import {changeCurrentTheme} from '../../../../actions/index';
+import { changeCurrentTheme, changeCurrentUser } from '../../../../actions/index';
+import {persistor} from '../../../../reducers/index';
 
 interface Props{
   isMenuOpen: boolean,
@@ -22,6 +23,7 @@ const Menu = ({isMenuOpen, closeMenu, repos, isReposListOpen, setIsReposListOpen
 
   const onLogoutSuccess = () => {
     navigate('/auth');
+    persistor.purge();
   };
 
   const {

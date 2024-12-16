@@ -2,7 +2,8 @@ import Button from "../../../../shared/button/Button";
 import {ITodo} from "@/features/todo/types/ITodosRequest";
 import {useDispatch, useSelector} from "react-redux";
 import {IRootState} from "@/features/todo/types/RootState";
-import './Modal.css'
+import './Modal.css';
+import '../../../../app/App.scss';
 import {changeEditedTodoId, completeTodo, editTodo} from "../../../../actions";
 import EditButtonIcon from "../../../../shared/button/EditButtonIcon";
 import SuggestButtonIcon from "../../../../shared/button/SuggestButtonIcon";
@@ -22,7 +23,7 @@ const Modal = ({isModalOpen, setIsModalOpen}: Props) =>{
     const editedTodo = useSelector((state: IRootState) => state.editedTodoId);
     const dispatch = useDispatch();
     let currentTodo: ITodo | undefined;
-    if (!todoIdInModal) currentTodo = todos?.find((todo: ITodo) => todo.id === todoIdInModal);
+    if (todoIdInModal) currentTodo = todos?.find((todo: ITodo) => todo.id === todoIdInModal);
     const [newTodoText, setNewTodoText] = useState(currentTodo?.text);
     const [newAdditionalText, setNewAdditionalText] = useState(currentTodo?.additionalText);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -126,9 +127,9 @@ const Modal = ({isModalOpen, setIsModalOpen}: Props) =>{
                             value={""}
                             onClick={onEditClickHandler}
                             disabled={false}
-                            className="edit-button"
+                            className="edit-todo-button"
                         >
-                            <EditButtonIcon className={"edit-todo"}/>
+                            <EditButtonIcon className={"edit-todo-icon"}/>
                         </Button>
                         <p
                             className={currentTodo?.completed ? "сompleted " : "modal-text"}

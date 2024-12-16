@@ -32,23 +32,24 @@ const AddTodo = ({isOpenAddModal, setIsOpenAddModal}: Props) => {
     url: '/todos/addTodo',
   });
 
-  const { data: todos, makeRequest: getTodos, isLoading: isGetTodosLoading,  } = useRequest({
-    method: 'GET',
-    url: '/todos/getTodos',
-    onSuccess: (data)=>dispatch(loadTodos(data))
-  });
+  // const {
+  //   data: todos,
+  //   makeRequest: getTodos,
+  //   isLoading: isGetTodosLoading,  } = useRequest({
+  //   method: 'GET',
+  //   url: '/todos/getTodos',
+  // });
 
-  useEffect(() => {
-    dispatch(loadTodos(todos));
-    setText('');
-  }, [todos]);
+  // useEffect(() => {
+  //   dispatch(loadTodos(todos));
+  //   setText('');
+  // }, [todos]);
 
   const onClickHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     await addNewTodo();
     dispatch(addTodo(newId, currentUser.userId, text, false, additionalText));
-
-    // await getTodos();
     setIsOpenAddModal(!isOpenAddModal);
+    setText("");
   };
 
   return (
@@ -56,12 +57,13 @@ const AddTodo = ({isOpenAddModal, setIsOpenAddModal}: Props) => {
       <input
           ref={ref}
           placeholder={"Задание"}
-          onChange={(e) => setText(e.target.value)} value={text} />
+          onChange={(e) => setText(e.target.value)}
+          value={text} />
       <Button
           id={"close-modal-button"}
           value={""}
           onClick={()=> setIsOpenAddModal(!isOpenAddModal)}
-          disabled={isGetTodosLoading || isAddTodoLoading}
+          disabled={isAddTodoLoading}
           className="close-add-modal-button"/>
       <textarea
           value={additionalText}
@@ -72,8 +74,8 @@ const AddTodo = ({isOpenAddModal, setIsOpenAddModal}: Props) => {
         id={"add-todo-button"}
         value={"Добавить задание"}
         onClick={onClickHandler}
-        disabled={isGetTodosLoading || isAddTodoLoading}/>
-      <Spinner isLoading={isGetTodosLoading || isAddTodoLoading}/>
+        disabled={isAddTodoLoading}/>
+      <Spinner isLoading={isAddTodoLoading}/>
     </div>
   );
 };

@@ -33,18 +33,19 @@ class AuthController {
       res.status(500).send({ message: 'Некорректный пароль' });
     }
 
-    console.log(`Пользователь авторизован`);
-
     req.session.user = {
       id: (user as any).id as number,
       name: (user as any).name as string,
     };
+
+    console.log(`Пользователь ${req.session.user?.id} авторизован`);
 
     res.send(user);
     console.log(user);
   }
 
   public async logout(req: Request, res: Response) {
+    console.log("logout")
     req.session.destroy((error) => {
       if (error) {
         return res.status(500).send({ message: 'Ошибка при выходе' });
@@ -52,6 +53,7 @@ class AuthController {
       res.clearCookie('connect.sid');
       res.status(200).send({ message: 'Выполнен выход из системы' });
     });
+    console.log(req?.session?.user?.id);
   }
 }
 

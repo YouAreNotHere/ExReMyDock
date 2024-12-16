@@ -10,7 +10,7 @@ const FilterBar = () => {
   const ShowCompleteOnlyButton = () => {
     return (
       <button onClick={() => dispatch(changeCurrentFilter('SHOW_COMPLETED'))}>
-        Show complete
+        Показать выполненные
       </button>
     );
   };
@@ -18,7 +18,7 @@ const FilterBar = () => {
   const ShowActiveOnlyButton = () => {
     return (
       <button onClick={() => dispatch(changeCurrentFilter('SHOW_ACTIVE'))}>
-        Show active
+        Показать активные
       </button>
     );
   };
@@ -26,7 +26,7 @@ const FilterBar = () => {
   const ShowAllButton = () => {
     return (
       <button onClick={() => dispatch(changeCurrentFilter('SHOW_ALL'))}>
-        Show all
+        Показать всё
       </button>
     );
   };

@@ -12,11 +12,13 @@ import {ITodo} from "../features/todo/types/ITodosRequest";
 import GithabBar from "../features/todo/ui/GIthubBar/GithabBar";
 import { useSelector } from 'react-redux';
 import { IRootState } from '../features/todo/types/RootState';
+import { persistor } from '../reducers/index';
 
 const MainPage = () => {
   const navigate = useNavigate();
   const onLogoutSuccess = () => {
     navigate('/auth');
+    persistor.purge();
   };
   const [isOpenAddModal, setIsOpenAddModal] = React.useState(false);
   const [isTodoModalOpen, setIsTodoModalOpen] = useState(false);
