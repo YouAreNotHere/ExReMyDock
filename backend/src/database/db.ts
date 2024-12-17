@@ -52,7 +52,7 @@ class db {
   public async createTables() {
     await this.createUsersTable();
     await this.createTodosTable();
-    // await this.changeFormat();
+    await this.changeFormat();
 
     console.log('MySQL tables was created');
   }
@@ -83,7 +83,7 @@ class db {
 
   private async changeFormat(){
     const sql = `DROP TABLE todos;`;
-    const sql1 = `ALTER DATABASE test_database CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;`;
+    const sql1 = `ALTER DATABASE sql7752582 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;`;
     const sql2 = `ALTER TABLE todos CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`;
     const sql3 = `ALTER TABLE todos MODIFY text TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`;
     await this.query(sql1);
