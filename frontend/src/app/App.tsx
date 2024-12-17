@@ -1,9 +1,6 @@
 import './App.scss';
 import { Navigation } from './ui';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector, Provider } from 'react-redux';
-import {changeCurrentTheme} from '../actions/index';
-import { IRootState } from '../features/todo/types/RootState';
+import { Provider } from 'react-redux';
 import { persistor, store } from '../reducers/index';
 import { PersistGate } from 'redux-persist/integration/react';
 

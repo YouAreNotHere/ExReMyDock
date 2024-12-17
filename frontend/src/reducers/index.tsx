@@ -25,13 +25,13 @@ const persistConfig = {
 
 const todoApp: any = combineReducers({ editedTodoId, todos, todoFilters, todoIdInModal, currentUser, isDarkMode});
 const persistedReducer = persistReducer(persistConfig, todoApp);
-// export const store = configureStore({
-//   reducer: persistedReducer,
-//   middleware: (getDefaultMiddleware) =>
-//     getDefaultMiddleware({
-//       serializableCheck: {
-//         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-//       } // Временно отключаем проверку
-//     }),});
-export const store = configureStore({ reducer: persistedReducer});
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      }
+    }),});
+// export const store = configureStore({ reducer: persistedReducer});
 export const persistor = persistStore(store);

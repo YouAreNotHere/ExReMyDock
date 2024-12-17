@@ -5,7 +5,7 @@ import {IRootState} from "@/features/todo/types/RootState";
 import "./SearchInput.css"
 import Button from "../../../../shared/button/Button";
 
-const SearchInput = ({getMap, ref}: any) => {
+const SearchInput = ({getMap}: any) => {
     const [text, setText] = useState('');
     const [showShortSuggest, setShowShortSuggest] = useState(true);
     let regText : RegExp;

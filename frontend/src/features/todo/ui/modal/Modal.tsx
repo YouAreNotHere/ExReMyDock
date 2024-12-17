@@ -6,10 +6,8 @@ import './Modal.css';
 import '../../../../app/App.scss';
 import {changeEditedTodoId, completeTodo, editTodo} from "../../../../actions";
 import EditButtonIcon from "../../../../shared/button/EditButtonIcon";
-import SuggestButtonIcon from "../../../../shared/button/SuggestButtonIcon";
 import React, {useRef, useState, useEffect} from "react";
 import {useRequest} from "../../../../shared/hooks/useRequest";
-import {saveEditedTodoRequest} from "../../api/todos.request";
 import {useArrowNavigation} from "../../../../shared/hooks/useArrowNavigation";
 import Spinner from '../../../../shared/effects/spinner/Spinner';
 

@@ -1,6 +1,3 @@
-// import React from 'react';
-// import '../../features/todo/ui/modal/Modal.css'
-// import '../../app/App.scss'
 import {useSelector} from 'react-redux';
 import { IRootState } from '../../features/todo/types/RootState';
 
@@ -16,8 +13,8 @@ const EditButtonIcon = ({className}: {className: string}) => {
             xmlns="http://www.w3.org/2000/svg"
         >
             <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M18.3103 4.87844L14.1216 0.68875C13.8402
          0.407371 13.4587 0.249289 13.0608 0.249289C12.6629 0.249289
           12.2813 0.407371 12 0.68875L0.439687 12.25C0.157107 12.5303

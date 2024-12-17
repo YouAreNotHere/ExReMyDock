@@ -142,11 +142,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import { changeCurrentUser } from '../../../actions';
 import { useArrowNavigation } from '../../../shared/hooks/useArrowNavigation';
 import Button from '../../../shared/button/Button';
-import {IRootState} from "../../todo/types/RootState";
 import Spinner from '../../../shared/effects/spinner/Spinner';
 
 const AuthForm = () => {
-  // const username: string | undefined = useSelector((state: IRootState) => state.currentUser.userName);
   const [name, setName] = useState("");
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -190,8 +188,6 @@ const AuthForm = () => {
           console.log('Некорректный пароль');
           return;
         }
-        console.log('Авторизация успешна');
-        console.log(user);
         dispatch(changeCurrentUser(user.name, user.id));
         setIsLoading(!isLoading);
         navigate('/');

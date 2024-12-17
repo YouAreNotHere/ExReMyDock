@@ -1,5 +1,4 @@
 import { ITodo } from '@/features/todo/types/ITodosRequest';
-import { IRootState } from '@/features/todo/types/RootState';
 
 const initialState: ITodo[] = [];
 
@@ -9,7 +8,6 @@ const todos = (
 ) => {
   switch (action.type) {
     case 'ADD_TODO':
-      console.log(state);
       return [
         ...state,
         {

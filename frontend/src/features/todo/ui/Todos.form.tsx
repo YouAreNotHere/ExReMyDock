@@ -1,8 +1,8 @@
-import {useEffect, useRef, useState, forwardRef} from 'react';
+import {useEffect, useState, forwardRef} from 'react';
 import TodoForm from './Todo.form';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRequest } from '../../../shared/hooks/useRequest';
-import {changeTodoIdInModal, loadTodos} from '../../../actions';
+import {loadTodos} from '../../../actions';
 import { ITodo } from '@/features/todo/types/ITodosRequest';
 import { IRootState } from '@/features/todo/types/RootState';
 import Modal from "./modal/Modal";
@@ -25,7 +25,7 @@ const TodosForm = forwardRef(function TodosForm(props: any, ref){
     }
   };
 
-  const { makeRequest: getTodos, data: newTodos } = useRequest({
+  const { makeRequest: getTodos} = useRequest({
     method: 'GET',
     url: '/todos/getTodos',
     onSuccess: dispatchTodos,

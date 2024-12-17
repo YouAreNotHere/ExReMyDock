@@ -1,5 +1,4 @@
-import TodosPage from './todo/Todos.page';
-import React, {useRef, useState} from "react";
+import React, {useRef} from "react";
 import {useRequest} from "../shared/hooks/useRequest";
 import { useNavigate } from 'react-router-dom';
 import FilterBar from "../features/todo/ui/FilterBar/FilterBar.form";
@@ -10,8 +9,6 @@ import TodosForm from "../features/todo/ui/Todos.form";
 import Button from "../shared/button/Button";
 import {ITodo} from "../features/todo/types/ITodosRequest";
 import GithabBar from "../features/todo/ui/GIthubBar/GithabBar";
-import { useSelector } from 'react-redux';
-import { IRootState } from '../features/todo/types/RootState';
 import { persistor } from '../reducers/index';
 
 const MainPage = () => {
@@ -21,9 +18,7 @@ const MainPage = () => {
     persistor.purge();
   };
   const [isOpenAddModal, setIsOpenAddModal] = React.useState(false);
-  const [isTodoModalOpen, setIsTodoModalOpen] = useState(false);
   const itemsRef: any = useRef<ITodo[]>(null);
-  const todos = useSelector((state: IRootState) => state.todos)
 
   const {
     isLoading,
@@ -53,7 +48,7 @@ const MainPage = () => {
               className={"open-addTodo-modal__button"}
               onClick={() => setIsOpenAddModal(!isOpenAddModal)}
               disabled={false}/>
-          <SearchInput ref = {itemsRef} getMap = {() => getMap()}/>
+          <SearchInput getMap = {() => getMap()}/>
           <GithabBar/>
           <button onClick={logoutRequest} className="logout-button">
             {isLoading ? 'Загрузка...' : 'Выйти'}

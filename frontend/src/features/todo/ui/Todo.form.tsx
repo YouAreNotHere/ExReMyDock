@@ -1,5 +1,4 @@
-import React, { useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import '../../../app/App.scss';
 import { useRequest } from '../../../shared/hooks/useRequest';
 import {
@@ -41,7 +40,7 @@ const TodoForm = ({ todo, isModalOpen, setIsModalOpen}: Props) => {
     todoContent = <p>Its place to your first todo!</p>;
   }
     todoContent = (
-        <li key={todo.id} className= "todo_bar">
+        <div key={todo.id} className= "todo_bar">
             <p
                 onClick={onTextClickHandler}
                 className={!todo.completed || todo.completed === "0" ? 'task-text' : 'сompleted-text'}>{todo.text}
@@ -66,7 +65,7 @@ const TodoForm = ({ todo, isModalOpen, setIsModalOpen}: Props) => {
                 disabled={false}
                 className={"delete-todo__button"}/>
           </div>
-        </li>
+        </div>
     );
   return todoContent;
 };

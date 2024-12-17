@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
-const ThemeProvider = ({ children }) => {
+const ThemeProvider = ({ children }: {children: any}) => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     return prefersDark;
   });
 
   useEffect(() => {
-    const handleChange = (e) => {
+    const handleChange = (e: MediaQueryListEvent) => {
       setIsDarkMode(e.matches);
     };
 

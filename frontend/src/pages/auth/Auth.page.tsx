@@ -5,7 +5,7 @@ import { FormLayout } from '../../shared/layouts/FormLayout';
 const AuthPage = () => {
   return (
     <FormLayout>
-      <h1>Войдите в учетную запись!</h1>
+      <h2>Войдите в учетную запись!</h2>
       <AuthForm />
     </FormLayout>
   );

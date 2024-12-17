@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import Button from '../../../../shared/button/Button';
 import { ITodo } from '../../types/ITodosRequest';
 import { useRequest } from '../../../../shared/hooks/useRequest';
