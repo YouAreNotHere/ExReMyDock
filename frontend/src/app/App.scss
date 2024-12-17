@@ -213,11 +213,25 @@ text:hover{
 .сompleted-text {
   min-width: 50%;
   max-width: 70%;
-  padding: 0px;
-  margin-right: 30px;
+  padding: 10px;
+  margin: 0 30px 0 0;
   white-space: normal; /* Позволяет обычный перенос строк */
   word-wrap: break-word; /* Позволяет длинным словам переноситься */
   overflow-wrap: break-word; /* Современный аналог */
+}
+
+.focused-todo{
+  min-width: 50%;
+  max-width: 70%;
+  //padding:  10px 0 10px 0;
+  padding: 10px;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  background-color: aliceblue;
+  color: black;
+  border-radius: 25px;
+  margin: 0 30px 0 0;
 }
 
 .сompleted-text{
@@ -274,18 +288,6 @@ text:hover{
 
 .display-hidden{
   display: none;
-}
-
-.focused-todo{
-  min-width: 50%;
-  max-width: 80%;
-  padding: 10px;
-  white-space: normal; /* Позволяет обычный перенос строк */
-  word-wrap: break-word; /* Позволяет длинным словам переноситься */
-  overflow-wrap: break-word; /* Современный аналог */
-  background-color: aliceblue;
-  color: black;
-  border-radius: 25px;
 }
 
 .logout-button{

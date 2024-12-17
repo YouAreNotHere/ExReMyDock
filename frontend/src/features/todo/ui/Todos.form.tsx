@@ -38,15 +38,13 @@ const TodosForm = forwardRef(function TodosForm(props: any, ref){
 
   if (Array.isArray(todos)) {
     if (currentFilter == 'SHOW_COMPLETED') {
-      currentTodos = todos.filter((todo: ITodo) => todo.completed === 1);
+      currentTodos = todos.filter((todo: ITodo) => todo.completed == 1);
     } else if (currentFilter == 'SHOW_ACTIVE') {
-      currentTodos = todos.filter((todo: ITodo) => todo.completed === 0);
+      currentTodos = todos.filter((todo: ITodo) => !todo.completed || todo.completed === "0");
     } else {
       currentTodos = todos;
     }
   }
-  console.log(currentTodos);
-  console.log(getTodosCounter +1);
 
   return (
       <div className="todos-wrapper">
@@ -61,9 +59,8 @@ const TodosForm = forwardRef(function TodosForm(props: any, ref){
               }else{
                 map?.delete(todo.id);
               }
-            }}>
+            }} key={todo.id}>
               <TodoForm
-                  key={todo.id}
                   todo={todo}
                   isModalOpen={isModalOpen}
                   setIsModalOpen={setIsModalOpen}

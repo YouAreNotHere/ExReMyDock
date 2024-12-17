@@ -54,6 +54,14 @@
     margin: 5px;
 }
 
+.suggest-todo:hover{
+    opacity: 0.5;
+}
+
+.suggest-todo:active{
+    background-color: var(--active-button);
+}
+
 .show-more-suggest-todo__button{
     border-color: transparent;
     background: transparent;
@@ -61,10 +69,6 @@
     height: 32px;
     color: cornflowerblue;
 }
-
-/*.suggest-todo__input{*/
-/*    width: 100%;*/
-/*}*/
 
 @media  (max-width: 550px) {
     .suggest-todo__input {

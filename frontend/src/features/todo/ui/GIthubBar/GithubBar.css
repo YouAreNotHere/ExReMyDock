@@ -58,6 +58,7 @@
     margin: 0;
     top: 55px;
     left: 0px;
+    z-index: 1;
 }
 
 .repos-list-wrapper-hidden{
@@ -70,8 +71,8 @@
 }
 
 @media (max-width: 770px) {
-    .repos-list{
-        display: none;
+    .repos-list-wrapper{
+        left: -250%;
     }
     .github-bar{
         width: auto;

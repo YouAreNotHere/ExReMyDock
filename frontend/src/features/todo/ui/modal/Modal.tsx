@@ -11,6 +11,7 @@ import React, {useRef, useState, useEffect} from "react";
 import {useRequest} from "../../../../shared/hooks/useRequest";
 import {saveEditedTodoRequest} from "../../api/todos.request";
 import {useArrowNavigation} from "../../../../shared/hooks/useArrowNavigation";
+import Spinner from '../../../../shared/effects/spinner/Spinner';
 
 interface Props{
     isModalOpen: boolean,
@@ -34,7 +35,7 @@ const Modal = ({isModalOpen, setIsModalOpen}: Props) =>{
         additionalInputRef,
     ]);
 
-    const { makeRequest: completeTodoRequest } = useRequest({
+    const { makeRequest: completeTodoRequest, isLoading: isCompletedLoading } = useRequest({
         method: 'POST',
         body: { id: currentTodo?.id, completed: !currentTodo?.completed },
         url: '/todos/completeTodo',
@@ -150,6 +151,7 @@ const Modal = ({isModalOpen, setIsModalOpen}: Props) =>{
                 </div>
             )
             }
+            <Spinner isLoading={isCompletedLoading}/>
         </div>
 )
 }
