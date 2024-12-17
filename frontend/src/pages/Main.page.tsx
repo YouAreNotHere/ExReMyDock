@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useRef, useEffect} from "react";
 import {useRequest} from "../shared/hooks/useRequest";
 import { useNavigate } from 'react-router-dom';
 import FilterBar from "../features/todo/ui/FilterBar/FilterBar.form";
@@ -13,10 +13,12 @@ import { persistor } from '../reducers/index';
 
 const MainPage = () => {
   const navigate = useNavigate();
+
   const onLogoutSuccess = () => {
     navigate('/auth');
     persistor.purge();
   };
+
   const [isOpenAddModal, setIsOpenAddModal] = React.useState(false);
   const itemsRef: any = useRef<ITodo[]>(null);
 

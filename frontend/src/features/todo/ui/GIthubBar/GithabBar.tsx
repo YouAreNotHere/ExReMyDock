@@ -8,7 +8,7 @@ import ReposList from './ReposList';
 const GithubBar = () => {
     const [userPic, setUserPic] = useState<any>();
     const [name, setName] = useState<string>();
-    const userName: string | undefined = useSelector((state: IRootState) => state.currentUser.userName);
+    const userName: string | undefined = useSelector((state: IRootState) => state.currentUser?.userName);
     const [repos, setRepos]: any = useState([]);
     const [isReposListOpen, setIsReposListOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
